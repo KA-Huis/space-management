@@ -51,14 +51,12 @@ f) force="$OPTARG"
 esac
 done
 
-#runScript php artisan vendor:publish --tag=telescope-assets
-
-#if [ $force == "y" ]; then
-#runScript ./refresh.sh -f y
-#else
-#runScript ./refresh.sh
-#fi
+if [ $force == "y" ]; then
+runScript ./refresh.sh -f y
+else
+runScript ./refresh.sh
+fi
 
 docker exec --user=root -it sm-php chown -R www-data:www-data .
 
-#runScript ./build-frontend-dev.sh
+runScript ./build-frontend-dev.sh
