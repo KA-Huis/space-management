@@ -14,6 +14,10 @@ This application requires **PHP 8.0+**.
 
 ### Installation
 
+Make sure that a Traefik reverse proxy is running. See [KA-Huis/traefik-gateway](https://github.com/KA-Huis/traefik-gateway).
+
+Run `./setup.sh`. This will setup the application for you.
+
 ## Branching model
 
 * **Branch `production`:** This branch will be used to build an artefact that can be deployed to the production environment.
