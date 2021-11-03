@@ -1,0 +1,87 @@
+version: "3.8"
+services:
+  php:
+    container_name: sm-php
+    build:
+      context: ./
+      dockerfile: "./docker/php/Dockerfile"
+      args:
+        - BUILD_UID=${DOCKER_UID}
+        - BUILD_GID=${DOCKER_GID}
+    working_dir: /var/www/html
+    networks:
+      - default
+    volumes:
+      - ./:/var/www/html:cached
+      - ./node_modules:/var/www/html/node_modules:delegated
+      - ./public:/var/www/html/public:delegated
+
+  nginx:
+    container_name: sm-nginx
+    image: wodby/nginx
+    environment:
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_VHOST_PRESET: php
+      NGINX_SERVER_ROOT: /var/www/html/public
+    volumes:
+      - ./public:/var/www/html/public:delegated
+      - ./storage/app/public:/var/www/html/public/storage:delegated
+    networks:
+      - default
+      - traefik-gateway
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-gateway"
+      - "traefik.http.routers.sm-nginx.rule=Host(`space-management.localhost`)"
+      - "traefik.http.routers.sm-nginx.entrypoints=https"
+      - "traefik.http.routers.sm-nginx.tls=true"
+
+  mariadb:
+    container_name: sm-mariadb
+    image: mariadb:10.4
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./docker/init.sql:/data/application/init.sql
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: sm
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: sm
+      MYSQL_PASSWORD: sm
+    ports:
+      - "127.0.0.1:34030:3306"
+
+  redis:
+    image: redis:4-alpine
+    container_name: sm-redis
+    volumes:
+      - redis:/data
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: sm-mailhog
+    networks:
+      - default
+      - traefik-gateway
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-gateway"
+      - "traefik.http.services.sm-mailhog.loadbalancer.server.port=8025"
+      - "traefik.http.routers.sm-mailhog.rule=Host(`mailhog.space-management.localhost`)"
+      - "traefik.http.routers.sm-mailhog.entrypoints=https"
+      - "traefik.http.routers.sm-mailhog.tls=true"
+
+volumes:
+  mariadb:
+    driver: local
+  redis:
+    driver: local
+
+# Make the externally created network "traefik-gateway" available as network "default"
+# docker network create traefik-gateway
+networks:
+  traefik-gateway:
+    external:
+      name: traefik-gateway
