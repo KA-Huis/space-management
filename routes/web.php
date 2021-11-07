@@ -5,12 +5,12 @@ declare(strict_types=1);
 /** @var Router $router */
 
 use Illuminate\Routing\Router;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 
-$router->get('/', function () {
-        return "test";
-    })
-    ->name('home');
+$router->get('/', [HomeController::class, 'index'])
+    ->name('home.index');
 
 // Email verification
 $router
