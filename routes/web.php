@@ -32,7 +32,14 @@ $router
 // Admin portal
 $router
     ->name('admin.')
-    ->middleware('verified')
+    ->prefix('admin')
+    ->middleware([
+        'auth',
+        'verified',
+    ])
     ->group(function (Router $router) {
-        //
+
+        $router->get('/', [DashboardController::class, 'index'])
+            ->name('dashboard');
+
     });
