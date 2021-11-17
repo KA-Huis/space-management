@@ -2,7 +2,7 @@
 
 # Some simple function to print a line (TODO Add some coloring and formatting later)
 function printline {
-echo $1;
+echo "$1";
 }
 
 function runScript {

@@ -43,7 +43,7 @@ services:
     image: mariadb:10.4
     command: --init-file /data/application/init.sql
     volumes:
-      - ./docker/init.sql:/data/application/init.sql
+      - ./docker/mariadb/init.sql:/data/application/init.sql
       - mariadb:/var/lib/mysql
     environment:
       MYSQL_DATABASE: sm
