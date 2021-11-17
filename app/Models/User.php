@@ -37,4 +37,29 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullName(): string
+    {
+        $nameParts = (new Collection([
+            $this->first_name,
+            $this->last_name
+        ]));
+
+        dump($nameParts->toArray());
+
+        return $nameParts
+            ->filter(function ($part) {
+                return !empty($part);
+            })
+            ->implode(' ');
+    }
+
+    /**
+     * Send the email verification notification.
+     */
+    public function sendEmailVerificationNotification(): void
+    {
+        throw new Exception('This feature is not created yet.');
+//        $this->notify(new VerifyEmail);
+    }
 }

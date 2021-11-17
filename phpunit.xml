@@ -14,7 +14,7 @@
     </testsuites>
     <coverage>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./app</directory>
         </include>
         <report>
             <clover outputFile="build/logs/clover.xml"/>
