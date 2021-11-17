@@ -35,7 +35,7 @@ $router
     ->prefix('admin')
     ->middleware([
         'auth',
-        'verified',
+//        'verified', Not required
     ])
     ->group(function (Router $router) {
 
