@@ -36,6 +36,14 @@ jobs:
         run: |
           composer install --prefer-dist --no-interaction
 
+      - name: Setup MariaDB
+        uses: getong/mariadb-action@v1.1
+        with:
+          mysql database: 'test'
+          mysql root password: 'root'
+          mysql user: 'test'
+          mysql password: 'test'
+
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
 
