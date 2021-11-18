@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-alpine3.13
+FROM php:7.4-fpm-alpine3.14
 
 ARG BUILD_GID=1000
 ARG BUILD_UID=1000

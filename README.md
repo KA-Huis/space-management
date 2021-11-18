@@ -18,6 +18,20 @@ Make sure that a Traefik reverse proxy is running. See [KA-Huis/traefik-gateway]
 
 Run `./setup.sh`. This will setup the application for you.
 
+## Usage
+
+### User accounts
+
+A small list of user accounts are already automatically created by the database seeder which you can use to easily get access to the admin portal.
+
+| First Name | Last Name | E-mailaddress | Password | Role |
+|------------|-----------|---------------|----------|------|
+| Cyril | de Wit | 453717@student.fontys.nl| Welkom0! | To be created |
+| Abas | Sharif | 472244@student.fontys.nl| Welkom0! | To be created |
+| Joey | Vonck | 454988@student.fontys.nl| Welkom0! | To be created |
+| Mitch | Kessels | 453258@student.fontys.nl| Welkom0! | To be created |
+| Enno | Overbeeken | enno@kahuis.nl| Welkom0! | To be created |
+
 ## Branching model
 
 * **Branch `production`:** This branch will be used to build an artefact that can be deployed to the production environment.

@@ -1,5 +1,7 @@
 <?php
 
+use App\Authentication\Guard;
+
 return [
 
     /*
@@ -14,7 +16,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => Guard::WEB,
         'passwords' => 'users',
     ],
 
