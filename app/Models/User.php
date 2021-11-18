@@ -52,7 +52,10 @@ class User extends Authenticatable implements CanResetPasswordContact
 
         return $nameParts
             ->filter(function ($part) {
-                return !empty($part);
+                return is_string($part) && !empty($part);
+            })
+            ->map(function ($part) {
+                return trim($part);
             })
             ->implode(' ');
     }
