@@ -87,7 +87,7 @@ class EmailVerificationTest extends TestCase
         self::assertTrue($user->fresh()->hasVerifiedEmail());
     }
 
-    public function test_email_is_not_verified_with_invalid_hash()
+    public function test_email_is_not_verified_with_invalid_hash(): void
     {
         $this->markTestSkipped();
 
