@@ -3,24 +3,24 @@
 </div>
 
 <!-- Validation Errors -->
-<x-auth-validation-errors class="mb-4" :errors="$errors"/>
+{!! dump($errors) !!}
 
 <form method="POST" action="{{ route('auth.password.confirm') }}">
 @csrf
 
 <!-- Password -->
     <div>
-        <x-label for="password" :value="__('Password')"/>
+        <label for="password" >{{ __('Password') }}</label>
 
-        <x-input id="password" class="block mt-1 w-full"
+        <input id="password"
                  type="password"
                  name="password"
                  required autocomplete="current-password"/>
     </div>
 
     <div class="flex justify-end mt-4">
-        <x-button>
+        <button>
             {{ __('Confirm') }}
-        </x-button>
+        </button>
     </div>
 </form>

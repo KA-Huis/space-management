@@ -13,16 +13,16 @@
         @csrf
 
         <div>
-            <x-button>
+            <button type="submit">
                 {{ __('Resend Verification Email') }}
-            </x-button>
+            </button>
         </div>
     </form>
 
     <form method="POST" action="{{ route('auth.logout') }}">
         @csrf
 
-        <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+        <button type="submit">
             {{ __('Log Out') }}
         </button>
     </form>

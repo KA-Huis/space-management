@@ -3,25 +3,25 @@
 </div>
 
 <!-- Session Status -->
-<x-auth-session-status class="mb-4" :status="session('status')"/>
+{!! dump(session('status')) !!}
 
 <!-- Validation Errors -->
-<x-auth-validation-errors class="mb-4" :errors="$errors"/>
+{!! dump($errors) !!}
 
 <form method="POST" action="{{ route('auth.password.email') }}">
 @csrf
 
 <!-- Email Address -->
     <div>
-        <x-label for="email" :value="__('Email')"/>
+        <label for="email">{{ __('Email') }}</label>
 
-        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+        <input id="email" type="email" name="email" value="{{ old('email') }}" required
                  autofocus/>
     </div>
 
     <div class="flex items-center justify-end mt-4">
-        <x-button>
+        <button type="submit">
             {{ __('Email Password Reset Link') }}
-        </x-button>
+        </button>
     </div>
 </form>

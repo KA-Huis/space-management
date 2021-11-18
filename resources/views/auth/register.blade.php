@@ -1,34 +1,34 @@
 <!-- Validation Errors -->
-<x-auth-validation-errors class="mb-4" :errors="$errors"/>
+{!! dump($errors) !!}
 
 <form method="POST" action="{{ route('auth.register') }}">
 @csrf
 
 <!-- Name -->
     <div>
-        <x-label for="first_name" :value="__('First name')"/>
+        <label for="first_name">{{ __('First name') }}</label>
 
-        <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus/>
+        <input id="first_name" type="text" name="first_name" value="{{ old('first_name') }}" required autofocus/>
     </div>
 
     <div>
-        <x-label for="last_name" :value="__('Last name')"/>
+        <label for="last_name">{{ __('Last name') }}</label>
 
-        <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus/>
+        <input id="last_name" type="text" name="last_name" value="{{ old('last_name') }}" required autofocus/>
     </div>
 
     <!-- Email Address -->
     <div class="mt-4">
-        <x-label for="email" :value="__('Email')"/>
+        <label for="email">{{__('Email')}}</label>
 
-        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required/>
+        <input id="email" type="email" name="email" value="{{ old('email') }}" required/>
     </div>
 
     <!-- Password -->
     <div class="mt-4">
-        <x-label for="password" :value="__('Password')"/>
+        <label for="password">{{__('Password')}}</label>
 
-        <x-input id="password" class="block mt-1 w-full"
+        <input id="password" class="block mt-1 w-full"
                  type="password"
                  name="password"
                  required autocomplete="new-password"/>
@@ -36,9 +36,9 @@
 
     <!-- Confirm Password -->
     <div class="mt-4">
-        <x-label for="password_confirmation" :value="__('Confirm Password')"/>
+        <label for="password_confirmation">{{ __('Confirm Password') }}</label>
 
-        <x-input id="password_confirmation" class="block mt-1 w-full"
+        <input id="password_confirmation"
                  type="password"
                  name="password_confirmation" required/>
     </div>
@@ -48,8 +48,8 @@
             {{ __('Already registered?') }}
         </a>
 
-        <x-button class="ml-4">
+        <button>
             {{ __('Register') }}
-        </x-button>
+        </button>
     </div>
 </form>
