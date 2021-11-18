@@ -13,6 +13,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 
 class RegisteredUserController extends Controller
 {
