@@ -9,8 +9,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 /**
- * @group feature
- * @group models
+ * @group Feature
+ * @group Models
  */
 class UserTest extends TestCase
 {
