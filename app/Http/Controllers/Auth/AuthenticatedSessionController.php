@@ -2,22 +2,29 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Authentication\Guard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\Factory as ViewFactory;
 
 class AuthenticatedSessionController extends Controller
 {
     private ViewFactory $viewFactory;
+    private AuthFactory $authFactory;
+    private Redirector $redirector;
 
-    public function __construct(ViewFactory $viewFactory)
+    public function __construct(ViewFactory $viewFactory, AuthFactory $authFactory, Redirector $redirector)
     {
         $this->viewFactory = $viewFactory;
+        $this->authFactory = $authFactory;
+        $this->redirector = $redirector;
     }
 
     /**
@@ -30,6 +37,8 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Handle an incoming authentication request.
+     *
+     * @throws ValidationException
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -42,18 +51,15 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        $this->authFactory->guard(Guard::WEB)->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return $this->redirector->route('home.index');
     }
 }
