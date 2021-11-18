@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Models\Concerns\HasUuid;
 use App\Notifications\Auth\ResetPassword;
+use Exception;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContact;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail, CanResetPasswordContact
+class User extends Authenticatable implements CanResetPasswordContact
 {
     use HasApiTokens,
         HasFactory,
@@ -59,6 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPasswordC
 
     /**
      * Send the email verification notification.
+     * @throws Exception
      */
     public function sendEmailVerificationNotification(): void
     {
