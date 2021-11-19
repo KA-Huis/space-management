@@ -15,6 +15,12 @@ class Group extends Model
         SoftDeletes,
         HasUuid;
 
+    /** @var array */
+    protected $casts = [
+        'uuid' => 'string',
+        'name' => 'string',
+    ];
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);

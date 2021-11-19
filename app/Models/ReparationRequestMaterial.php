@@ -5,10 +5,10 @@ namespace App\Models;
 use App\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GroupType extends Model
+class ReparationRequestMaterial extends Model
 {
     use HasFactory,
         SoftDeletes,
@@ -18,10 +18,11 @@ class GroupType extends Model
     protected $casts = [
         'uuid' => 'string',
         'name' => 'string',
+        'is_mandatory' => 'boolean',
     ];
 
-    public function groups(): HasMany
+    public function reparationRequest(): BelongsTo
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsTo(ReparationRequest::class);
     }
 }
