@@ -60,6 +60,12 @@ jobs:
         run: |
           composer install --prefer-dist --no-interaction
 
+      - name: Prepare application
+        run: |
+          php artisan key:generate
+          php artisan config:clear
+          php artisan migrate
+
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
 
