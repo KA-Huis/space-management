@@ -16,6 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Copy .env file
+        run: php -r "file_exists('.env.testing.github') || copy('.env.testing.github', '.env.testing');"
+
       - name: Cache dependencies
         uses: actions/cache@v1
         with:
@@ -29,11 +32,17 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: xdebug
 
-      - name: Copy .env file
-        run: php -r "file_exists('.env.testing.github') || copy('.env.testing.github', '.env.testing');"
-
       - name: Setup Memcached
         uses: niden/actions-memcached@v7
+
+      - name: Setup MariaDB database
+        uses: getong/mariadb-action@v1.1
+        with:
+          mariadb version: "10.4"
+          mysql database: "sm_test"
+          mysql root password: "sm"
+          mysql user: "sm"
+          mysql password: "sm"
 
       - name: Install dependencies
         run: |
