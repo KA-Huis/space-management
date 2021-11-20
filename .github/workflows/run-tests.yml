@@ -35,6 +35,9 @@ jobs:
       - name: Setup Memcached
         uses: niden/actions-memcached@v7
 
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
+
       - name: Setup MariaDB database
         uses: getong/mariadb-action@v1.1
         with:
