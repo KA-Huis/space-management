@@ -9,6 +9,8 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContact;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -20,6 +22,7 @@ class User extends Authenticatable implements CanResetPasswordContact
     use HasApiTokens,
         HasFactory,
         Notifiable,
+        SoftDeletes,
         HasUuid,
         HasRoles,
         CanResetPassword;
@@ -40,8 +43,14 @@ class User extends Authenticatable implements CanResetPasswordContact
 
     /** @var array */
     protected $casts = [
+        'uuid' => 'string',
         'email_verified_at' => 'datetime',
     ];
+
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class);
+    }
 
     public function getFullName(): string
     {

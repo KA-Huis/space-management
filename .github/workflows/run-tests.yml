@@ -4,17 +4,38 @@ on: [push]
 
 jobs:
   tests:
+    name: P${{ matrix.php }}
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
         php: [7.4]
 
-    name: P${{ matrix.php }}
+    services:
+      mariadb:
+        image: mariadb:10.4
+        env:
+          MYSQL_DATABASE: sm
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: sm
+          MYSQL_PASSWORD: sm
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Copy .env file
+        run: php -r "file_exists('.env.testing.github') || copy('.env.testing.github', '.env.testing');"
 
       - name: Cache dependencies
         uses: actions/cache@v1
@@ -32,9 +53,18 @@ jobs:
       - name: Setup Memcached
         uses: niden/actions-memcached@v7
 
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
+
       - name: Install dependencies
         run: |
           composer install --prefer-dist --no-interaction
+
+      - name: Prepare application
+        run: |
+          php artisan key:generate
+          php artisan config:clear
+          php artisan migrate
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
