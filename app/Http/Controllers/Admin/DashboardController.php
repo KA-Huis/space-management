@@ -6,19 +6,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Inertia\ResponseFactory as InertiaResponseFactory;
+use Inertia\Response as InertiaResponse;
 
 class DashboardController extends Controller
 {
-    private ViewFactory $viewFactory;
+    private InertiaResponseFactory $inertiaResponseFactory;
 
-    public function __construct(ViewFactory $viewFactory)
+    public function __construct(InertiaResponseFactory $inertiaResponseFactory)
     {
-        $this->viewFactory = $viewFactory;
+        $this->inertiaResponseFactory = $inertiaResponseFactory;
     }
 
-    public function index(): View
+    public function index(Request $request): InertiaResponse
     {
-        return $this->viewFactory->make('admin.dashboard.index');
+        $user = $request->user();
+
+        return $this->inertiaResponseFactory->render('Admin/Dashboard', [
+            'user' => [
+                'full_name' => $user->getFullName(),
+            ],
+        ]);
     }
 }
