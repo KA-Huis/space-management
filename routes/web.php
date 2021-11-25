@@ -42,4 +42,12 @@ $router
         $router->get('/', [DashboardController::class, 'index'])
             ->name('dashboard');
 
+        // Spaces
+        $router
+            ->name('space.')
+            ->prefix('spaces')->group(function (Router $router) {
+                $router->get('/create', [SpaceController::class, 'create'])->name('create');
+                $router->post('/', [SpaceController::class, 'store'])->name('store');
+            });
+
     });
