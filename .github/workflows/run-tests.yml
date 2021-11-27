@@ -12,21 +12,21 @@ jobs:
       matrix:
         php: [7.4]
 
-#    services:
-#      mariadb:
-#        image: mariadb:10.4
-#        env:
-#          MYSQL_DATABASE: sm_test
-#          MYSQL_ROOT_PASSWORD: root
-#          MYSQL_USER: sm
-#          MYSQL_PASSWORD: sm
-#        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-#
-#      redis:
-#        image: redis
-#        ports:
-#          - 6379/tcp
-#        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    services:
+      mariadb:
+        image: mariadb:10.4
+        env:
+          MYSQL_DATABASE: sm_test
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: sm
+          MYSQL_PASSWORD: sm
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
