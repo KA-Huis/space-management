@@ -59,8 +59,7 @@ jobs:
           composer install --prefer-dist --no-interaction
 
       - name: Create Sqlite database
-          run: |
-            touch database/database.sql
+        run: touch database/database.sql
 
       - name: Prepare application
         run: |
