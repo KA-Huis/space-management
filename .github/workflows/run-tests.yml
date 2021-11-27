@@ -58,11 +58,9 @@ jobs:
         run: |
           composer install --prefer-dist --no-interaction
 
-      - name: Create Sqlite database
-        run: touch database/database.sql
-
       - name: Prepare application
         run: |
+          touch database/database.sql
           php artisan key:generate --env=testing
           php artisan config:clear --env=testing
           php artisan migrate --env=testing
