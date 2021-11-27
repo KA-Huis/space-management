@@ -16,7 +16,7 @@ jobs:
       mariadb:
         image: mariadb:10.4
         env:
-          MYSQL_DATABASE: sm
+          MYSQL_DATABASE: sm_test
           MYSQL_ROOT_PASSWORD: root
           MYSQL_USER: sm
           MYSQL_PASSWORD: sm
