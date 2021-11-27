@@ -62,9 +62,9 @@ jobs:
 
       - name: Prepare application
         run: |
-          php artisan key:generate
-          php artisan config:clear
-          php artisan migrate
+          php artisan key:generate --env=testing
+          php artisan config:clear --env=testing
+          php artisan migrate --env=testing
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
