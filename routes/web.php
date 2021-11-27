@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 /** @var Router $router */
 
+use App\Http\Controllers\Admin\SpaceController;
 use Illuminate\Routing\Router;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;

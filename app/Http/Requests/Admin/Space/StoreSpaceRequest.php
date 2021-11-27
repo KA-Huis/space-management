@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Admin\Space;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,7 +22,7 @@ class StoreSpaceRequest extends FormRequest
                 'max:255',
             ],
             'description' => [
-                'optional',
+                'nullable',
                 'string',
             ],
             'is_open_for_reservations' => [

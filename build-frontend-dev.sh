@@ -11,8 +11,13 @@ while getopts ":f:" opt; do
   esac
 done
 
+echo "==[ Generate Ziggy Routes ]=="
+php artisan ziggy:generate
+
 echo "==[ Install NPM dependencies ]=="
 yarn
 
 echo "==[ Build assets ]=="
 yarn dev
+
+

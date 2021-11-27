@@ -36,7 +36,7 @@ class SpaceController extends Controller
     {
         $user = $request->user();
 
-        return $this->inertiaResponseFactory->render('Admin/Dashboard', [
+        return $this->inertiaResponseFactory->render('Admin/Space/Create', [
             'user' => [
                 'full_name' => $user->getFullName(),
             ],
