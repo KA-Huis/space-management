@@ -2,13 +2,22 @@
 name: User story
 about: Create a user story
 title: ''
-labels: ''
+labels: User Story
 assignees: ''
 
 ---
 
-### Summary
+**Als een** [gebruiker] **wil ik** [doel van de story], **zodat** [reden van de story]
 
-**As a** [user concerned by the story] **I want** [goal of the story] **so that** [reason for the story]
+### Omschrijving
 
-###
+Schrijf een korte omschrijving met bijvoorbeeld de context ter ondersteuning van de story.
+
+### Acceptatiecriteria
+
+1. Criteria 1
+2. Criteria 2 ...
+
+### Hupmiddelen
+
+Hier kunnen eventueel hulpmiddelen bijgesloten worden.
