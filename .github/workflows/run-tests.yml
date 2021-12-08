@@ -60,7 +60,6 @@ jobs:
 
       - name: Prepare application
         run: |
-          touch database/database.sql
           php artisan key:generate --env=testing
           php artisan config:clear --env=testing
           php artisan migrate --env=testing
