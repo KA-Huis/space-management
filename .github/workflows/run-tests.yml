@@ -7,6 +7,9 @@ jobs:
     name: P${{ matrix.php }}
     runs-on: ubuntu-latest
 
+    env:
+      APP_ENV: "testing"
+
     strategy:
       fail-fast: false
       matrix:
@@ -60,9 +63,9 @@ jobs:
 
       - name: Prepare application
         run: |
-          php artisan key:generate --env=testing
-          php artisan config:clear --env=testing
-          php artisan migrate --env=testing
+          php artisan key:generate
+          php artisan config:clear
+          php artisan migrate
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
