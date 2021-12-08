@@ -1,0 +1,44 @@
+version: 2
+
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    target-branch: "acceptance"
+    assignees:
+      - "cyrildewit"
+    reviewers:
+      - "joeyvonck"
+      - "abassharif"
+      - "MiKessels"
+    labels:
+      - "Task"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    target-branch: "acceptance"
+    assignees:
+      - "cyrildewit"
+    reviewers:
+      - "joeyvonck"
+      - "abassharif"
+      - "MiKessels"
+    labels:
+      - "Task"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    assignees:
+      - "cyrildewit"
+    reviewers:
+      - "joeyvonck"
+      - "abassharif"
+      - "MiKessels"
+    labels:
+      - "Task"
