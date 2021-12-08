@@ -54,7 +54,7 @@ All work branches branch off from the `producion` branch to make branches indepe
 * **Joey Vonck** - _Creator_ - [joeyvonck](https://github.com/joeyvonck)
 * **Cyril de Wit** - _Creator_ - [cyrildewit](https://github.com/cyrildewit)
 
-See also the list of [contributors](https://github.com/cyrildewit/eloquent-viewable/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/space-management/graphs/contributors) who participated in this project.
 
 ## Changelog
 
