@@ -18,6 +18,6 @@ class Space extends Model
         'uuid' => 'string',
         'name' => 'string',
         'description' => 'string',
-        'open_for_reservations' => 'boolean',
+        'is_open_for_reservations' => 'boolean',
     ];
 }

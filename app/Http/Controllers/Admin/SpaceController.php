@@ -48,7 +48,7 @@ class SpaceController extends Controller
         $space = new Space();
         $space->name = $request->get('name');
         $space->description = $request->get('description');
-        $space->is_open_for_reservations = $request->get('is_open_for_reservations');
+        $space->is_open_for_reservations = $request->boolean('is_open_for_reservations');
         $space->save();
 
         return $this
