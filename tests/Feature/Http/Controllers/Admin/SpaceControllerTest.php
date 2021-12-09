@@ -7,6 +7,7 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
+use Inertia\Testing\Assert;
 use Tests\TestCase;
 
 class SpaceControllerTest extends TestCase
@@ -34,6 +35,13 @@ class SpaceControllerTest extends TestCase
 
         // Then
         $response->assertOk();
+
+        $response->assertInertia(fn(Assert $page) => $page
+            ->component('Admin/Space/Create')
+            ->has('user', fn (Assert $page) => $page
+                ->where('full_name', $user->getFullName())
+            )
+        );
     }
 
     public function test_that_a_new_space_can_be_created(): void
