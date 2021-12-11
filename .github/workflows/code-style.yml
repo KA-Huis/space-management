@@ -8,9 +8,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2.4.0
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          token: ${{ secrets.PAT }}
+#        with:
+#          ref: ${{ github.event.pull_request.head.sha }}
+#          token: ${{ secrets.PAT }}
 
       - name: Run php-cs-fixer
         uses: docker://oskarstark/php-cs-fixer-ga:3.0.0
