@@ -23,7 +23,7 @@ class SpaceControllerTest extends TestCase
         $this->urlGenerator = $this->app->get(UrlGenerator::class);
     }
 
-    public function test_create_form_is_shown(): void
+    public function testCreateFormIsShown(): void
     {
         // Given
         $user = User::factory()->create();
@@ -36,7 +36,7 @@ class SpaceControllerTest extends TestCase
         // Then
         $response->assertOk();
 
-        $response->assertInertia(fn(Assert $page) => $page
+        $response->assertInertia(fn (Assert $page) => $page
             ->component('Admin/Space/Create')
             ->has('user', fn (Assert $page) => $page
                 ->where('full_name', $user->getFullName())
@@ -44,7 +44,7 @@ class SpaceControllerTest extends TestCase
         );
     }
 
-    public function test_that_a_new_space_can_be_created(): void
+    public function testThatANewSpaceCanBeCreated(): void
     {
         // Given
         $user = User::factory()->create();
@@ -55,7 +55,7 @@ class SpaceControllerTest extends TestCase
             'is_open_for_reservations' => true,
         ];
 
-        $route = $this->urlGenerator->route('admin.space.store');;
+        $route = $this->urlGenerator->route('admin.space.store');
 
         // When
         $response = $this->actingAs($user)->post($route, $formData);

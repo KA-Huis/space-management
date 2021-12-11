@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reservation extends Model
 {
-    use HasFactory,
-        HasUuid,
-        SoftDeletes;
+    use HasFactory;
+    use HasUuid;
+    use SoftDeletes;
 
     /** @var array */
     protected $casts = [

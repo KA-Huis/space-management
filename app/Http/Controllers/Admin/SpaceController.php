@@ -8,12 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Space\StoreSpaceRequest;
 use App\Models\Space;
 use Illuminate\Contracts\Translation\Translator;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Inertia\ResponseFactory as InertiaResponseFactory;
 use Inertia\Response as InertiaResponse;
+use Inertia\ResponseFactory as InertiaResponseFactory;
 
 class SpaceController extends Controller
 {
@@ -25,8 +24,7 @@ class SpaceController extends Controller
         InertiaResponseFactory $inertiaResponseFactory,
         Redirector $redirector,
         Translator $translator
-    )
-    {
+    ) {
         $this->inertiaResponseFactory = $inertiaResponseFactory;
         $this->redirector = $redirector;
         $this->translator = $translator;

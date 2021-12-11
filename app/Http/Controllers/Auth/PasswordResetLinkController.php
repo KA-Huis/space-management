@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\PasswordResetRequest;
+use Illuminate\Contracts\Auth\PasswordBroker as PasswordBrokerContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory as ViewFactory;
-use Illuminate\Contracts\Auth\PasswordBroker as PasswordBrokerContract;
 
 class PasswordResetLinkController extends Controller
 {
@@ -20,8 +20,7 @@ class PasswordResetLinkController extends Controller
         ViewFactory $viewFactory,
         Redirector $redirector,
         PasswordBrokerContract $passwordBroker
-    )
-    {
+    ) {
         $this->viewFactory = $viewFactory;
         $this->redirector = $redirector;
         $this->passwordBroker = $passwordBroker;

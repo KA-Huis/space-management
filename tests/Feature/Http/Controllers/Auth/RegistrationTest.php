@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Authentication\Guard;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
@@ -21,7 +20,7 @@ class RegistrationTest extends TestCase
         $this->urlGenerator = $this->app->get(UrlGenerator::class);
     }
 
-    public function test_registration_screen_can_be_rendered(): void
+    public function testRegistrationScreenCanBeRendered(): void
     {
         // When
         $response = $this->get('/register');
@@ -30,7 +29,7 @@ class RegistrationTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_new_users_can_register(): void
+    public function testNewUsersCanRegister(): void
     {
         // Given
         $email = 'test@example.com';
@@ -51,7 +50,6 @@ class RegistrationTest extends TestCase
 
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect($this->urlGenerator->route('admin.dashboard'));
-
 
         $this->assertAuthenticatedAs($user);
     }

@@ -13,7 +13,7 @@ class ReparationRequestTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_it_can_be_reported_by_a_user(): void
+    public function testItCanBeReportedByAUser(): void
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
@@ -24,7 +24,7 @@ class ReparationRequestTest extends TestCase
         self::assertInstanceOf(User::class, $reparationRequest->reporter);
     }
 
-    public function test_it_can_have_a_current_status(): void
+    public function testItCanHaveACurrentStatus(): void
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
@@ -37,7 +37,7 @@ class ReparationRequestTest extends TestCase
         self::assertEquals($reparationRequest->statuses()->latest()->first()->id, $reparationRequest->currentStatus->id);
     }
 
-    public function test_it_can_have_have_many_statuses(): void
+    public function testItCanHaveHaveManyStatuses(): void
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
@@ -49,7 +49,7 @@ class ReparationRequestTest extends TestCase
         self::assertEquals(5, $reparationRequest->statuses()->count());
     }
 
-    public function test_it_can_have_have_many_materials(): void
+    public function testItCanHaveHaveManyMaterials(): void
     {
         // Given
         $reparationRequest = ReparationRequest::factory()

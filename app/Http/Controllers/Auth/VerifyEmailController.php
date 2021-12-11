@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\UrlGenerator;
-use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 
 class VerifyEmailController extends Controller
 {
@@ -20,8 +20,7 @@ class VerifyEmailController extends Controller
         Redirector $redirector,
         UrlGenerator $urlGenerator,
         EventDispatcher $eventDispatcher
-    )
-    {
+    ) {
         $this->redirector = $redirector;
         $this->urlGenerator = $urlGenerator;
         $this->eventDispatcher = $eventDispatcher;

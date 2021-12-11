@@ -13,7 +13,7 @@ class SpaceTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_example(): void
+    public function testExample(): void
     {
         $response = $this->get('/');
 

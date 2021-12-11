@@ -2,9 +2,9 @@
 
 namespace App\Notifications\Auth;
 
+use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Routing\UrlGenerator;
 
 class ResetPassword extends Notification
 {
@@ -20,7 +20,7 @@ class ResetPassword extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      */
     public function via($notifiable): array
     {
@@ -32,12 +32,13 @@ class ResetPassword extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view(
+        return (new MailMessage())->view(
             'emails.auth.reset-password',
             [
                 'resetUrl' => $this->generatePasswordResetUrl($notifiable->getEmailForPasswordReset()),
@@ -48,13 +49,13 @@ class ResetPassword extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
         ];
     }
 

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
-use Inertia\ResponseFactory as InertiaResponseFactory;
 use Inertia\Response as InertiaResponse;
+use Inertia\ResponseFactory as InertiaResponseFactory;
 
 class DashboardController extends Controller
 {

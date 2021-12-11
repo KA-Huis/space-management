@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory as ViewFactory;
-use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 
 class RegisteredUserController extends Controller
 {
@@ -29,8 +29,7 @@ class RegisteredUserController extends Controller
         AuthFactory $authFactory,
         Redirector $redirector,
         Hasher $hasher
-    )
-    {
+    ) {
         $this->viewFactory = $viewFactory;
         $this->eventDispatcher = $eventDispatcher;
         $this->authFactory = $authFactory;
@@ -59,8 +58,6 @@ class RegisteredUserController extends Controller
             'email' => $request->get('email'),
             'password' => $this->hasher->make($request->get('password')),
         ]);
-
-
 
         $this->eventDispatcher->dispatch(new Registered($user));
 

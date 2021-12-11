@@ -23,8 +23,7 @@ class EmailVerificationController extends Controller
         ViewFactory $viewFactory,
         Redirector $redirector,
         Translator $translator
-    )
-    {
+    ) {
         $this->viewFactory = $viewFactory;
         $this->redirector = $redirector;
         $this->translator = $translator;

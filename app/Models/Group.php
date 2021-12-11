@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
-    use HasFactory,
-        SoftDeletes,
-        HasUuid;
+    use HasFactory;
+    use SoftDeletes;
+    use HasUuid;
 
     /** @var array */
     protected $casts = [

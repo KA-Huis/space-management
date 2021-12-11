@@ -12,7 +12,7 @@ class ReparationRequestStatusTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_it_can_belong_to_a_reparation_request(): void
+    public function testItCanBelongToAReparationRequest(): void
     {
         // Given
         $reparationRequestStatus = ReparationRequestStatus::factory()

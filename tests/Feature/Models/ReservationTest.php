@@ -12,7 +12,7 @@ class ReservationTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_it_can_be_created_by_user(): void
+    public function testItCanBeCreatedByUser(): void
     {
         // Given
         $reservation = Reservation::factory()
@@ -24,7 +24,7 @@ class ReservationTest extends TestCase
         self::assertInstanceOf(User::class, $reservation->createdByUser);
     }
 
-    public function test_it_can_have_reservation_participants(): void
+    public function testItCanHaveReservationParticipants(): void
     {
         // Given
         $reservation = Reservation::factory()
@@ -38,7 +38,7 @@ class ReservationTest extends TestCase
         self::assertInstanceOf(User::class, $reservation->reservationParticipants()->first());
     }
 
-    public function test_it_can_be_made_for_a_room(): void
+    public function testItCanBeMadeForARoom(): void
     {
         // Given
         $reservation = Reservation::factory()
