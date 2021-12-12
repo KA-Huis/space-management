@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
@@ -23,8 +26,10 @@ class AuthenticationTest extends TestCase
 
     public function testLoginScreenCanBeRendered(): void
     {
-        // When
+        // Given
         $route = $this->urlGenerator->route('auth.login');
+
+        // When
         $response = $this->get($route);
 
         // Then
@@ -35,12 +40,14 @@ class AuthenticationTest extends TestCase
     {
         // Given
         $user = User::factory()->create();
-
-        // When
-        $response = $this->post('/login', [
+        $route = $this->urlGenerator->route('auth.login');
+        $formData = [
             'email' => $user->email,
             'password' => 'password',
-        ]);
+        ];
+
+        // When
+        $response = $this->post($route, $formData);
 
         // Then
         $this->assertAuthenticated();
@@ -52,15 +59,33 @@ class AuthenticationTest extends TestCase
     {
         // Given
         $user = User::factory()->create();
-
-        // When
-        $response = $this->post('/login', [
+        $route = $this->urlGenerator->route('auth.login');
+        $formData = [
             'email' => $user->email,
             'password' => 'wrong-password',
-        ]);
+        ];
+
+        // When
+        $response = $this->post($route, $formData);
 
         // Then
         $response->assertSessionHasErrors();
+
+        $this->assertGuest();
+    }
+
+    public function testUsersCanLogoutFromTheirSession(): void
+    {
+        // Given
+        $user = User::factory()->create();
+
+        $route = $this->urlGenerator->route('auth.logout');
+
+        // When
+        $response = $this->actingAs($user)->post($route);
+
+        // Then
+        $response->assertRedirect();
 
         $this->assertGuest();
     }
