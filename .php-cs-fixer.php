@@ -24,5 +24,6 @@ return (new PhpCsFixer\Config())
             'spacing' => 'one',
         ],
         'yoda_style' => false,
+        'declare_strict_types' => true,
     ])
     ->setFinder($finder);
