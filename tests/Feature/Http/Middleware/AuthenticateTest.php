@@ -29,7 +29,7 @@ class AuthenticateTest extends TestCase
         });
     }
 
-    public function test_user_is_not_redirected_when_logged_in()
+    public function testUserIsNotRedirectedWhenLoggedIn()
     {
         // Given
         $user = User::factory()->create();
@@ -42,7 +42,7 @@ class AuthenticateTest extends TestCase
         $response->assertSeeText('OK');
     }
 
-    public function test_user_is_redirected_when_not_logged_in()
+    public function testUserIsRedirectedWhenNotLoggedIn()
     {
         // When
         $response = $this->get('/_test/requires-authentication');

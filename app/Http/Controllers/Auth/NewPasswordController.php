@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\NewPasswordRequest;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 use Illuminate\View\Factory as ViewFactory;
-use Illuminate\Contracts\Auth\PasswordBroker;
-use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 
 class NewPasswordController extends Controller
 {
@@ -29,8 +29,7 @@ class NewPasswordController extends Controller
         PasswordBroker $passwordBroker,
         Hasher $hasher,
         EventDispatcher $eventDispatcher
-    )
-    {
+    ) {
         $this->viewFactory = $viewFactory;
         $this->redirector = $redirector;
         $this->passwordBroker = $passwordBroker;
@@ -60,7 +59,7 @@ class NewPasswordController extends Controller
             'email',
             'password',
             'password_confirmation',
-            'token'
+            'token',
         ]);
 
         $status = $this->passwordBroker->reset(

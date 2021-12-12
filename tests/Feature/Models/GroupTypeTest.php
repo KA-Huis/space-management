@@ -15,7 +15,7 @@ class GroupTypeTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_it_can_have_many_groups(): void
+    public function testItCanHaveManyGroups(): void
     {
         // Given
         $groupType = GroupType::factory()

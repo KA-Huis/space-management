@@ -25,7 +25,7 @@ class EmailVerificationTest extends TestCase
         $this->urlGenerator = $this->app->get(UrlGenerator::class);
     }
 
-    public function test_email_verification_screen_can_be_rendered(): void
+    public function testEmailVerificationScreenCanBeRendered(): void
     {
         // Given
         $user = User::factory()->create([
@@ -41,7 +41,7 @@ class EmailVerificationTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_email_verification_screen_is_not_rendered_when_email_is_already_verified(): void
+    public function testEmailVerificationScreenIsNotRenderedWhenEmailIsAlreadyVerified(): void
     {
         $this->markTestSkipped();
 
@@ -59,7 +59,7 @@ class EmailVerificationTest extends TestCase
         $response->assertRedirect($this->urlGenerator->route('admin.dashboard'));
     }
 
-    public function test_email_can_be_verified(): void
+    public function testEmailCanBeVerified(): void
     {
         $this->markTestSkipped();
 
@@ -80,14 +80,14 @@ class EmailVerificationTest extends TestCase
         $response = $this->actingAs($user)->get($verificationUrl);
 
         // Then
-        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        $response->assertRedirect(RouteServiceProvider::HOME . '?verified=1');
 
         Event::assertDispatched(Verified::class);
 
         self::assertTrue($user->fresh()->hasVerifiedEmail());
     }
 
-    public function test_email_is_not_verified_with_invalid_hash(): void
+    public function testEmailIsNotVerifiedWithInvalidHash(): void
     {
         $this->markTestSkipped();
 

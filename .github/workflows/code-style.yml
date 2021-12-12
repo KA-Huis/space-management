@@ -13,7 +13,9 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga:3.0.0
+        uses: docker://oskarstark/php-cs-fixer-ga:3.2.1
+        with:
+          args: --allow-risky=yes
 
 #      - name: Run prettier
 #        uses: actionsx/prettier@v2
@@ -24,4 +26,4 @@ jobs:
         with:
           commit_user_name: Cyril de Wit (Bot)
           commit_user_email: cyril+githubbot@cyrildewit.nl
-          commit_message: "style: fix code style!"
+          commit_message: "style: fix code style"

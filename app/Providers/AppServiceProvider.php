@@ -6,13 +6,11 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory as InertiaResponseFactory;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /** @return void */
     public function register()
     {
-       //
     }
 
     /** @return void */
@@ -43,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
             'errors' => function () use ($session) {
                 return $session->get('errors')
                     ? $session->get('errors')->getBag('default')->getMessages()
-                    : (object)[];
+                    : (object) [];
             },
         ]);
     }
