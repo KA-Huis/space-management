@@ -6,7 +6,6 @@ namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
