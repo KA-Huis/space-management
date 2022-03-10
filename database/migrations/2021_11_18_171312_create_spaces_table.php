@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +15,7 @@ class CreateSpacesTable extends Migration
             $table->uuid('uuid');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->boolean('open_for_reservations')->default(true);
+            $table->boolean('is_open_for_reservations')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

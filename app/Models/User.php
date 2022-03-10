@@ -19,13 +19,13 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements CanResetPasswordContact
 {
-    use HasApiTokens,
-        HasFactory,
-        Notifiable,
-        SoftDeletes,
-        HasUuid,
-        HasRoles,
-        CanResetPassword;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
+    use HasUuid;
+    use HasRoles;
+    use CanResetPassword;
 
     /** @var string[] */
     protected $fillable = [
@@ -56,7 +56,7 @@ class User extends Authenticatable implements CanResetPasswordContact
     {
         $nameParts = (new Collection([
             $this->first_name,
-            $this->last_name
+            $this->last_name,
         ]));
 
         return $nameParts
@@ -71,6 +71,7 @@ class User extends Authenticatable implements CanResetPasswordContact
 
     /**
      * Send the email verification notification.
+     *
      * @throws Exception
      */
     public function sendEmailVerificationNotification(): void
@@ -82,7 +83,8 @@ class User extends Authenticatable implements CanResetPasswordContact
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
+     *
      * @return void
      */
     public function sendPasswordResetNotification($token)

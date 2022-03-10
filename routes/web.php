@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 /** @var Router $router */
 
-use Illuminate\Routing\Router;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\SpaceController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Routing\Router;
 
 $router->get('/', [HomeController::class, 'index'])
     ->name('home.index');
@@ -38,8 +39,14 @@ $router
 //        'verified', Not required
     ])
     ->group(function (Router $router) {
-
         $router->get('/', [DashboardController::class, 'index'])
             ->name('dashboard');
 
+        // Spaces
+        $router
+            ->name('space.')
+            ->prefix('spaces')->group(function (Router $router) {
+                $router->get('/create', [SpaceController::class, 'create'])->name('create');
+                $router->post('/', [SpaceController::class, 'store'])->name('store');
+            });
     });

@@ -16,7 +16,7 @@ class GroupTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_it_can_belong_to_many_users(): void
+    public function testItCanBelongToManyUsers(): void
     {
         // Given
         $group = Group::factory()
@@ -28,7 +28,7 @@ class GroupTest extends TestCase
         self::assertEquals(3, $group->users()->count());
     }
 
-    public function test_it_can_belong_to_a_group_type(): void
+    public function testItCanBelongToAGroupType(): void
     {
         // Given
         $group = Group::factory()

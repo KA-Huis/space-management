@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ReparationRequest extends Model
 {
-    use HasFactory,
-        SoftDeletes,
-        HasUuid;
+    use HasFactory;
+    use SoftDeletes;
+    use HasUuid;
 
     /** @var array */
     protected $casts = [

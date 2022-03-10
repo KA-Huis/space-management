@@ -3,7 +3,6 @@
 use App\Authentication\Guard;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -109,5 +108,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
@@ -21,26 +24,30 @@ class AuthenticationTest extends TestCase
         $this->urlGenerator = $this->app->get(UrlGenerator::class);
     }
 
-    public function test_login_screen_can_be_rendered(): void
+    public function testLoginScreenCanBeRendered(): void
     {
-        // When
+        // Given
         $route = $this->urlGenerator->route('auth.login');
+
+        // When
         $response = $this->get($route);
 
         // Then
         $response->assertOk();
     }
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function testUsersCanAuthenticateUsingTheLoginScreen(): void
     {
         // Given
         $user = User::factory()->create();
-
-        // When
-        $response = $this->post('/login', [
+        $route = $this->urlGenerator->route('auth.login');
+        $formData = [
             'email' => $user->email,
             'password' => 'password',
-        ]);
+        ];
+
+        // When
+        $response = $this->post($route, $formData);
 
         // Then
         $this->assertAuthenticated();
@@ -48,19 +55,37 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
-    public function test_users_can_not_authenticate_with_invalid_password(): void
+    public function testUsersCanNotAuthenticateWithInvalidPassword(): void
+    {
+        // Given
+        $user = User::factory()->create();
+        $route = $this->urlGenerator->route('auth.login');
+        $formData = [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ];
+
+        // When
+        $response = $this->post($route, $formData);
+
+        // Then
+        $response->assertSessionHasErrors();
+
+        $this->assertGuest();
+    }
+
+    public function testUsersCanLogoutFromTheirSession(): void
     {
         // Given
         $user = User::factory()->create();
 
+        $route = $this->urlGenerator->route('auth.logout');
+
         // When
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'wrong-password',
-        ]);
+        $response = $this->actingAs($user)->post($route);
 
         // Then
-        $response->assertSessionHasErrors();
+        $response->assertRedirect();
 
         $this->assertGuest();
     }

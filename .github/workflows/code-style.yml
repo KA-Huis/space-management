@@ -1,0 +1,29 @@
+name: Code Style
+
+on: [ pull_request_target ]
+
+jobs:
+  fix-code-style:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          token: ${{ secrets.PAT }}
+
+      - name: Run php-cs-fixer
+        uses: docker://oskarstark/php-cs-fixer-ga:3.2.1
+        with:
+          args: --allow-risky=yes
+
+#      - name: Run prettier
+#        uses: actionsx/prettier@v2
+#        with:
+#          args: --write .
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.12.0
+        with:
+          commit_user_name: Cyril de Wit (Bot)
+          commit_user_email: cyril+githubbot@cyrildewit.nl
+          commit_message: "style: fix code style"

@@ -15,8 +15,7 @@ class EmailVerificationNotificationController extends Controller
     public function __construct(
         Redirector $redirector,
         UrlGenerator $urlGenerator
-    )
-    {
+    ) {
         $this->redirector = $redirector;
         $this->urlGenerator = $urlGenerator;
     }
@@ -24,7 +23,6 @@ class EmailVerificationNotificationController extends Controller
     /**
      * Send a new email verification notification.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)

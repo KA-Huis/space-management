@@ -11,7 +11,7 @@ class SpaceFactory extends Factory
         return [
             'name' => $this->faker->name,
             'description' => $this->faker->boolean ? $this->faker->text : null,
-            'open_for_reservations' => $this->faker->boolean,
+            'is_open_for_reservations' => $this->faker->boolean,
         ];
     }
 }

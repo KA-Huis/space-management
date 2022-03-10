@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Space extends Model
 {
-    use HasFactory,
-        SoftDeletes,
-        HasUuid;
+    use HasFactory;
+    use SoftDeletes;
+    use HasUuid;
 
     /** @var array */
     protected $casts = [
         'uuid' => 'string',
         'name' => 'string',
         'description' => 'string',
-        'open_for_reservations' => 'boolean',
+        'is_open_for_reservations' => 'boolean',
     ];
 }
