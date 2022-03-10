@@ -4,7 +4,7 @@
     "description": "Spaces management tool built for KA-Huis.",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^8.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.5",
