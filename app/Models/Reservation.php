@@ -26,13 +26,13 @@ class Reservation extends Model
 
     public function createdByUser(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(AuthorizedUser::class);
     }
 
     public function reservationParticipants(): BelongsToMany
     {
         return $this->belongsToMany(
-            User::class,
+            AuthorizedUser::class,
             'reservation_participant',
             'reservation_id',
             'user_id'

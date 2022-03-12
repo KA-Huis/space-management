@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Auth;
 use App\Authentication\Guard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
@@ -54,7 +54,7 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $user = User::create([
+        $user = AuthorizedUser::create([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),

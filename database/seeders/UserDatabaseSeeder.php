@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +13,7 @@ class UserDatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
+        AuthorizedUser::create([
             'first_name' => 'Cyril',
             'last_name' => 'de Wit',
             'email' => '453717@student.fontys.nl',
@@ -21,7 +21,7 @@ class UserDatabaseSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
         ]);
 
-        User::create([
+        AuthorizedUser::create([
             'first_name' => 'Abas',
             'last_name' => 'Sharif',
             'email' => '472244@student.fontys.nl',
@@ -29,7 +29,7 @@ class UserDatabaseSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
         ]);
 
-        User::create([
+        AuthorizedUser::create([
             'first_name' => 'Joey',
             'last_name' => 'Vonck',
             'email' => '454988@student.fontys.nl',
@@ -37,7 +37,7 @@ class UserDatabaseSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
         ]);
 
-        User::create([
+        AuthorizedUser::create([
             'first_name' => 'Mitch',
             'last_name' => 'Kessels',
             'email' => '453258@student.fontys.nl',
@@ -45,7 +45,7 @@ class UserDatabaseSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
         ]);
 
-        User::create([
+        AuthorizedUser::create([
             'first_name' => 'Enno',
             'last_name' => 'Overbeeken',
             'email' => 'enno@kahuis.nl',

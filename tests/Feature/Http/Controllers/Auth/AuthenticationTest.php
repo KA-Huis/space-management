@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
@@ -38,7 +38,7 @@ class AuthenticationTest extends TestCase
     public function testUsersCanAuthenticateUsingTheLoginScreen(): void
     {
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
         $route = $this->urlGenerator->route('auth.login');
         $formData = [
             'email' => $user->email,
@@ -57,7 +57,7 @@ class AuthenticationTest extends TestCase
     public function testUsersCanNotAuthenticateWithInvalidPassword(): void
     {
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
         $route = $this->urlGenerator->route('auth.login');
         $formData = [
             'email' => $user->email,
@@ -76,7 +76,7 @@ class AuthenticationTest extends TestCase
     public function testUsersCanLogoutFromTheirSession(): void
     {
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
 
         $route = $this->urlGenerator->route('auth.logout');
 

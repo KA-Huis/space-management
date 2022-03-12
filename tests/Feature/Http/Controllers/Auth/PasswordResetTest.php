@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use App\Notifications\Auth\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
@@ -41,7 +41,7 @@ class PasswordResetTest extends TestCase
         Notification::fake();
 
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
         $formData = [
             'email' => $user->email,
         ];
@@ -59,7 +59,7 @@ class PasswordResetTest extends TestCase
         Notification::fake();
 
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
         $formData = [
             'email' => $user->email,
         ];
@@ -87,7 +87,7 @@ class PasswordResetTest extends TestCase
         Notification::fake();
 
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
         $formData = [
             'email' => $user->email,
         ];

@@ -6,7 +6,7 @@ namespace Tests\Feature\Models;
 
 use App\Models\Group;
 use App\Models\GroupType;
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -23,7 +23,7 @@ class GroupTest extends TestCase
         // Given
         $group = Group::factory()
             ->for(GroupType::factory())
-            ->has(User::factory()->count(3))
+            ->has(AuthorizedUser::factory()->count(3))
             ->create();
 
         // Then

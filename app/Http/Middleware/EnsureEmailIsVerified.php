@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -42,9 +42,9 @@ class EnsureEmailIsVerified
         throw new HttpException(403, 'Your email address is not verified.');
     }
 
-    private function emailIsNotVerified(?User $user): bool
+    private function emailIsNotVerified(?AuthorizedUser $user): bool
     {
-        return !$user instanceof User
+        return !$user instanceof AuthorizedUser
             || (
                 $user instanceof MustVerifyEmail
                 && !$user->hasVerifiedEmail()

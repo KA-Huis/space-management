@@ -19,7 +19,7 @@ use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements CanResetPasswordContact
+class AuthorizedUser extends Authenticatable implements CanResetPasswordContact
 {
     use HasApiTokens;
     use HasFactory;
@@ -28,6 +28,9 @@ class User extends Authenticatable implements CanResetPasswordContact
     use HasUuid;
     use HasRoles;
     use CanResetPassword;
+
+    public const AUTHENTICATION_GUARD = 'authorized_users';
+    public const AUTHENTICATION_PROVIDER = 'authorized_users';
 
     /** @var string[] */
     protected $fillable = [

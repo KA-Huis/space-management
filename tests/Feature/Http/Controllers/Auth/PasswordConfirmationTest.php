@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class PasswordConfirmationTest extends TestCase
     {
         $this->markTestSkipped();
 
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
 
         $response = $this->actingAs($user)->get('/confirm-password');
 
@@ -27,7 +27,7 @@ class PasswordConfirmationTest extends TestCase
     {
         $this->markTestSkipped();
 
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
 
         $response = $this->actingAs($user)->post('/confirm-password', [
             'password' => 'password',
@@ -41,7 +41,7 @@ class PasswordConfirmationTest extends TestCase
     {
         $this->markTestSkipped();
 
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
 
         $response = $this->actingAs($user)->post('/confirm-password', [
             'password' => 'wrong-password',

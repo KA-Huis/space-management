@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Reservation;
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +13,7 @@ return new class() extends Migration {
     {
         Schema::create('reservation_participant', function (Blueprint $table) {
             $table->foreignIdFor(Reservation::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(AuthorizedUser::class);
         });
     }
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Http\Middleware;
 
 use App\Http\Middleware\Authenticate;
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Router;
@@ -34,7 +34,7 @@ class AuthenticateTest extends TestCase
     public function testUserIsNotRedirectedWhenLoggedIn()
     {
         // Given
-        $user = User::factory()->create();
+        $user = AuthorizedUser::factory()->create();
 
         // When
         $response = $this->actingAs($user)->get('/_test/requires-authentication');

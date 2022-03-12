@@ -7,7 +7,7 @@ namespace Tests\Feature\Models;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
 use App\Models\ReparationRequestStatus;
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -19,18 +19,18 @@ class ReparationRequestTest extends TestCase
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
-            ->for(User::factory(), 'reporter')
+            ->for(AuthorizedUser::factory(), 'reporter')
             ->create();
 
         // Then
-        self::assertInstanceOf(User::class, $reparationRequest->reporter);
+        self::assertInstanceOf(AuthorizedUser::class, $reparationRequest->reporter);
     }
 
     public function testItCanHaveACurrentStatus(): void
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
-            ->for(User::factory(), 'reporter')
+            ->for(AuthorizedUser::factory(), 'reporter')
             ->has(ReparationRequestStatus::factory()->count(5), 'statuses')
             ->create();
 
@@ -43,7 +43,7 @@ class ReparationRequestTest extends TestCase
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
-            ->for(User::factory(), 'reporter')
+            ->for(AuthorizedUser::factory(), 'reporter')
             ->has(ReparationRequestStatus::factory()->count(5), 'statuses')
             ->create();
 
@@ -55,7 +55,7 @@ class ReparationRequestTest extends TestCase
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
-            ->for(User::factory(), 'reporter')
+            ->for(AuthorizedUser::factory(), 'reporter')
             ->has(ReparationRequestMaterial::factory()->count(5), 'materials')
             ->create();
 

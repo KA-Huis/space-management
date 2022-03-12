@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Models;
 
-use App\Models\User;
+use App\Models\AuthorizedUser;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -61,7 +61,7 @@ class UserTest extends TestCase
     public function testGetFullName(array $attributes, string $fullName)
     {
         // Given
-        $user = new User($attributes);
+        $user = new AuthorizedUser($attributes);
 
         // When
         $generatedFullName = $user->getFullName();
