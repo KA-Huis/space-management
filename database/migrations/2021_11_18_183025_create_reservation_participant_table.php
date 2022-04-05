@@ -8,8 +8,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReservationParticipantTable extends Migration
-{
+return new class() extends Migration {
     public function up(): void
     {
         Schema::create('reservation_participant', function (Blueprint $table) {
@@ -22,4 +21,4 @@ class CreateReservationParticipantTable extends Migration
     {
         Schema::dropIfExists('reservation_participant');
     }
-}
+};

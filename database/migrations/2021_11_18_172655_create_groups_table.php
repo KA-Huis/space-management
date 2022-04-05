@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupsTable extends Migration
-{
+return new class() extends Migration {
     public function up(): void
     {
         Schema::create('groups', function (Blueprint $table) {
@@ -25,4 +24,4 @@ class CreateGroupsTable extends Migration
     {
         Schema::dropIfExists('groups');
     }
-}
+};

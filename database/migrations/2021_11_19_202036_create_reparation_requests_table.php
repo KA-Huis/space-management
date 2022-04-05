@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReparationRequestsTable extends Migration
-{
+return new class() extends Migration {
     public function up(): void
     {
         Schema::create('reparation_requests', function (Blueprint $table) {
@@ -27,4 +26,4 @@ class CreateReparationRequestsTable extends Migration
     {
         Schema::dropIfExists('reparation_requests');
     }
-}
+};
