@@ -17,7 +17,7 @@ $router->get('/', [HomeController::class, 'index'])
 // Email verification
 $router
     ->middleware([
-        sprintf('auth:%s', AuthorizedUser::AUTHENTICATION_GUARD)
+        sprintf('auth:%s', AuthorizedUser::AUTHENTICATION_GUARD),
     ])
     ->name('email-verification.')
     ->group(function (Router $router) {
@@ -38,7 +38,7 @@ $router
     ->name('admin.')
     ->prefix('admin')
     ->middleware([
-        sprintf('auth:%s', AuthorizedUser::AUTHENTICATION_GUARD)
+        sprintf('auth:%s', AuthorizedUser::AUTHENTICATION_GUARD),
     ])
     ->group(function (Router $router) {
         $router->get('/', [DashboardController::class, 'index'])
