@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('authorized_users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->string('first_name');
@@ -25,6 +25,6 @@ return new class() extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('authorized_users');
     }
 };
