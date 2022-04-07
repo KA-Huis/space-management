@@ -20,7 +20,6 @@ use Spatie\Permission\Traits\HasRoles;
 
 class AuthorizedUser extends Authenticatable implements CanResetPasswordContact
 {
-    use HasApiTokens;
     use HasFactory;
     use Notifiable;
     use SoftDeletes;

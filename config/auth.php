@@ -46,7 +46,7 @@ return [
         ],
 
         ApiUser::AUTHENTICATION_GUARD => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => ApiUser::AUTHENTICATION_PROVIDER,
         ],
     ],
