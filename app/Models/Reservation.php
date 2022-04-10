@@ -35,7 +35,7 @@ class Reservation extends Model
             AuthorizedUser::class,
             'reservation_participant',
             'reservation_id',
-            'user_id'
+            'authorized_user_id'
         );
     }
 

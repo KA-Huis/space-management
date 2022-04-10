@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class AuthorizedUserFactory extends Factory
 {
     /** @return array<string, mixed> */
     public function definition()
@@ -27,7 +27,7 @@ class UserFactory extends Factory
     }
 
     /** Indicate that the model's email address should be unverified. */
-    public function unverified(): UserFactory
+    public function unverified(): AuthorizedUserFactory
     {
         return $this->state(function (array $attributes) {
             return [

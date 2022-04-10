@@ -74,7 +74,7 @@ return [
             'model' => AuthorizedUser::class,
         ],
 
-         ApiUser::AUTHENTICATION_GUARD => [
+         ApiUser::AUTHENTICATION_PROVIDER => [
              'driver' => 'eloquent',
              'model' => ApiUser::class,
          ],

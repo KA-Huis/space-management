@@ -53,6 +53,6 @@ class RegistrationTest extends TestCase
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect($this->urlGenerator->route('admin.dashboard'));
 
-        $this->assertAuthenticatedAs($user);
+        $this->assertAuthenticatedAs($user, AuthorizedUser::AUTHENTICATION_GUARD);
     }
 }

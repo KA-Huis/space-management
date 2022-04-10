@@ -30,6 +30,8 @@ class AuthorizedUser extends Authenticatable implements CanResetPasswordContact
     public const AUTHENTICATION_GUARD = 'authorized_users';
     public const AUTHENTICATION_PROVIDER = 'authorized_users';
 
+    public const DATABASE_TABLE = 'authorized_users';
+
     /** @var string[] */
     protected $fillable = [
         'first_name',
