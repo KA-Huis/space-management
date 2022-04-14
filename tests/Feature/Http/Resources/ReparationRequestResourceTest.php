@@ -7,7 +7,6 @@ namespace Tests\Feature\Http\Resources;
 use App\Http\Resources\ReparationRequestResource;
 use App\Models\ReparationRequest;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Mockery;
@@ -34,11 +33,11 @@ class ReparationRequestResourceTest extends TestCase
                 'title' => $reparationRequest->title,
                 'description' => $reparationRequest->description,
                 'priority' => $reparationRequest->priority,
-                'created_at' => (string)$reparationRequest->created_at,
-                'updated_at' => (string)$reparationRequest->updated_at,
+                'created_at' => (string) $reparationRequest->created_at,
+                'updated_at' => (string) $reparationRequest->updated_at,
                 'deleted_at' => $reparationRequest->deleted_at,
             ],
-            collect(Arr::get((array)$response->getData(true), 'data'))->toArray()
+            collect(Arr::get((array) $response->getData(true), 'data'))->toArray()
         );
     }
 
@@ -57,5 +56,4 @@ class ReparationRequestResourceTest extends TestCase
         // Then
         $this->assertArrayHasKey('reporter', $response);
     }
-
 }
