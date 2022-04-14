@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements CanResetPasswordContact
@@ -26,11 +27,9 @@ class User extends Authenticatable implements CanResetPasswordContact
     use HasUuid;
     use HasRoles;
     use CanResetPassword;
+    use HasApiTokens;
 
-    public const AUTHENTICATION_GUARD = 'authorized_users';
-    public const AUTHENTICATION_PROVIDER = 'authorized_users';
-
-    public const DATABASE_TABLE = 'authorized_users';
+    public const AUTHENTICATION_PROVIDER = 'users';
 
     /** @var string[] */
     protected $fillable = [

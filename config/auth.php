@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\ApiUser;
+use App\Authentication\GuardsInterface;
 use App\Models\User;
 
 return [
@@ -18,7 +18,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => User::AUTHENTICATION_GUARD,
+        'guard' => GuardsInterface::WEB,
         'passwords' => 'users',
     ],
 
@@ -40,14 +40,14 @@ return [
     */
 
     'guards' => [
-        User::AUTHENTICATION_GUARD => [
+        GuardsInterface::WEB => [
             'driver' => 'session',
             'provider' => User::AUTHENTICATION_PROVIDER,
         ],
 
-        ApiUser::AUTHENTICATION_GUARD => [
+        GuardsInterface::REST_API => [
             'driver' => 'passport',
-            'provider' => ApiUser::AUTHENTICATION_PROVIDER,
+            'provider' => User::AUTHENTICATION_PROVIDER,
         ],
     ],
 
@@ -73,11 +73,6 @@ return [
             'driver' => 'eloquent',
             'model' => User::class,
         ],
-
-         ApiUser::AUTHENTICATION_PROVIDER => [
-             'driver' => 'eloquent',
-             'model' => ApiUser::class,
-         ],
     ],
 
     /*

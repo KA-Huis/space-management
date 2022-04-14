@@ -33,7 +33,9 @@ class RegisterRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::DATABASE_TABLE),
+                Rule::unique(
+                    (new User())->getTable()
+                ),
             ],
             'password' => [
                 'required',
