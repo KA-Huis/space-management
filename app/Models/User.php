@@ -18,7 +18,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 
-class AuthorizedUser extends Authenticatable implements CanResetPasswordContact
+class User extends Authenticatable implements CanResetPasswordContact
 {
     use HasFactory;
     use Notifiable;

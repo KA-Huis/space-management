@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\View\View;
@@ -56,7 +56,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $this->authFactory->guard(AuthorizedUser::AUTHENTICATION_GUARD)->logout();
+        $this->authFactory->guard(User::AUTHENTICATION_GUARD)->logout();
 
         $request->session()->invalidate();
 

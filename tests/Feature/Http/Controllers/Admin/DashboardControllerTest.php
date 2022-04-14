@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -26,7 +26,7 @@ class DashboardControllerTest extends TestCase
     public function testDashboardIsShown(): void
     {
         // Given
-        $user = AuthorizedUser::factory()->create();
+        $user = User::factory()->create();
 
         $route = $this->urlGenerator->route('admin.dashboard');
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
@@ -48,11 +48,11 @@ class RegistrationTest extends TestCase
         $response = $this->post($route, $formData);
 
         // Then
-        $user = AuthorizedUser::where('email', '=', $email)->first();
+        $user = User::where('email', '=', $email)->first();
 
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect($this->urlGenerator->route('admin.dashboard'));
 
-        $this->assertAuthenticatedAs($user, AuthorizedUser::AUTHENTICATION_GUARD);
+        $this->assertAuthenticatedAs($user, User::AUTHENTICATION_GUARD);
     }
 }

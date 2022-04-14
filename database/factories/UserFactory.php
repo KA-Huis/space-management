@@ -11,10 +11,10 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class AuthorizedUserFactory extends Factory
+class UserFactory extends Factory
 {
     /** @return array<string, mixed> */
-    public function definition()
+    public function definition(): array
     {
         return [
             'first_name' => $this->faker->firstName(),
@@ -27,7 +27,7 @@ class AuthorizedUserFactory extends Factory
     }
 
     /** Indicate that the model's email address should be unverified. */
-    public function unverified(): AuthorizedUserFactory
+    public function unverified(): UserFactory
     {
         return $this->state(function (array $attributes) {
             return [

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use App\Models\Group;
 use App\Models\Space;
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +18,7 @@ return new class() extends Migration {
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->foreignIdFor(Space::class);
-            $table->foreignIdFor(AuthorizedUser::class, 'created_by_user_id');
+            $table->foreignIdFor(User::class, 'created_by_user_id');
             $table->foreignIdFor(Group::class)->nullable();
             $table->timestamps();
             $table->softDeletes();

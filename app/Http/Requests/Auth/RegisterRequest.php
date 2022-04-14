@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Auth;
 
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(AuthorizedUser::DATABASE_TABLE),
+                Rule::unique(User::DATABASE_TABLE),
             ],
             'password' => [
                 'required',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Models;
 
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestStatus;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -19,7 +19,7 @@ class ReparationRequestStatusTest extends TestCase
         // Given
         $reparationRequestStatus = ReparationRequestStatus::factory()
             ->for(ReparationRequest::factory()
-                ->for(AuthorizedUser::factory(), 'reporter')
+                ->for(User::factory(), 'reporter')
             )
             ->create();
 

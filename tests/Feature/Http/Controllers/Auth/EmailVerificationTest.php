@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -30,7 +30,7 @@ class EmailVerificationTest extends TestCase
     public function testEmailVerificationScreenCanBeRendered(): void
     {
         // Given
-        $user = AuthorizedUser::factory()->create([
+        $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
 
@@ -48,7 +48,7 @@ class EmailVerificationTest extends TestCase
         $this->markTestSkipped();
 
         // Given
-        $user = AuthorizedUser::factory()->create([
+        $user = User::factory()->create([
             'email_verified_at' => Carbon::now(),
         ]);
 
@@ -68,7 +68,7 @@ class EmailVerificationTest extends TestCase
         Event::fake();
 
         // Given
-        $user = AuthorizedUser::factory()->create([
+        $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
 
@@ -93,7 +93,7 @@ class EmailVerificationTest extends TestCase
     {
         $this->markTestSkipped();
 
-        $user = AuthorizedUser::factory()->create([
+        $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
 

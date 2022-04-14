@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\ApiUser;
-use App\Models\AuthorizedUser;
+use App\Models\User;
 
 return [
     /*
@@ -18,7 +18,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => AuthorizedUser::AUTHENTICATION_GUARD,
+        'guard' => User::AUTHENTICATION_GUARD,
         'passwords' => 'users',
     ],
 
@@ -40,9 +40,9 @@ return [
     */
 
     'guards' => [
-        AuthorizedUser::AUTHENTICATION_GUARD => [
+        User::AUTHENTICATION_GUARD => [
             'driver' => 'session',
-            'provider' => AuthorizedUser::AUTHENTICATION_PROVIDER,
+            'provider' => User::AUTHENTICATION_PROVIDER,
         ],
 
         ApiUser::AUTHENTICATION_GUARD => [
@@ -69,9 +69,9 @@ return [
     */
 
     'providers' => [
-        AuthorizedUser::AUTHENTICATION_PROVIDER => [
+        User::AUTHENTICATION_PROVIDER => [
             'driver' => 'eloquent',
-            'model' => AuthorizedUser::class,
+            'model' => User::class,
         ],
 
          ApiUser::AUTHENTICATION_PROVIDER => [
@@ -97,7 +97,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => AuthorizedUser::AUTHENTICATION_PROVIDER,
+            'provider' => User::AUTHENTICATION_PROVIDER,
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

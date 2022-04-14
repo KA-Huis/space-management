@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $user = AuthorizedUser::create([
+        $user = User::create([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
 
         $this->eventDispatcher->dispatch(new Registered($user));
 
-        $this->authFactory->guard(AuthorizedUser::AUTHENTICATION_GUARD)->login($user);
+        $this->authFactory->guard(User::AUTHENTICATION_GUARD)->login($user);
 
         return $this->redirector->route('admin.dashboard');
     }

@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SpaceController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\HomeController;
-use App\Models\AuthorizedUser;
+use App\Models\User;
 use Illuminate\Routing\Router;
 
 $router->get('/', [HomeController::class, 'index'])
@@ -17,7 +17,7 @@ $router->get('/', [HomeController::class, 'index'])
 // Email verification
 $router
     ->middleware([
-        sprintf('auth:%s', AuthorizedUser::AUTHENTICATION_GUARD),
+        sprintf('auth:%s', User::AUTHENTICATION_GUARD),
     ])
     ->name('email-verification.')
     ->group(function (Router $router) {
@@ -38,7 +38,7 @@ $router
     ->name('admin.')
     ->prefix('admin')
     ->middleware([
-        sprintf('auth:%s', AuthorizedUser::AUTHENTICATION_GUARD),
+        sprintf('auth:%s', User::AUTHENTICATION_GUARD),
     ])
     ->group(function (Router $router) {
         $router->get('/', [DashboardController::class, 'index'])
