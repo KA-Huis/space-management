@@ -23,7 +23,7 @@ class GroupTest extends TestCase
         // Given
         $group = Group::factory()
             ->for(GroupType::factory())
-            ->has(User::factory()->count(3))
+            ->has(User::factory()->count(3), 'users')
             ->create();
 
         // Then

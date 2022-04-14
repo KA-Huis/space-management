@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Authentication\Guard;
+use App\Authentication\GuardsInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -56,7 +56,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $this->authFactory->guard(Guard::WEB)->logout();
+        $this->authFactory->guard(GuardsInterface::WEB)->logout();
 
         $request->session()->invalidate();
 

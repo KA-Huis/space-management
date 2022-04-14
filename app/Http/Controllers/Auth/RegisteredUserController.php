@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Authentication\Guard;
+use App\Authentication\GuardsInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
@@ -63,7 +63,7 @@ class RegisteredUserController extends Controller
 
         $this->eventDispatcher->dispatch(new Registered($user));
 
-        $this->authFactory->guard(Guard::WEB)->login($user);
+        $this->authFactory->guard(GuardsInterface::WEB)->login($user);
 
         return $this->redirector->route('admin.dashboard');
     }
