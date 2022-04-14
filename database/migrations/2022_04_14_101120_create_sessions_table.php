@@ -7,9 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /** @var Application */
+return new class() extends Migration {
     private Application $application;
 
     public function __construct()
@@ -31,7 +29,6 @@ return new class extends Migration
             $table->text('payload');
             $table->integer('last_activity')->index();
         });
-
     }
 
     public function down(): void
