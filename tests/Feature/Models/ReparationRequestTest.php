@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Models;
 
-use App\Models\User;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
 use App\Models\ReparationRequestStatus;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 

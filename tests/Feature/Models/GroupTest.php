@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Models;
 
-use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupType;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
