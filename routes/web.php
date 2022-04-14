@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SpaceController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\HomeController;
-use App\Models\User;
 use Illuminate\Routing\Router;
 
 $router->get('/', [HomeController::class, 'index'])

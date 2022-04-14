@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Auth;
 use App\Authentication\GuardsInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\View\View;
