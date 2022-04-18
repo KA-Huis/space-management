@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\API\V1;
+namespace App\API\V1\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReparationRequestCollection;

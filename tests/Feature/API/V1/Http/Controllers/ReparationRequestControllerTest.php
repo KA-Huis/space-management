@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Http\Controllers\API\V1;
+namespace Tests\Feature\API\V1\Http\Controllers;
 
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;

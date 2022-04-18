@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/* @var \Illuminate\Routing\Router $router */
+/* @var Router $router */
 
-use App\Http\Controllers\API\V1\ReparationRequestController;
+use App\API\V1\Http\Controllers\ReparationRequestController;
 use Illuminate\Routing\Router;
 
 $router

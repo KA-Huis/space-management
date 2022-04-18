@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Http\Resources;
+namespace Tests\Feature\API\V1\Http\Resources;
 
-use App\Http\Resources\ReparationRequestResource;
+use App\API\V1\Http\Resources\ReparationRequestResource;
 use App\Models\ReparationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
