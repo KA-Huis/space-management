@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\API\V1;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Models\ReparationRequestMaterial;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
-use App\Models\ReparationRequestMaterial;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ReparationRequestMaterialController extends Controller
 {
@@ -29,7 +31,6 @@ class ReparationRequestMaterialController extends Controller
                 AllowedInclude::relationship('reparationRequest'),
             ])
             ->jsonPaginate();
-
 
         return $materialRequest;
     }
