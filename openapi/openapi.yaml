@@ -1,0 +1,24 @@
+openapi: 3.0.0
+
+info:
+  title: KA-Huis REST API
+  description: The official KA-Huis REST API.
+  version: 1.0.0
+
+servers:
+  - url: http://acc-ka.jstlwk.dev/v1
+    description: Acceptance Environment
+
+components:ReparationRequestCollection
+  securitySchemes:
+    oAuth:
+      type: oauth2
+      description: This API uses OAuth 2 with the Authorization Code PKCE grant type.
+      flows:
+        pkce:
+          authorizationUrl: http://acc-ka.jstlwk.dev/v1/oauth/authorize
+          scopes:
+            s: ads
+
+paths:
+

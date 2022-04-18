@@ -1,0 +1,15 @@
+name: Validate OpenAPI
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: swagger-cli
+        uses: vaibhav-jain/spectral-action/@v2.6
+        with:
+          file_path: examples/swagger.yaml
