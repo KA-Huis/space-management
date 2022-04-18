@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
+use App\Authentication\GuardsInterface;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
@@ -53,6 +54,6 @@ class RegistrationTest extends TestCase
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect($this->urlGenerator->route('admin.dashboard'));
 
-        $this->assertAuthenticatedAs($user);
+        $this->assertAuthenticatedAs($user, GuardsInterface::WEB);
     }
 }

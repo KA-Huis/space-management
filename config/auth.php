@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Authentication\Guard;
+use App\Authentication\GuardsInterface;
+use App\Models\User;
 
 return [
     /*
@@ -17,7 +18,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => Guard::WEB,
+        'guard' => GuardsInterface::WEB,
         'passwords' => 'users',
     ],
 
@@ -39,9 +40,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        GuardsInterface::WEB => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => User::AUTHENTICATION_PROVIDER,
+        ],
+
+        GuardsInterface::REST_API => [
+            'driver' => 'passport',
+            'provider' => User::AUTHENTICATION_PROVIDER,
         ],
     ],
 
@@ -63,15 +69,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        User::AUTHENTICATION_PROVIDER => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -91,7 +92,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => User::AUTHENTICATION_PROVIDER,
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

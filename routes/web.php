@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 /** @var Router $router */
 
+use App\Authentication\GuardsInterface;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SpaceController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -15,7 +16,9 @@ $router->get('/', [HomeController::class, 'index'])
 
 // Email verification
 $router
-    ->middleware('auth')
+    ->middleware([
+        sprintf('auth:%s', GuardsInterface::WEB),
+    ])
     ->name('email-verification.')
     ->group(function (Router $router) {
         $router->get('/email/verify', [EmailVerificationController::class, 'showNotice'])
@@ -35,8 +38,7 @@ $router
     ->name('admin.')
     ->prefix('admin')
     ->middleware([
-        'auth',
-//        'verified', Not required
+        sprintf('auth:%s', GuardsInterface::WEB),
     ])
     ->group(function (Router $router) {
         $router->get('/', [DashboardController::class, 'index'])

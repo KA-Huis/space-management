@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Some simple function to print a line (TODO Add some coloring and formatting later)
-function printline {
+function printLine {
 echo "$1";
 }
 
@@ -14,20 +14,20 @@ docker exec -it sm-php "$@";
 if ! [ -f ".env" ];
 then
 ENVIRONMENT_FILE=".env.example";
-printline "==[ Copying $ENVIRONMENT_FILE to .env"
+printLine "==[ Copying $ENVIRONMENT_FILE to .env"
 cp $ENVIRONMENT_FILE .env
 local_uid=$(id -u);
 local_gid=$(id -g);
 
-echo "" >> ".env"
-echo "DOCKER_UID=$local_uid" >> ".env"
-echo "DOCKER_GID=$local_gid" >> ".env"
+printLine "" >> ".env"
+printLine "DOCKER_UID=$local_uid" >> ".env"
+printLine "DOCKER_GID=$local_gid" >> ".env"
 fi
 
-echo "==[ DOCKER INIT ]==";
+printLine "==[ DOCKER INIT ]==";
 docker-compose up -d --remove-orphans
 
-echo "==[ COMPOSER INSTALL ]==";
+printLine "==[ COMPOSER INSTALL ]==";
 runScript composer install
 
 # load the env file
@@ -35,11 +35,14 @@ export $(cat .env | grep APP | xargs)
 
 # Generate an app key if it doesn't exist yes
 if [ -z ${APP_KEY+x} ] || [ "$APP_KEY" == "" ]; then
-printline "==[ Generating new app key ]=="
+printLine "==[ Generating new app key ]=="
 runScript php artisan key:generate
 fi
 
-printline "==[ All checks are passed, starting with the setup ]=="
+printLine "==[ Generating new encryption keys for Laravel Passport ]=="
+runScript php artisan passport:keys
+
+printLine "==[ All checks are passed, starting with the setup ]=="
 
 force="n"
 while getopts "f:" opt; do
