@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Models\ReparationRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\V1\ReparationRequestMaterialStoreRequest;
+use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\QueryBuilder;
-use App\Http\Requests\API\V1\ReparationRequestMaterialStoreRequest;
 
 class ReparationRequestMaterialController extends Controller
 {
@@ -39,7 +39,7 @@ class ReparationRequestMaterialController extends Controller
 
     public function store(ReparationRequestMaterialStoreRequest $reparationRequestMaterialStoreRequest): ReparationRequestMaterial
     {
-        $reparationRequest = ReparationRequest::find((int)$reparationRequestMaterialStoreRequest->get('reparation_request_id'));
+        $reparationRequest = ReparationRequest::find((int) $reparationRequestMaterialStoreRequest->get('reparation_request_id'));
 
         $reparationRequestMaterial = ReparationRequestMaterial::make($reparationRequestMaterialStoreRequest->except(['reparation_request_id']));
         $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
