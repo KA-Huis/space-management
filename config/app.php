@@ -167,8 +167,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Spatie\JsonApiPaginate\JsonApiPaginateServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
