@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use App\API\V1\Http\Resources\ReparationRequestCollection;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ReparationRequestCollection;
 use App\Models\ReparationRequest;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
@@ -15,7 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 final class ReparationRequestController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): ReparationRequestCollection
     {
         $reparationRequests = QueryBuilder::for(ReparationRequest::class)
             ->allowedFilters([
@@ -35,7 +34,6 @@ final class ReparationRequestController extends Controller
             ])
             ->jsonPaginate();
 
-        return (new ReparationRequestCollection($reparationRequests))
-            ->toResponse($request);
+        return new ReparationRequestCollection($reparationRequests);
     }
 }
