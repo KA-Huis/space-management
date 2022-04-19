@@ -16,6 +16,11 @@ class ReparationRequestMaterial extends Model
     use SoftDeletes;
     use HasUuid;
 
+    protected $fillable = [
+        'name',
+        'is_mandatory',
+    ];
+
     /** @var array */
     protected $casts = [
         'uuid' => 'string',
