@@ -6,6 +6,8 @@ namespace Tests\Feature\API\V1\Http\Resources;
 
 use App\API\V1\Http\Resources\ReparationRequestResource;
 use App\Models\ReparationRequest;
+use App\Models\ReparationRequestMaterial;
+use App\Models\ReparationRequestStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -27,21 +29,23 @@ class ReparationRequestResourceTest extends TestCase
         $response = $reparationRequestResource->toResponse($request);
 
         // Then
+       $castedReparationRequest = $reparationRequest->toArray();
+
         self::assertEquals(
             [
-                'uuid' => $reparationRequest->uuid,
-                'title' => $reparationRequest->title,
-                'description' => $reparationRequest->description,
-                'priority' => $reparationRequest->priority,
-                'created_at' => (string) $reparationRequest->created_at,
-                'updated_at' => (string) $reparationRequest->updated_at,
-                'deleted_at' => $reparationRequest->deleted_at,
+                'uuid' => Arr::get($castedReparationRequest, 'uuid'),
+                'title' => Arr::get($castedReparationRequest, 'title'),
+                'description' => Arr::get($castedReparationRequest, 'description'),
+                'priority' => Arr::get($castedReparationRequest, 'priority'),
+                'created_at' => Arr::get($castedReparationRequest, 'created_at'),
+                'updated_at' => Arr::get($castedReparationRequest, 'updated_at'),
+                'deleted_at' => Arr::get($castedReparationRequest, 'deleted_at'),
             ],
-            collect(Arr::get((array) $response->getData(true), 'data'))->toArray()
+            Arr::get((array) $response->getData(true), 'data')
         );
     }
 
-    public function testOptionalLoadedReporter(): void
+    public function testOptionalIncludedReporter(): void
     {
         // Given
         $reparationRequest = ReparationRequest::factory()
@@ -55,5 +59,39 @@ class ReparationRequestResourceTest extends TestCase
 
         // Then
         $this->assertArrayHasKey('reporter', $response);
+    }
+
+    public function testOptionalIncludedStatuses(): void
+    {
+        // Given
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')
+            ->has(ReparationRequestStatus::factory(), 'statuses')
+            ->create();
+        $reparationRequestResource = new ReparationRequestResource($reparationRequest);
+        $request = Mockery::mock(Request::class);
+
+        // When
+        $response = $reparationRequestResource->toArray($request);
+
+        // Then
+        $this->assertArrayHasKey('statuses', $response);
+    }
+
+    public function testOptionalIncludedMaterials(): void
+    {
+        // Given
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')
+            ->has(ReparationRequestMaterial::factory(), 'materials')
+            ->create();
+        $reparationRequestResource = new ReparationRequestResource($reparationRequest);
+        $request = Mockery::mock(Request::class);
+
+        // When
+        $response = $reparationRequestResource->toArray($request);
+
+        // Then
+        $this->assertArrayHasKey('materials', $response);
     }
 }
