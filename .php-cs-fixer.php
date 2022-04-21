@@ -25,6 +25,5 @@ return (new PhpCsFixer\Config())
         ],
         'yoda_style' => false,
         'declare_strict_types' => true,
-        'align_double_arrow' => true,
     ])
     ->setFinder($finder);
