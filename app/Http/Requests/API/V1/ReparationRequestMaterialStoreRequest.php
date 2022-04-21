@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\API\V1;
 
-use App\Http\Requests\API\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\ReparationRequest;
+use App\Models\ReparationRequestMaterial;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ReparationRequestMaterialStoreRequest extends FormRequest
 {
@@ -13,7 +16,7 @@ class ReparationRequestMaterialStoreRequest extends FormRequest
         return [
             'name'                  => ['required', 'string', 'max:255'],
             'is_mandatory'          => ['required', 'boolean'],
-            'reparation_request_id' => ['required', 'exists:App\Models\ReparationRequest,id'],
+            'reparation_request_id' => ['required', Rule::exists((new ReparationRequest())->getTable(), 'id')],
         ];
     }
 

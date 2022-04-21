@@ -215,9 +215,11 @@ class ReparationRequestMaterialControllerTest extends TestCase
             'reparation_request_id' => $reparationRequest->id,
         ];
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.store');
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.store');
 
-        $response = $this->post($endpointUri, $data);
+        $response = $this->post($endpointUri, $data, [
+            'Accept' => 'application/json',
+        ]);
 
         $response->assertCreated()
             ->assertJsonPath('reparation_request.uuid', $reparationRequest->uuid);
@@ -235,9 +237,11 @@ class ReparationRequestMaterialControllerTest extends TestCase
             'reparation_request_id' => $reparationRequest->id,
         ];
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.store');
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.store');
 
-        $response = $this->post($endpointUri, $data);
+        $response = $this->post($endpointUri, $data, [
+            'Accept' => 'application/json',
+        ]);
 
         $response->assertUnprocessable()
             ->assertJson(
