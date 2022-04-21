@@ -222,7 +222,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         $response->assertCreated()
-            ->assertJsonPath('reparation_request.uuid', $reparationRequest->uuid);
+            ->assertJsonPath('data.reparation_request.uuid', $reparationRequest->uuid);
     }
 
     public function testCreateEndpointValidation(): void

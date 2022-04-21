@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use App\API\V1\Http\Resources\ReparationRequestMaterialResource;
 use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\ReparationRequestMaterialStoreRequest;
@@ -36,7 +37,7 @@ class ReparationRequestMaterialController extends Controller
         return new ReparationRequestMaterialCollection($reparationRequestMaterial);
     }
 
-    public function store(ReparationRequestMaterialStoreRequest $reparationRequestMaterialStoreRequest): ReparationRequestMaterial
+    public function store(ReparationRequestMaterialStoreRequest $reparationRequestMaterialStoreRequest): ReparationRequestMaterialResource
     {
         $reparationRequest = ReparationRequest::find((int) $reparationRequestMaterialStoreRequest->get('reparation_request_id'));
 
@@ -44,6 +45,6 @@ class ReparationRequestMaterialController extends Controller
         $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
         $reparationRequestMaterial->save();
 
-        return $reparationRequestMaterial;
+        return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
 }
