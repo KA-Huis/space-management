@@ -45,9 +45,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 3,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $firstReparationRequest->uuid)
                             ->etc()
                     )
@@ -76,9 +76,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $expectedReparationRequest->uuid)
                             ->etc()
                     )
@@ -111,9 +111,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $expectedReparationRequest->uuid)
                             ->etc()
                     )
@@ -146,9 +146,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $expectedReparationRequest->uuid)
                             ->etc()
                     )
@@ -181,9 +181,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $expectedReparationRequest->uuid)
                             ->etc()
                     )
@@ -256,9 +256,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $reparationRequest->uuid)
                             ->has('reporter')
                             ->etc()
@@ -288,9 +288,9 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $reparationRequest->uuid)
                             ->has('statuses', 3)
                             ->etc()
@@ -320,11 +320,38 @@ class ReparationRequestControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn (AssertableJson $json) => $json
+                fn(AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn (AssertableJson $json) => $json
+                        fn(AssertableJson $json) => $json
                             ->where('uuid', $reparationRequest->uuid)
                             ->has('materials', 3)
+                            ->etc()
+                    )
+                    ->etc()
+            );
+    }
+
+    public function testShowEndpoint(): void
+    {
+        // Given
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')
+            ->create();
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.show', [
+            'reparationRequest' => $reparationRequest->id,
+        ]);
+
+        // When
+        $response = $this->get($endpointUri);
+
+        // Then
+        $response->assertOk()
+            ->assertJson(
+                fn(AssertableJson $json) => $json
+                    ->has('data',
+                        fn(AssertableJson $json) => $json
+                            ->where('uuid', $reparationRequest->uuid)
                             ->etc()
                     )
                     ->etc()
