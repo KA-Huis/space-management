@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
 use App\Http\Controllers\Controller;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Models\ReparationRequestMaterial;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
-use App\Models\ReparationRequestMaterial;
-use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ReparationRequestMaterialController extends Controller
 {

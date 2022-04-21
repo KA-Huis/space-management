@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Feature\API\V1\Http\Controllers;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\ReparationRequest;
-use Illuminate\Support\Collection;
-use Illuminate\Routing\UrlGenerator;
 use App\Models\ReparationRequestMaterial;
-use Illuminate\Testing\Fluent\AssertableJson;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Collection;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Tests\TestCase;
 
 class ReparationRequestMaterialControllerTest extends TestCase
 {

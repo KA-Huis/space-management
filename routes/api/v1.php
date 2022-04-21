@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 /* @var Router $router */
 
-use Illuminate\Routing\Router;
 use App\API\V1\Http\Controllers\ReparationRequestController;
+use Illuminate\Routing\Router;
 
 $router
     ->prefix('v1')
