@@ -7,6 +7,7 @@ namespace App\API\V1\Http\Controllers;
 use App\API\V1\Http\Resources\ReparationRequestCollection;
 use App\Http\Controllers\Controller;
 use App\Models\ReparationRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
@@ -35,5 +36,12 @@ final class ReparationRequestController extends Controller
             ->jsonPaginate();
 
         return new ReparationRequestCollection($reparationRequests);
+    }
+
+    public function destroy(ReparationRequest $reparationRequest): JsonResponse
+    {
+        $reparationRequest->delete();
+
+        return new JsonResponse();
     }
 }

@@ -12,9 +12,10 @@ $router
     ->name('api.v1.')
     ->group(function (Router $router) {
         $router
-            ->prefix('reparation-requests')
+            ->prefix('reparation_requests')
             ->name('reparation-request.')
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestController::class, 'index'])->name('index');
+                $router->delete('/{reparationRequest}', [ReparationRequestController::class, 'destroy'])->name('destroy');
             });
     });
