@@ -8,6 +8,7 @@ use App\API\V1\Http\Resources\ReparationRequestCollection;
 use App\API\V1\Http\Resources\ReparationRequestResource;
 use App\Http\Controllers\Controller;
 use App\Models\ReparationRequest;
+use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -45,5 +46,12 @@ final class ReparationRequestController extends Controller
     public function show(ReparationRequest $reparationRequest): ReparationRequestResource
     {
         return new ReparationRequestResource($reparationRequest);
+    }
+
+    public function destroy(ReparationRequest $reparationRequest): JsonResponse
+    {
+        $reparationRequest->delete();
+
+        return new JsonResponse();
     }
 }

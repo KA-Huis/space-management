@@ -393,4 +393,30 @@ class ReparationRequestControllerTest extends TestCase
                     ->etc()
             );
     }
+
+    public function testDestroyEndpoint(): void
+    {
+        // Given
+        $user = User::factory()->create();
+
+        $reparationRequests = ReparationRequest::factory(3)
+            ->for(User::factory(), 'reporter')
+            ->create();
+        /** @var ReparationRequest $firstReparationRequest */
+        $firstReparationRequest = $reparationRequests->first();
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.destroy', [
+            'reparationRequest' => $firstReparationRequest->id,
+        ]);
+
+        // When
+        $response = $this
+            ->actingAs($user)
+            ->delete($endpointUri);
+
+        // Then
+        self::assertFalse($firstReparationRequest->trashed());
+
+        $response->assertOk();
+    }
 }

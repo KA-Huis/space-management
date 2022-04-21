@@ -17,6 +17,7 @@ class ReparationRequest extends Model
     use HasFactory;
     use SoftDeletes;
     use HasUuid;
+    use SoftDeletes;
 
     /** @var array */
     protected $guarded = [];
