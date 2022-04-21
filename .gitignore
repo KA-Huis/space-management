@@ -19,3 +19,5 @@ yarn-error.log
 /.php-cs-fixer.cache
 
 /resources/js/ziggy.js
+/bootstrap/cache
+/storage/framework/views/*.php

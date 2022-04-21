@@ -17,5 +17,14 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestController::class, 'index'])->name('index');
                 $router->delete('/{reparationRequest}', [ReparationRequestController::class, 'destroy'])->name('destroy');
+                $router->get('/{reparationRequest}', [ReparationRequestController::class, 'show'])->name('show');
+            });
+
+        $router
+            ->prefix('reparation_request_materials')
+            ->name('reparation-request-material.')
+            ->group(function (Router $router) {
+                $router->get('/', [ReparationRequestMaterialController::class, 'index'])->name('index');
+                $router->post('/', [ReparationRequestMaterialController::class, 'store'])->name('store');
             });
     });
