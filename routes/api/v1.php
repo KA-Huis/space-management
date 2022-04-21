@@ -16,6 +16,7 @@ $router
             ->name('reparation-request.')
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestController::class, 'index'])->name('index');
+                $router->get('/{reparationRequest}', [ReparationRequestController::class, 'show'])->name('show');
             });
 
         $router

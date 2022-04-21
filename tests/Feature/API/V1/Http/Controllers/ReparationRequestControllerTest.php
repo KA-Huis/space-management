@@ -366,4 +366,31 @@ class ReparationRequestControllerTest extends TestCase
                     ->etc()
             );
     }
+
+    public function testShowEndpoint(): void
+    {
+        // Given
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')
+            ->create();
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.show', [
+            'reparationRequest' => $reparationRequest->id,
+        ]);
+
+        // When
+        $response = $this->get($endpointUri);
+
+        // Then
+        $response->assertOk()
+            ->assertJson(
+                fn (AssertableJson $json) => $json
+                    ->has('data',
+                        fn (AssertableJson $json) => $json
+                            ->where('uuid', $reparationRequest->uuid)
+                            ->etc()
+                    )
+                    ->etc()
+            );
+    }
 }
