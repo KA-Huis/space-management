@@ -30,6 +30,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpoint(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequests = ReparationRequest::factory(3)
             ->for(User::factory(), 'reporter')
             ->create();
@@ -37,7 +39,9 @@ class ReparationRequestControllerTest extends TestCase
         $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.index');
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $firstReparationRequest = $reparationRequests->first();
@@ -58,6 +62,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointFilteringOnUuid(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequests = ReparationRequest::factory(3)
             ->for(User::factory(), 'reporter')
             ->create();
@@ -70,7 +76,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -89,6 +97,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointFilteringOnTitle(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequests = ReparationRequest::factory(3)
             ->for(User::factory(), 'reporter')
             ->create([
@@ -105,7 +115,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -124,6 +136,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointFilteringOnDescription(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequests = ReparationRequest::factory(3)
             ->for(User::factory(), 'reporter')
             ->create([
@@ -140,7 +154,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -159,6 +175,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointFilteringOnPriority(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequests = ReparationRequest::factory(3)
             ->for(User::factory(), 'reporter')
             ->create([
@@ -175,7 +193,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -209,6 +229,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointSortingOnDateColumns(string $dateColumn): void
     {
         // Given
+        $user = User::factory()->create();
+
         ReparationRequest::factory(3)
             ->for(User::factory(), 'reporter')
             ->create();
@@ -220,7 +242,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -239,6 +263,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointIncludingReporter(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')
             ->create();
@@ -250,7 +276,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -270,6 +298,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointIncludingStatuses(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')
             ->has(ReparationRequestStatus::factory()->count(3), 'statuses')
@@ -282,7 +312,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -302,6 +334,8 @@ class ReparationRequestControllerTest extends TestCase
     public function testIndexEndpointIncludingMaterials(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')
             ->has(ReparationRequestMaterial::factory()->count(3), 'materials')
@@ -314,7 +348,9 @@ class ReparationRequestControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user)
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()

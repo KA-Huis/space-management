@@ -14,8 +14,13 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 final class ReparationRequestController extends Controller
 {
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function index(): ReparationRequestCollection
     {
+        $this->authorize('viewAny', ReparationRequest::class);
+
         $reparationRequests = QueryBuilder::for(ReparationRequest::class)
             ->allowedFilters([
                 AllowedFilter::exact('uuid'),
