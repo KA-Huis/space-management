@@ -47,7 +47,7 @@ class User extends Authenticatable implements CanResetPasswordContact
 
     /** @var array */
     protected $casts = [
-        'uuid' => 'string',
+        'uuid'              => 'string',
         'email_verified_at' => 'datetime',
     ];
 

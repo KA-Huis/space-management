@@ -17,9 +17,9 @@ class Space extends Model
 
     /** @var array */
     protected $casts = [
-        'uuid' => 'string',
-        'name' => 'string',
-        'description' => 'string',
+        'uuid'                     => 'string',
+        'name'                     => 'string',
+        'description'              => 'string',
         'is_open_for_reservations' => 'boolean',
     ];
 }

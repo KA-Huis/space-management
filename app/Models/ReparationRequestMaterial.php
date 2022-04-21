@@ -18,8 +18,8 @@ class ReparationRequestMaterial extends Model
 
     /** @var array */
     protected $casts = [
-        'uuid' => 'string',
-        'name' => 'string',
+        'uuid'         => 'string',
+        'name'         => 'string',
         'is_mandatory' => 'boolean',
     ];
 

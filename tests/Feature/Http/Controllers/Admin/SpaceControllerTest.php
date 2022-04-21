@@ -50,8 +50,8 @@ class SpaceControllerTest extends TestCase
         $user = User::factory()->create();
 
         $formData = [
-            'name' => 'Test',
-            'description' => 'Lorem ipsum',
+            'name'                     => 'Test',
+            'description'              => 'Lorem ipsum',
             'is_open_for_reservations' => true,
         ];
 

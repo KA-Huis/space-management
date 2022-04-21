@@ -12,7 +12,7 @@ class ReservationFactory extends Factory
     {
         return [
             'starts_at' => $startsAt = $this->faker->dateTimeThisMonth,
-            'ends_at' => $this->faker->dateTimeBetween($startsAt, '+2 weeks'),
+            'ends_at'   => $this->faker->dateTimeBetween($startsAt, '+2 weeks'),
         ];
     }
 }

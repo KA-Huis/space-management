@@ -16,7 +16,7 @@ class ReparationRequestStatus extends Model
 
     /** @var array */
     protected $casts = [
-        'uuid' => 'string',
+        'uuid'   => 'string',
         'status' => 'integer',
     ];
 
