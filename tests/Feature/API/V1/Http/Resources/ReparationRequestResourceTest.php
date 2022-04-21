@@ -33,13 +33,13 @@ class ReparationRequestResourceTest extends TestCase
 
         self::assertEquals(
             [
-                'uuid' => Arr::get($castedReparationRequest, 'uuid'),
-                'title' => Arr::get($castedReparationRequest, 'title'),
+                'uuid'        => Arr::get($castedReparationRequest, 'uuid'),
+                'title'       => Arr::get($castedReparationRequest, 'title'),
                 'description' => Arr::get($castedReparationRequest, 'description'),
-                'priority' => Arr::get($castedReparationRequest, 'priority'),
-                'created_at' => Arr::get($castedReparationRequest, 'created_at'),
-                'updated_at' => Arr::get($castedReparationRequest, 'updated_at'),
-                'deleted_at' => Arr::get($castedReparationRequest, 'deleted_at'),
+                'priority'    => Arr::get($castedReparationRequest, 'priority'),
+                'created_at'  => Arr::get($castedReparationRequest, 'created_at'),
+                'updated_at'  => Arr::get($castedReparationRequest, 'updated_at'),
+                'deleted_at'  => Arr::get($castedReparationRequest, 'deleted_at'),
             ],
             Arr::get((array) $response->getData(true), 'data')
         );

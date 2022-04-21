@@ -68,7 +68,7 @@ class NewPasswordController extends Controller
             $credentials,
             function ($user) use ($request) {
                 $user->forceFill([
-                    'password' => $this->hasher->make($request->get('password')),
+                    'password'       => $this->hasher->make($request->get('password')),
                     'remember_token' => Str::random(60),
                 ])->save();
 

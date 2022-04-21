@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
             'flash' => function () use ($session) {
                 return [
                     'success' => $session->get('success'),
-                    'error' => $session->get('error'),
-                    'status' => $session->get('status'),
+                    'error'   => $session->get('error'),
+                    'status'  => $session->get('status'),
                 ];
             },
             'errors' => function () use ($session) {

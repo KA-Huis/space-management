@@ -18,7 +18,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => GuardsInterface::WEB,
+        'guard'     => GuardsInterface::WEB,
         'passwords' => 'users',
     ],
 
@@ -41,12 +41,12 @@ return [
 
     'guards' => [
         GuardsInterface::WEB => [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => User::AUTHENTICATION_PROVIDER,
         ],
 
         GuardsInterface::REST_API => [
-            'driver' => 'passport',
+            'driver'   => 'passport',
             'provider' => User::AUTHENTICATION_PROVIDER,
         ],
     ],
@@ -71,7 +71,7 @@ return [
     'providers' => [
         User::AUTHENTICATION_PROVIDER => [
             'driver' => 'eloquent',
-            'model' => User::class,
+            'model'  => User::class,
         ],
     ],
 
@@ -93,8 +93,8 @@ return [
     'passwords' => [
         'users' => [
             'provider' => User::AUTHENTICATION_PROVIDER,
-            'table' => 'password_resets',
-            'expire' => 60,
+            'table'    => 'password_resets',
+            'expire'   => 60,
             'throttle' => 60,
         ],
     ],

@@ -17,9 +17,9 @@ abstract class TestCase extends BaseTestCase
 
         TestResponse::macro('assertJsonPaginated', function () {
             return $this->assertJson([
-                'data' => true,
+                'data'  => true,
                 'links' => true,
-                'meta' => true,
+                'meta'  => true,
             ]);
         });
     }

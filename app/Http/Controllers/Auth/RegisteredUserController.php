@@ -56,9 +56,9 @@ class RegisteredUserController extends Controller
     {
         $user = User::create([
             'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'email' => $request->get('email'),
-            'password' => $this->hasher->make($request->get('password')),
+            'last_name'  => $request->get('last_name'),
+            'email'      => $request->get('email'),
+            'password'   => $this->hasher->make($request->get('password')),
         ]);
 
         $this->eventDispatcher->dispatch(new Registered($user));

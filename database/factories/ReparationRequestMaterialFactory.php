@@ -11,7 +11,7 @@ class ReparationRequestMaterialFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name'         => $this->faker->name,
             'is_mandatory' => $this->faker->boolean,
         ];
     }

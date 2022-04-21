@@ -37,10 +37,10 @@ class RegistrationTest extends TestCase
         // Given
         $email = 'test@example.com';
         $formData = [
-            'first_name' => 'Test',
-            'last_name' => 'User',
-            'email' => $email,
-            'password' => 'password',
+            'first_name'            => 'Test',
+            'last_name'             => 'User',
+            'email'                 => $email,
+            'password'              => 'password',
             'password_confirmation' => 'password',
         ];
 
