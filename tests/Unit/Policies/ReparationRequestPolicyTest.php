@@ -14,6 +14,7 @@ class ReparationRequestPolicyTest extends TestCase
 {
     /**
      * This tests the `viewAny` action.
+     *
      * @testdox This verifies the happy flow when someone is allowed to view all reparation requests.
      */
     public function testViewAny(): void
@@ -32,6 +33,7 @@ class ReparationRequestPolicyTest extends TestCase
 
     /**
      * This tests the `view` action.
+     *
      * @testdox This verifies the happy flow when someone is allowed to view a reparation request.
      */
     public function testView(): void
@@ -51,6 +53,7 @@ class ReparationRequestPolicyTest extends TestCase
 
     /**
      * This tests the `create` action.
+     *
      * @testdox This verifies the happy flow when someone is allowed to create a reparation request.
      */
     public function testCreate(): void
@@ -69,6 +72,7 @@ class ReparationRequestPolicyTest extends TestCase
 
     /**
      * This tests the `update` action.
+     *
      * @testdox This verifies the happy flow when someone is allowed to update a reparation request.
      */
     public function testUpdate(): void
@@ -88,6 +92,7 @@ class ReparationRequestPolicyTest extends TestCase
 
     /**
      * This tests the `delete` action.
+     *
      * @testdox This verifies the happy flow when someone is allowed to view a reparation request.
      */
     public function testDelete(): void
@@ -107,6 +112,7 @@ class ReparationRequestPolicyTest extends TestCase
 
     /**
      * This tests the `forceDelete` action.
+     *
      * @testdox This verifies the happy flow when someone is allowed to view a reparation request.
      */
     public function testForceDelete(): void
