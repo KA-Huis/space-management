@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
-use App\API\V1\Http\Resources\ReparationRequestMaterialResource;
 use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
+use App\API\V1\Http\Resources\ReparationRequestMaterialResource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\ReparationRequestMaterialStoreRequest;
 use App\Models\ReparationRequest;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\API\V1\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ class ReparationRequestMaterialResource extends JsonResource
 {
     /**
      * @param Request $request
+     *
      * @return array
      */
     public function toArray($request)
