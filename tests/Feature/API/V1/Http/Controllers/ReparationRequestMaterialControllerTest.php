@@ -202,4 +202,52 @@ class ReparationRequestMaterialControllerTest extends TestCase
                     ->etc()
             );
     }
+
+    public function testCreateEndpoint(): void
+    {
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')
+            ->create();
+
+        $data = [
+            'name'                  => 'test',
+            'is_mandatory'          => false,
+            'reparation_request_id' => $reparationRequest->id,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.store');
+
+        $response = $this->post($endpointUri, $data, [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertCreated()
+            ->assertJsonPath('data.reparation_request.uuid', $reparationRequest->uuid);
+    }
+
+    public function testCreateEndpointValidation(): void
+    {
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')
+            ->create();
+
+        $data = [
+            'name'                  => 'test',
+            'is_mandatory'          => 'ttuurur',
+            'reparation_request_id' => $reparationRequest->id,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.store');
+
+        $response = $this->post($endpointUri, $data, [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertJson(
+                fn (AssertableJson $json) => $json
+                    ->has('errors.is_mandatory')
+                    ->etc()
+            );
+    }
 }
