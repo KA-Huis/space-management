@@ -5,6 +5,7 @@ declare(strict_types=1);
 /* @var Router $router */
 
 use App\API\V1\Http\Controllers\ReparationRequestController;
+use App\API\V1\Http\Controllers\ReparationRequestMaterialController;
 use Illuminate\Routing\Router;
 
 $router
