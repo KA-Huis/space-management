@@ -41,7 +41,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
         $route = $this->urlGenerator->route('auth.login');
         $formData = [
-            'email' => $user->email,
+            'email'    => $user->email,
             'password' => 'password',
         ];
 
@@ -60,7 +60,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
         $route = $this->urlGenerator->route('auth.login');
         $formData = [
-            'email' => $user->email,
+            'email'    => $user->email,
             'password' => 'wrong-password',
         ];
 

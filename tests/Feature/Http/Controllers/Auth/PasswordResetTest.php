@@ -100,9 +100,9 @@ class PasswordResetTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
             $route = $this->urlGenerator->route('auth.password.update');
             $formData = [
-                'token' => $notification->getToken(),
-                'email' => $user->email,
-                'password' => 'password',
+                'token'                 => $notification->getToken(),
+                'email'                 => $user->email,
+                'password'              => 'password',
                 'password_confirmation' => 'password',
             ];
 

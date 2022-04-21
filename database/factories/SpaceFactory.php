@@ -11,8 +11,8 @@ class SpaceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'description' => $this->faker->boolean ? $this->faker->text : null,
+            'name'                     => $this->faker->name,
+            'description'              => $this->faker->boolean ? $this->faker->text : null,
             'is_open_for_reservations' => $this->faker->boolean,
         ];
     }

@@ -22,35 +22,35 @@ class UserTest extends TestCase
             'only firstname' => [
                 'attributes' => [
                     'first_name' => 'John',
-                    'last_name' => null,
+                    'last_name'  => null,
                 ],
                 'full_name_result' => 'John',
             ],
             'only lastname' => [
                 'attributes' => [
                     'first_name' => null,
-                    'last_name' => 'Doe',
+                    'last_name'  => 'Doe',
                 ],
                 'full_name_result' => 'Doe',
             ],
             'both firstname and lastname' => [
                 'attributes' => [
                     'first_name' => 'John',
-                    'last_name' => 'Doe',
+                    'last_name'  => 'Doe',
                 ],
                 'full_name_result' => 'John Doe',
             ],
             'null values for firstname and lastname' => [
                 'attributes' => [
                     'first_name' => null,
-                    'last_name' => null,
+                    'last_name'  => null,
                 ],
                 'full_name_result' => '',
             ],
             'empty values for firstname and lastname' => [
                 'attributes' => [
                     'first_name' => '',
-                    'last_name' => '    ',
+                    'last_name'  => '    ',
                 ],
                 'full_name_result' => '',
             ],

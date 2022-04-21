@@ -19,9 +19,9 @@ class Reservation extends Model
 
     /** @var array */
     protected $casts = [
-        'uuid' => 'string',
+        'uuid'      => 'string',
         'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
+        'ends_at'   => 'datetime',
     ];
 
     public function createdByUser(): BelongsTo
