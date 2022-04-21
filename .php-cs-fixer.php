@@ -25,5 +25,10 @@ return (new PhpCsFixer\Config())
         ],
         'yoda_style' => false,
         'declare_strict_types' => true,
+        'binary_operator_spaces' => [
+            'operators' => [
+                '=>' => 'align',
+            ],
+        ],
     ])
     ->setFinder($finder);
