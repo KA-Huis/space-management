@@ -2,21 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\API\V1;
+namespace App\API\V1\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\ReparationRequestMaterial;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Models\ReparationRequestMaterial;
+use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
 
 class ReparationRequestMaterialController extends Controller
 {
-    public function index(Request $request): LengthAwarePaginator
+    public function index(): ReparationRequestMaterialCollection
     {
-        $materialRequest = QueryBuilder::for(ReparationRequestMaterial::class)
+        $reparationRequestMaterial = QueryBuilder::for(ReparationRequestMaterial::class)
             ->allowedFilters([
                 AllowedFilter::partial('uuid'),
                 AllowedFilter::partial('name'),
@@ -32,6 +31,6 @@ class ReparationRequestMaterialController extends Controller
             ])
             ->jsonPaginate();
 
-        return $materialRequest;
+        return new ReparationRequestMaterialCollection($reparationRequestMaterial);
     }
 }

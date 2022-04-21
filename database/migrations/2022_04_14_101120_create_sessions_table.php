@@ -42,6 +42,6 @@ return new class() extends Migration {
 
     private function shouldRun(): bool
     {
-        return $this->application->environment(['acceptance', 'local', 'testing']);
+        return $this->application->environment(['acceptance']);
     }
 };
