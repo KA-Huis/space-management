@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Http\Controllers\API\V1;
+namespace Feature\API\V1\Http\Controllers;
 
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
@@ -35,7 +35,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
             )
             ->create();
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.index');
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.index');
 
         // When
         $response = $this->get($endpointUri);
@@ -66,7 +66,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
         $expectedReparationRequest = $reparationRequests->random();
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.index', [
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.index', [
             'filter' => [
                 'uuid' => $expectedReparationRequest->uuid,
             ],
@@ -103,7 +103,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
         $expectedReparationRequestMaterial->name = 'Needle in title';
         $expectedReparationRequestMaterial->save();
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.index', [
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.index', [
             'filter' => [
                 'name' => 'Needle',
             ],
@@ -149,7 +149,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
             )
             ->create();
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.index', [
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.index', [
             'sort' => [
                 $dateColumn,
             ],
@@ -180,7 +180,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
             )
             ->create();
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparationRequestMaterial.index', [
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.index', [
             'include' => [
                 'reparationRequest',
             ],

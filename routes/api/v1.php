@@ -17,4 +17,11 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestController::class, 'index'])->name('index');
             });
+
+        $router
+            ->prefix('reparation_requests_material')
+            ->name('reparation-request-material.')
+            ->group(function (Router $router) {
+                $router->get('/', [\App\API\V1\Http\Controllers\ReparationRequestMaterialController::class, 'index'])->name('index');
+            });
     });
