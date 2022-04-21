@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\ReparationRequest;
+use App\Policies\ReparationRequestPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -11,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
 {
     /** @var array */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        ReparationRequest::class => ReparationRequestPolicy::class,
     ];
 
     /** @return void */
