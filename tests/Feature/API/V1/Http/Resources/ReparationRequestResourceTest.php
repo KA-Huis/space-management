@@ -29,7 +29,7 @@ class ReparationRequestResourceTest extends TestCase
         $response = $reparationRequestResource->toResponse($request);
 
         // Then
-       $castedReparationRequest = $reparationRequest->toArray();
+        $castedReparationRequest = $reparationRequest->toArray();
 
         self::assertEquals(
             [
