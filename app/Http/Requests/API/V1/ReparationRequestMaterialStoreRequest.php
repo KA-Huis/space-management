@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\API\V1;
 
-use Illuminate\Validation\Rule;
 use App\Models\ReparationRequest;
-use App\Models\ReparationRequestMaterial;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ReparationRequestMaterialStoreRequest extends FormRequest
 {
