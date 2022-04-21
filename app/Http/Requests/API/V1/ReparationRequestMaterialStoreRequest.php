@@ -11,8 +11,8 @@ class ReparationRequestMaterialStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'is_mandatory' => ['required', 'boolean'],
+            'name'                  => ['required', 'string', 'max:255'],
+            'is_mandatory'          => ['required', 'boolean'],
             'reparation_request_id' => ['required', 'exists:App\Models\ReparationRequest,id'],
         ];
     }

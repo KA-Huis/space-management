@@ -210,8 +210,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
             ->create();
 
         $data = [
-            'name' => 'test',
-            'is_mandatory' => false,
+            'name'                  => 'test',
+            'is_mandatory'          => false,
             'reparation_request_id' => $reparationRequest->id,
         ];
 
@@ -230,8 +230,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
             ->create();
 
         $data = [
-            'name' => 'test',
-            'is_mandatory' => 'ttuurur',
+            'name'                  => 'test',
+            'is_mandatory'          => 'ttuurur',
             'reparation_request_id' => $reparationRequest->id,
         ];
 
