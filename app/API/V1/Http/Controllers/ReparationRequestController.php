@@ -56,13 +56,6 @@ final class ReparationRequestController extends Controller
         return new ReparationRequestResource($reparationRequest);
     }
 
-    public function destroy(ReparationRequest $reparationRequest): JsonResponse
-    {
-        $reparationRequest->delete();
-
-        return new JsonResponse();
-    }
-
     /**
      * @throws AuthorizationException
      */
@@ -75,5 +68,17 @@ final class ReparationRequestController extends Controller
         $reparationRequest->save();
 
         return new ReparationRequestResource($reparationRequest);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(ReparationRequest $reparationRequest): JsonResponse
+    {
+        $this->authorize('delete', $reparationRequest);
+
+        $reparationRequest->delete();
+
+        return new JsonResponse();
     }
 }
