@@ -33,7 +33,7 @@ class ReparationRequestResourceTest extends TestCase
 
         self::assertEquals(
             [
-                'id'        => Arr::get($castedReparationRequest, 'id'),
+                'id'          => Arr::get($castedReparationRequest, 'id'),
                 'title'       => Arr::get($castedReparationRequest, 'title'),
                 'description' => Arr::get($castedReparationRequest, 'description'),
                 'priority'    => Arr::get($castedReparationRequest, 'priority'),
