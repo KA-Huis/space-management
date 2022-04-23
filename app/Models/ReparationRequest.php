@@ -28,6 +28,7 @@ class ReparationRequest extends Model
         'title'       => 'string',
         'description' => 'string',
         'priority'    => 'integer',
+        'reporter_id'    => 'integer',
     ];
 
     public function reporter(): BelongsTo
