@@ -18,7 +18,7 @@ class ReparationRequestResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'uuid'        => $this->uuid,
+            'id'          => $this->id,
             'title'       => $this->title,
             'description' => $this->description,
             'priority'    => $this->priority,
