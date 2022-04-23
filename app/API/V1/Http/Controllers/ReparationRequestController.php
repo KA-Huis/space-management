@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\API\V1\Http\Controllers;
 
 use App\API\V1\Http\Requests\StoreReparationRequest;
+use App\API\V1\Http\Requests\UpdateReparationRequest;
 use App\API\V1\Http\Resources\ReparationRequestCollection;
 use App\API\V1\Http\Resources\ReparationRequestResource;
 use App\Authentication\GuardsInterface;
@@ -66,6 +67,18 @@ final class ReparationRequestController extends Controller
         $reparationRequest = ReparationRequest::make($request->safe()->all());
         $reparationRequest->reporter()->associate($request->user(GuardsInterface::REST_API));
         $reparationRequest->save();
+
+        return new ReparationRequestResource($reparationRequest);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function update(UpdateReparationRequest $request, ReparationRequest $reparationRequest): ReparationRequestResource
+    {
+        $this->authorize('update', ReparationRequest::class);
+
+        $reparationRequest->fill($request->safe()->all());
 
         return new ReparationRequestResource($reparationRequest);
     }

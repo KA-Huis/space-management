@@ -18,8 +18,9 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestController::class, 'index'])->name('index');
                 $router->post('/', [ReparationRequestController::class, 'store'])->name('store');
-                $router->delete('/{reparationRequest}', [ReparationRequestController::class, 'destroy'])->name('destroy');
+                $router->put('/', [ReparationRequestController::class, 'update'])->name('update');
                 $router->get('/{reparationRequest}', [ReparationRequestController::class, 'show'])->name('show');
+                $router->delete('/{reparationRequest}', [ReparationRequestController::class, 'destroy'])->name('destroy');
             });
 
         $router

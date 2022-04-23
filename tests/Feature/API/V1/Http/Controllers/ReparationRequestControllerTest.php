@@ -475,4 +475,74 @@ class ReparationRequestControllerTest extends TestCase
                 'priority',
             ]);
     }
+
+    public function testUpdateEndpoint(): void
+    {
+        // Given
+        $user = User::factory()->create();
+        $reparationRequest = ReparationRequest::create([
+            'title'                 => 'Some title',
+            'description'           => 'A description that is does not add anything of value.',
+            'priority'              => ReparationRequestPriority::PRIORITY_LOW,
+            'reporter_id' => $user->id,
+        ]);
+
+        $newData = [
+            'title'                 => 'New title',
+            'description'           => 'Edited description',
+            'priority'              => ReparationRequestPriority::PRIORITY_HIGH,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.update', [
+            'reparationRequest' => $reparationRequest->id,
+        ]);
+
+        // When
+        $response = $this
+            ->actingAs($user, GuardsInterface::REST_API)
+            ->post($endpointUri, $newData);
+
+        // Then
+        $reparationRequest->refresh();
+
+        $response->assertSuccessful()
+            ->assertJsonPath('data.id', $reparationRequest->id);
+
+        self::assertEquals($reparationRequest->title, $newData['title']);
+        self::assertEquals($reparationRequest->description, $newData['description']);
+        self::assertEquals($reparationRequest->priority, $newData['priority']);
+    }
+
+    public function testUpdateEndpointValidation(): void
+    {
+        // Given
+        $user = User::factory()->create();
+        $reparationRequest = ReparationRequest::create([
+            'title'                 => 'Some title',
+            'description'           => 'A description that is does not add anything of value.',
+            'priority'              => ReparationRequestPriority::PRIORITY_LOW,
+            'reporter_id' => $user->id,
+        ]);
+
+        $newData = [
+            'description'           => 'Edited description',
+            'priority'              => -200,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.update', [
+            'reparationRequest' => $reparationRequest->id,
+        ]);
+
+        // When
+        $response = $this
+            ->actingAs($user, GuardsInterface::REST_API)
+            ->post($endpointUri, $newData);
+
+        // Then
+        $response->assertRedirect()
+            ->assertSessionHasErrors([
+                'title',
+                'priority',
+            ]);
+    }
 }
