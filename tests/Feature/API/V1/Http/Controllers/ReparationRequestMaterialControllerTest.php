@@ -81,7 +81,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
                 fn (AssertableJson $json) => $json
                     ->has('data', 1,
                         fn (AssertableJson $json) => $json
-                            ->where('uuid', $expectedReparationRequest->uuid)
+                            ->where('id', $expectedReparationRequest->id)
                             ->etc()
                     )
                     ->etc()
@@ -203,7 +203,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
             );
     }
 
-    public function testCreateEndpoint(): void
+    public function testStoreEndpoint(): void
     {
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')
@@ -222,10 +222,10 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         $response->assertCreated()
-            ->assertJsonPath('data.reparation_request.uuid', $reparationRequest->uuid);
+            ->assertJsonPath('data.reparation_request.id', $reparationRequest->id);
     }
 
-    public function testCreateEndpointValidation(): void
+    public function testStoreEndpointValidation(): void
     {
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')

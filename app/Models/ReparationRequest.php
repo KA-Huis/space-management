@@ -24,10 +24,11 @@ class ReparationRequest extends Model
 
     /** @var array */
     protected $casts = [
-        'uuid'        => 'string',
-        'title'       => 'string',
-        'description' => 'string',
-        'priority'    => 'integer',
+        'uuid'           => 'string',
+        'title'          => 'string',
+        'description'    => 'string',
+        'priority'       => 'integer',
+        'reporter_id'    => 'integer',
     ];
 
     public function reporter(): BelongsTo
