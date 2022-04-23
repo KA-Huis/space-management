@@ -536,7 +536,7 @@ class ReparationRequestControllerTest extends TestCase
         // When
         $response = $this
             ->actingAs($user, GuardsInterface::REST_API)
-            ->post($endpointUri, $newData);
+            ->put($endpointUri, $newData);
 
         // Then
         $response->assertRedirect()
