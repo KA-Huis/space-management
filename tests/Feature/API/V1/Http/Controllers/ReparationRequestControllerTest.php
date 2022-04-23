@@ -484,7 +484,7 @@ class ReparationRequestControllerTest extends TestCase
             'title'                 => 'Some title',
             'description'           => 'A description that is does not add anything of value.',
             'priority'              => ReparationRequestPriority::PRIORITY_LOW,
-            'reporter_id' => $user->id,
+            'reporter_id'           => $user->id,
         ]);
 
         $newData = [
@@ -500,7 +500,7 @@ class ReparationRequestControllerTest extends TestCase
         // When
         $response = $this
             ->actingAs($user, GuardsInterface::REST_API)
-            ->post($endpointUri, $newData);
+            ->put($endpointUri, $newData);
 
         // Then
         $reparationRequest->refresh();
@@ -521,7 +521,7 @@ class ReparationRequestControllerTest extends TestCase
             'title'                 => 'Some title',
             'description'           => 'A description that is does not add anything of value.',
             'priority'              => ReparationRequestPriority::PRIORITY_LOW,
-            'reporter_id' => $user->id,
+            'reporter_id'           => $user->id,
         ]);
 
         $newData = [

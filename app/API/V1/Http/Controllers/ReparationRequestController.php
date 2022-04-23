@@ -76,9 +76,10 @@ final class ReparationRequestController extends Controller
      */
     public function update(UpdateReparationRequest $request, ReparationRequest $reparationRequest): ReparationRequestResource
     {
-        $this->authorize('update', ReparationRequest::class);
+        $this->authorize('update', $reparationRequest);
 
         $reparationRequest->fill($request->safe()->all());
+        $reparationRequest->save();
 
         return new ReparationRequestResource($reparationRequest);
     }
