@@ -8,5 +8,4 @@ use Illuminate\Support\Collection;
 
 class RoleCollection extends Collection
 {
-    //
 }

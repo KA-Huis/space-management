@@ -30,7 +30,7 @@ class ACLServiceTest extends TestCase
                         new class() implements RoleInterface {
                             public function getName(): string
                             {
-                               return 'test';
+                                return 'test';
                             }
 
                             public function getPermissions(): Collection
@@ -40,7 +40,7 @@ class ACLServiceTest extends TestCase
                                     'create_user',
                                 ]);
                             }
-                        }
+                        },
                     ]);
                 }
             };
