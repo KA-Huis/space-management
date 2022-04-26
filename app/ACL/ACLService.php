@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ACL;
 
 use App\ACL\Contracts\ACLService as ACLServiceContract;
+use App\ACL\Roles\ConciergeRole;
 use App\ACL\Roles\MemberRole;
 use App\ACL\Roles\RoleInterface;
 use App\Authentication\Guards\GuardInterface;
@@ -21,7 +22,7 @@ class ACLService implements ACLServiceContract
                 Role::findOrCreate($role->getName(), $guard->getName())
                     ->syncPermissions(
                         $role->getPermissions()->map(function (string $permission) use ($guard) {
-                            Permission::findOrCreate($permission, $guard->getName());
+                            return Permission::findOrCreate($permission, $guard->getName());
                         })
                     );
             });
@@ -31,6 +32,7 @@ class ACLService implements ACLServiceContract
     {
         return new Collection([
             new MemberRole(),
+            new ConciergeRole(),
         ]);
     }
 }

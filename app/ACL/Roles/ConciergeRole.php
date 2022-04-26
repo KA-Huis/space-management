@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ACL\Roles;
 
-use Ramsey\Collection\Collection;
+use Illuminate\Support\Collection;
 
 class ConciergeRole implements RoleInterface
 {
