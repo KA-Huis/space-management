@@ -46,7 +46,7 @@ class ReparationRequestMaterialController extends Controller
 
     public function store(StoreReparationRequestMaterialRequest $request): ReparationRequestMaterialResource
     {
-        $reparationRequest = ReparationRequest::find((int)$request->safe()->collect()->get('reparation_request_id'));
+        $reparationRequest = ReparationRequest::find((int) $request->safe()->collect()->get('reparation_request_id'));
 
         $reparationRequestMaterial = ReparationRequestMaterial::make($request->safe()
             ->except(['reparation_request_id']));
@@ -58,7 +58,7 @@ class ReparationRequestMaterialController extends Controller
 
     public function update(UpdateReparationRequestMaterialRequest $request, ReparationRequestMaterial $reparationRequestMaterial): ReparationRequestMaterialResource
     {
-        $reparationRequest = ReparationRequest::find((int)$request->get('reparation_request_id'));
+        $reparationRequest = ReparationRequest::find((int) $request->get('reparation_request_id'));
 
         $reparationRequestMaterial->fill($request->safe()->all());
         $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
