@@ -67,4 +67,12 @@ class ReparationRequestMaterialController extends Controller
 
         return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
+
+    public function destroy(ReparationRequestMaterial $reparationRequestMaterial): JsonResponse
+    {
+
+        $reparationRequestMaterial->delete();
+
+        return new JsonResponse();
+    }
 }

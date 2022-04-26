@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Feature\API\V1\Http\Controllers;
 
 use App\Models\ReparationRequest;
+use App\Authentication\GuardsInterface;
 use App\Models\ReparationRequestMaterial;
 use App\Models\User;
+use App\Models\Enums\ReparationRequestPriority;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
@@ -346,5 +348,29 @@ class ReparationRequestMaterialControllerTest extends TestCase
             ->assertSessionHasErrors([
                 'is_mandatory',
             ]);
+    }
+
+    public function testDestroyEndpoint(): void
+    {
+        // Given
+        $reparationRequestMaterials = ReparationRequestMaterial::factory()
+            ->for(ReparationRequest::factory()
+                ->for(User::factory(), 'reporter')
+            )
+            ->create();
+
+        $firstReparationRequest = $reparationRequestMaterials->first();
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.destroy', [
+            'reparationRequestMaterial' => $reparationRequestMaterials->id,
+        ]);
+
+        // When
+        $response = $this->delete($endpointUri);
+
+        // Then
+        self::assertFalse($firstReparationRequest->trashed());
+
+        $response->assertOk();
     }
 }
