@@ -9,16 +9,16 @@ servers:
   - url: http://acc-ka.jstlwk.dev/v1
     description: Acceptance Environment
 
-components:ReparationRequestCollection
+components:
   securitySchemes:
     oAuth:
       type: oauth2
       description: This API uses OAuth 2 with the Authorization Code PKCE grant type.
       flows:
-        pkce:
+        authorizationCode:
           authorizationUrl: http://acc-ka.jstlwk.dev/v1/oauth/authorize
-          scopes:
-            s: ads
 
-paths:
+security:
+  - oAuth: []
 
+paths: {}
