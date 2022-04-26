@@ -18,10 +18,10 @@ class AdminRoleTest extends TestCase
     public function testGateBeforeHookToImplicitlyGrantAdminRoleAllPermissions(): void
     {
         // Given
-        Role::findOrCreate((new AdminRole)->getName());
+        Role::findOrCreate((new AdminRole())->getName());
 
         $user = User::factory()->create();
-        $user->assignRole((new AdminRole)->getName());
+        $user->assignRole((new AdminRole())->getName());
 
         // When
 
