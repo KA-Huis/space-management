@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\Console\Command\Command;
 use Tests\TestCase;
 
-class SynchroniseRolesAndPermissions extends TestCase
+class SynchroniseRolesAndPermissionsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,15 +17,5 @@ class SynchroniseRolesAndPermissions extends TestCase
         // When
         $this->artisan('system:acl:synchronise-roles-and-permissions')
             ->assertExitCode(Command::SUCCESS);
-    }
-
-    public function testItThrowsErrorWhenGuardIsInvalid(): void
-    {
-        // When
-        $this
-            ->artisan('system:acl:synchronise-roles-and-permissions', [
-                'guard' => 'adsfadsfafsdd',
-            ])
-            ->assertExitCode(Command::FAILURE);
     }
 }
