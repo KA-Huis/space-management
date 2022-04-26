@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Feature\API\V1\Http\Controllers;
 
 use App\Models\ReparationRequest;
-use App\Authentication\GuardsInterface;
 use App\Models\ReparationRequestMaterial;
 use App\Models\User;
-use App\Models\Enums\ReparationRequestPriority;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
@@ -297,8 +295,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
         $reparationRequestMaterial->save();
 
         $newData = [
-            'name'         => 'Edited title',
-            'is_mandatory' => false,
+            'name'                  => 'Edited title',
+            'is_mandatory'          => false,
             'reparation_request_id' => $reparationRequest->id,
         ];
 

@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use App\API\V1\Http\Requests\UpdateReparationRequest;
+use App\API\V1\Http\Requests\StoreReparationRequestMaterialRequest;
+use App\API\V1\Http\Requests\UpdateReparationRequestMaterialRequest;
 use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
 use App\API\V1\Http\Resources\ReparationRequestMaterialResource;
 use App\Http\Controllers\Controller;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
+use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\QueryBuilder;
-use App\API\V1\Http\Requests\StoreReparationRequestMaterialRequest;
-use App\API\V1\Http\Requests\UpdateReparationRequestMaterialRequest;
 
 class ReparationRequestMaterialController extends Controller
 {
@@ -42,7 +41,6 @@ class ReparationRequestMaterialController extends Controller
 
     public function show(ReparationRequestMaterial $reparationRequestMaterial): ReparationRequestMaterialResource
     {
-
         return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
 
@@ -70,7 +68,6 @@ class ReparationRequestMaterialController extends Controller
 
     public function destroy(ReparationRequestMaterial $reparationRequestMaterial): JsonResponse
     {
-
         $reparationRequestMaterial->delete();
 
         return new JsonResponse();
