@@ -280,5 +280,4 @@ class ReparationRequestMaterialControllerTest extends TestCase
                     ->etc()
             );
     }
-
 }
