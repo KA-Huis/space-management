@@ -250,4 +250,35 @@ class ReparationRequestMaterialControllerTest extends TestCase
                     ->etc()
             );
     }
+
+    public function testShowEndpoint(): void
+    {
+        // Given
+        $reparationRequestMaterials = ReparationRequestMaterial::factory()
+            ->for(ReparationRequest::factory()
+                ->for(User::factory(), 'reporter')
+            )
+            ->create();
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.show', [
+            'reparationRequestMaterial' => $reparationRequestMaterials->id,
+        ]);
+
+        // When
+        $response = $this
+            ->get($endpointUri);
+
+        // Then
+        $response->assertOk()
+            ->assertJson(
+                fn (AssertableJson $json) => $json
+                    ->has('data',
+                        fn (AssertableJson $json) => $json
+                            ->where('id', $reparationRequestMaterials->id)
+                            ->etc()
+                    )
+                    ->etc()
+            );
+    }
+
 }

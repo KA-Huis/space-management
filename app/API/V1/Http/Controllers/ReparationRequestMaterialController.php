@@ -37,11 +37,22 @@ class ReparationRequestMaterialController extends Controller
         return new ReparationRequestMaterialCollection($reparationRequestMaterial);
     }
 
-    public function store(ReparationRequestMaterialStoreRequest $reparationRequestMaterialStoreRequest): ReparationRequestMaterialResource
+    public function show(ReparationRequestMaterial $reparationRequestMaterial): ReparationRequestMaterialResource
     {
-        $reparationRequest = ReparationRequest::find((int) $reparationRequestMaterialStoreRequest->get('reparation_request_id'));
 
-        $reparationRequestMaterial = ReparationRequestMaterial::make($reparationRequestMaterialStoreRequest->except(['reparation_request_id']));
+        return new ReparationRequestMaterialResource($reparationRequestMaterial);
+    }
+
+    public function store(StoreReparationRequestMaterialRequest $request): ReparationRequestMaterialResource
+    {
+        $reparationRequest = ReparationRequest::find((int) $request->get('reparation_request_id'));
+
+        $reparationRequestMaterial = ReparationRequestMaterial::make($request->except(['reparation_request_id']));
+        $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
+        $reparationRequestMaterial->save();
+
+        return new ReparationRequestMaterialResource($reparationRequestMaterial);
+    }
         $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
         $reparationRequestMaterial->save();
 

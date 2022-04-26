@@ -29,5 +29,6 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestMaterialController::class, 'index'])->name('index');
                 $router->post('/', [ReparationRequestMaterialController::class, 'store'])->name('store');
+                $router->get('/{reparationRequestMaterial}', [ReparationRequestMaterialController::class, 'show'])->name('show');
             });
     });
