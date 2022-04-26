@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use App\API\V1\Http\Requests\UpdateReparationRequest;
 use App\API\V1\Http\Resources\ReparationRequestMaterialCollection;
 use App\API\V1\Http\Resources\ReparationRequestMaterialResource;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\V1\ReparationRequestMaterialStoreRequest;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\QueryBuilder;
+use App\API\V1\Http\Requests\StoreReparationRequestMaterialRequest;
+use App\API\V1\Http\Requests\UpdateReparationRequestMaterialRequest;
 
 class ReparationRequestMaterialController extends Controller
 {
@@ -53,6 +56,12 @@ class ReparationRequestMaterialController extends Controller
 
         return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
+
+    public function update(UpdateReparationRequestMaterialRequest $request, ReparationRequestMaterial $reparationRequestMaterial): ReparationRequestMaterialResource
+    {
+        $reparationRequest = ReparationRequest::find((int) $request->get('reparation_request_id'));
+
+        $reparationRequestMaterial->fill($request->safe()->all());
         $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
         $reparationRequestMaterial->save();
 

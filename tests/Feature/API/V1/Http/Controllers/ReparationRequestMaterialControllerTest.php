@@ -281,4 +281,70 @@ class ReparationRequestMaterialControllerTest extends TestCase
             );
     }
 
+    public function testUpdateEndpoint(): void
+    {
+        // Given
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')->create();
+
+        $reparationRequestMaterial = ReparationRequestMaterial::make([
+            'name'         => 'Some title',
+            'is_mandatory' => true,
+        ]);
+        $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
+        $reparationRequestMaterial->save();
+
+        $newData = [
+            'name'         => 'Edited title',
+            'is_mandatory' => false,
+            'reparation_request_id' => $reparationRequest->id,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.update', [
+            'reparationRequestMaterial' => $reparationRequestMaterial->id,
+        ]);
+
+        $response = $this
+            ->put($endpointUri, $newData);
+
+        $reparationRequestMaterial->refresh();
+
+        $response->assertSuccessful()
+            ->assertJsonPath('data.id', $reparationRequest->id);
+
+        self::assertEquals($reparationRequestMaterial->name, $newData['name']);
+        self::assertEquals($reparationRequestMaterial->is_mandatory, $newData['is_mandatory']);
+        self::assertEquals($reparationRequestMaterial->reparation_request_id, $newData['reparation_request_id']);
+    }
+
+    public function testUpdateEndpointValidation(): void
+    {
+        $reparationRequest = ReparationRequest::factory()
+            ->for(User::factory(), 'reporter')->create();
+
+        $reparationRequestMaterial = ReparationRequestMaterial::make([
+            'name'         => 'Some title',
+            'is_mandatory' => true,
+        ]);
+        $reparationRequestMaterial->reparationRequest()->associate($reparationRequest);
+        $reparationRequestMaterial->save();
+
+        $newData = [
+            'name' => 'Edited title',
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.update', [
+            'reparationRequestMaterial' => $reparationRequestMaterial->id,
+        ]);
+
+        // When
+        $response = $this
+            ->put($endpointUri, $newData);
+
+        // Then
+        $response->assertRedirect()
+            ->assertSessionHasErrors([
+                'is_mandatory',
+            ]);
+    }
 }
