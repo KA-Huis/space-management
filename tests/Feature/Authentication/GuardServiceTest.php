@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Authentication;
 
-use App\ACL\Contracts\ACLService;
-use App\ACL\Contracts\RolesProvider;
-use App\ACL\Roles\RoleCollection;
-use App\ACL\Roles\RoleInterface;
 use App\Authentication\Contracts\GuardService;
 use App\Authentication\Exceptions\InvalidGuard;
 use App\Authentication\Guards\GuardInterface;
 use App\Authentication\Guards\RestApiGuard;
 use App\Authentication\Guards\WebGuard;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Collection;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class GuardServiceTest extends TestCase
@@ -54,17 +47,17 @@ class GuardServiceTest extends TestCase
     {
         return [
             [
-                'name' => (new WebGuard)->getName(),
+                'name'     => (new WebGuard())->getName(),
                 'response' => true,
             ],
             [
-                'name' => (new RestApiGuard)->getName(),
+                'name'     => (new RestApiGuard())->getName(),
                 'response' => true,
             ],
             [
-                'name' => 'random',
+                'name'     => 'random',
                 'response' => false,
-            ]
+            ],
         ];
     }
 
