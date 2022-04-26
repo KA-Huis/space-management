@@ -310,7 +310,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
         $reparationRequestMaterial->refresh();
 
         $response->assertSuccessful()
-            ->assertJsonPath('data.id', $reparationRequest->id);
+            ->assertJsonPath('data.id', $reparationRequestMaterial->id);
 
         self::assertEquals($reparationRequestMaterial->name, $newData['name']);
         self::assertEquals($reparationRequestMaterial->is_mandatory, $newData['is_mandatory']);
