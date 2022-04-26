@@ -6,6 +6,8 @@ namespace App\Providers;
 
 use App\ACL\ACLService;
 use App\ACL\Contracts\ACLService as ACLServiceContract;
+use App\ACL\Contracts\RolesProvider;
+use App\ACL\Roles\DefaultRolesProvider;
 use App\Authentication\Contracts\GuardService as GuardServiceContract;
 use App\Authentication\GuardService;
 use Illuminate\Contracts\Session\Session;
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerServices(): void
     {
+        $this->app->singleton(RolesProvider::class, DefaultRolesProvider::class);
         $this->app->singleton(ACLServiceContract::class, ACLService::class);
         $this->app->singleton(GuardServiceContract::class, GuardService::class);
     }

@@ -5,16 +5,22 @@ declare(strict_types=1);
 namespace App\ACL;
 
 use App\ACL\Contracts\ACLService as ACLServiceContract;
-use App\ACL\Roles\ConciergeRole;
-use App\ACL\Roles\MemberRole;
+use App\ACL\Contracts\RolesProvider;
+use App\ACL\Roles\RoleCollection;
 use App\ACL\Roles\RoleInterface;
 use App\Authentication\Guards\GuardInterface;
-use Illuminate\Support\Collection;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class ACLService implements ACLServiceContract
 {
+    private RolesProvider $rolesProvider;
+
+    public function __construct(RolesProvider $rolesProvider)
+    {
+        $this->rolesProvider = $rolesProvider;
+    }
+
     public function synchroniseRolesAndPermissions(GuardInterface $guard): void
     {
         $this->getRoles()
@@ -28,11 +34,8 @@ class ACLService implements ACLServiceContract
             });
     }
 
-    public function getRoles(): Collection
+    public function getRoles(): RoleCollection
     {
-        return new Collection([
-            new MemberRole(),
-            new ConciergeRole(),
-        ]);
+        return $this->rolesProvider->resolve();
     }
 }
