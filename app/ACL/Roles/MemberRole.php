@@ -7,8 +7,8 @@ namespace App\ACL\Roles;
 use Illuminate\Support\Collection;
 
 /**
-* @codeCoverageIgnore
-*/
+ * @codeCoverageIgnore
+ */
 final class MemberRole implements RoleInterface
 {
     public function getName(): string
