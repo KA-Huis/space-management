@@ -36,8 +36,12 @@ class AuthServiceProvider extends ServiceProvider
     private function setupGateHooks(): void
     {
         // Implicitly grant "Super Admin" role all permissions
-        $this->app->get(Gate::class)->before(function (User $user, $ability): bool {
-            return $user->hasRole((new AdminRole())->getName());
+        $this->app->get(Gate::class)->before(function (User $user, $ability): bool|null {
+            if ($user->hasRole((new AdminRole())->getName())) {
+                return true;
+            }
+
+            return null;
         });
     }
 }

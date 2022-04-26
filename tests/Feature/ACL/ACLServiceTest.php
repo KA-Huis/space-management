@@ -8,7 +8,6 @@ use App\ACL\Contracts\ACLService;
 use App\ACL\Contracts\RolesProvider;
 use App\ACL\Roles\RoleCollection;
 use App\ACL\Roles\RoleInterface;
-use App\Authentication\Guards\WebGuard;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
@@ -50,7 +49,7 @@ class ACLServiceTest extends TestCase
         $service = $this->app->get(ACLService::class);
 
         // When
-        $service->synchroniseRolesAndPermissions(new WebGuard());
+        $service->synchroniseRolesAndPermissions();
 
         // Then
         $role = Role::findByName('test');

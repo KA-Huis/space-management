@@ -9,6 +9,9 @@ use App\ACL\Contracts\RolesProvider;
 use App\ACL\Roles\RoleCollection;
 use App\ACL\Roles\RoleInterface;
 use App\Authentication\Guards\GuardInterface;
+use App\Authentication\Guards\RestApiGuard;
+use App\Authentication\Guards\WebGuard;
+use Illuminate\Support\Collection;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -21,16 +24,23 @@ class ACLService implements ACLServiceContract
         $this->rolesProvider = $rolesProvider;
     }
 
-    public function synchroniseRolesAndPermissions(GuardInterface $guard): void
+    public function synchroniseRolesAndPermissions(): void
     {
+        $guards = new Collection([
+            new WebGuard(),
+            new RestApiGuard(),
+        ]);
+
         $this->getRoles()
-            ->each(function (RoleInterface $role) use ($guard) {
-                Role::findOrCreate($role->getName(), $guard->getName())
-                    ->syncPermissions(
-                        $role->getPermissions()->map(function (string $permission) use ($guard) {
-                            return Permission::findOrCreate($permission, $guard->getName());
-                        })
-                    );
+            ->each(function (RoleInterface $role) use ($guards) {
+                $guards->each(function (GuardInterface $guard) use ($role) {
+                    Role::findOrCreate($role->getName(), $guard->getName())
+                        ->syncPermissions(
+                            $role->getPermissions()->map(function (string $permission) use ($guard) {
+                                return Permission::findOrCreate($permission, $guard->getName());
+                            })
+                        );
+                });
             });
     }
 

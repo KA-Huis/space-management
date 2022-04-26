@@ -7,7 +7,7 @@ namespace App\Providers;
 use App\ACL\ACLService;
 use App\ACL\Contracts\ACLService as ACLServiceContract;
 use App\ACL\Contracts\RolesProvider;
-use App\ACL\Roles\DefaultRolesProvider;
+use App\ACL\Roles\Providers\DefaultRolesProvider;
 use App\Authentication\Contracts\GuardService as GuardServiceContract;
 use App\Authentication\GuardService;
 use Illuminate\Contracts\Session\Session;
