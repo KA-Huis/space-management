@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\API\V1\Http\Controllers;
 
-use App\Authentication\GuardsInterface;
+use App\Authentication\Guards\RestApiGuard;
 use App\Models\Enums\ReparationRequestPriority;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
@@ -42,7 +42,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -79,7 +79,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -118,7 +118,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -157,7 +157,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -196,7 +196,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -245,7 +245,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -279,7 +279,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -315,7 +315,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -351,7 +351,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -384,7 +384,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -417,7 +417,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->delete($endpointUri);
 
         // Then
@@ -441,7 +441,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->post($endpointUri, $data);
 
         // Then
@@ -465,7 +465,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->post($endpointUri, $data);
 
         // Then
@@ -499,7 +499,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->put($endpointUri, $newData);
 
         // Then
@@ -535,7 +535,7 @@ class ReparationRequestControllerTest extends TestCase
 
         // When
         $response = $this
-            ->actingAs($user, GuardsInterface::REST_API)
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->put($endpointUri, $newData);
 
         // Then

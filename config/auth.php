@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Authentication\GuardsInterface;
+use App\Authentication\Guards\RestApiGuard;
+use App\Authentication\Guards\WebGuard;
 use App\Models\User;
 
 return [
@@ -18,7 +19,7 @@ return [
     */
 
     'defaults' => [
-        'guard'     => GuardsInterface::WEB,
+        'guard'     => (new WebGuard())->getName(),
         'passwords' => 'users',
     ],
 
@@ -40,12 +41,12 @@ return [
     */
 
     'guards' => [
-        GuardsInterface::WEB => [
+        (new WebGuard())->getName() => [
             'driver'   => 'session',
             'provider' => User::AUTHENTICATION_PROVIDER,
         ],
 
-        GuardsInterface::REST_API => [
+        (new RestApiGuard())->getName() => [
             'driver'   => 'passport',
             'provider' => User::AUTHENTICATION_PROVIDER,
         ],

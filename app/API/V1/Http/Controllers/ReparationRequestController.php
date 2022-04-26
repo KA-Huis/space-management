@@ -8,7 +8,7 @@ use App\API\V1\Http\Requests\StoreReparationRequest;
 use App\API\V1\Http\Requests\UpdateReparationRequest;
 use App\API\V1\Http\Resources\ReparationRequestCollection;
 use App\API\V1\Http\Resources\ReparationRequestResource;
-use App\Authentication\GuardsInterface;
+use App\Authentication\Guards\RestApiGuard;
 use App\Http\Controllers\Controller;
 use App\Models\ReparationRequest;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -65,7 +65,7 @@ final class ReparationRequestController extends Controller
         $this->authorize('create', ReparationRequest::class);
 
         $reparationRequest = ReparationRequest::make($request->safe()->all());
-        $reparationRequest->reporter()->associate($request->user(GuardsInterface::REST_API));
+        $reparationRequest->reporter()->associate($request->user((new RestApiGuard())->getName()));
         $reparationRequest->save();
 
         return new ReparationRequestResource($reparationRequest);
