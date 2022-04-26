@@ -9,7 +9,7 @@ use App\Authentication\Contracts\GuardService;
 use App\Authentication\Exceptions\InvalidGuard;
 use Illuminate\Console\Command;
 
-class SynchroniseRoleAndPermissions extends Command
+class SynchroniseRolesAndPermissions extends Command
 {
     protected $signature = 'system:acl:synchronise-roles-and-permissions {guard=web}';
 
