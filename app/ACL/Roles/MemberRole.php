@@ -16,7 +16,6 @@ class MemberRole implements RoleInterface
     public function getPermissions(): Collection
     {
         return new Collection([
-            //
         ]);
     }
 }

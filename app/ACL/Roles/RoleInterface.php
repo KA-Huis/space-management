@@ -9,5 +9,6 @@ use Illuminate\Support\Collection;
 interface RoleInterface
 {
     public function getName(): string;
+
     public function getPermissions(): Collection;
 }

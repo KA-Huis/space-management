@@ -16,7 +16,6 @@ class ConciergeRole implements RoleInterface
     public function getPermissions(): Collection
     {
         return new Collection([
-            //
         ]);
     }
 }

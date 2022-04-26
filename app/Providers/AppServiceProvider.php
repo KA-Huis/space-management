@@ -6,8 +6,8 @@ namespace App\Providers;
 
 use App\ACL\ACLService;
 use App\ACL\Contracts\ACLService as ACLServiceContract;
-use App\Authentication\GuardService;
 use App\Authentication\Contracts\GuardService as GuardServiceContract;
+use App\Authentication\GuardService;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory as InertiaResponseFactory;
