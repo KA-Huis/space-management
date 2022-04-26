@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\ACL\ACLService;
+use App\ACL\Contracts\ACLService as ACLServiceContract;
+use App\Authentication\GuardService;
+use App\Authentication\Contracts\GuardService as GuardServiceContract;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory as InertiaResponseFactory;
@@ -13,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     /** @return void */
     public function register()
     {
+        $this->registerServices();
     }
 
     /** @return void */
@@ -21,7 +26,13 @@ class AppServiceProvider extends ServiceProvider
         $this->bootInertia();
     }
 
-    public function bootInertia(): void
+    private function registerServices(): void
+    {
+        $this->app->singleton(ACLServiceContract::class, ACLService::class);
+        $this->app->singleton(GuardServiceContract::class, GuardService::class);
+    }
+
+    private function bootInertia(): void
     {
         $responseFactory = $this->app->get(InertiaResponseFactory::class);
         $session = $this->app->get(Session::class);
