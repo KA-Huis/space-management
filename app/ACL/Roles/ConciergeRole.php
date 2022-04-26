@@ -6,7 +6,10 @@ namespace App\ACL\Roles;
 
 use Illuminate\Support\Collection;
 
-class ConciergeRole implements RoleInterface
+/**
+ * @codeCoverageIgnore
+ */
+final class ConciergeRole implements RoleInterface
 {
     public function getName(): string
     {

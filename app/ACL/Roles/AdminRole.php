@@ -8,8 +8,10 @@ use Illuminate\Support\Collection;
 
 /**
  * This role has been implicitly granted all permissions by using the gate before hook. See the auth service provider.
+ *
+ * @codeCoverageIgnore
  */
-class AdminRole implements RoleInterface
+final class AdminRole implements RoleInterface
 {
     public function getName(): string
     {
