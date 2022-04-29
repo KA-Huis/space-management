@@ -55,7 +55,7 @@ class ReparationRequestPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ReparationRequestPolicy $reparationRequest): bool
+    public function restore(User $user, ReparationRequest $reparationRequest): bool
     {
         return true;
     }
