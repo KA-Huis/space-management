@@ -24,7 +24,7 @@ class SpaceTest extends TestCase
         $space = Space::factory()
             ->has(Reservation::factory()
                 ->for(User::factory(), 'createdByUser')
-                ->count(3) )
+                ->count(3))
             ->create();
 
         // Then
