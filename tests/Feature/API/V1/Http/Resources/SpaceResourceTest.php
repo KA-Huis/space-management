@@ -26,16 +26,16 @@ class SpaceResourceTest extends TestCase
         $response = $spaceResource->toResponse($request);
 
         // Then
-        $castedReparationRequest = $space->toArray();
+        $castedSpace = $space->toArray();
 
         self::assertEquals(
             [
-                'id'                      => Arr::get($castedReparationRequest, 'id'),
-                'name'                    => Arr::get($castedReparationRequest, 'name'),
-                'is_open_for_reservation' => Arr::get($castedReparationRequest, 'is_open_for_reservation'),
-                'created_at'              => Arr::get($castedReparationRequest, 'created_at'),
-                'updated_at'              => Arr::get($castedReparationRequest, 'updated_at'),
-                'deleted_at'              => Arr::get($castedReparationRequest, 'deleted_at'),
+                'id'                      => Arr::get($castedSpace, 'id'),
+                'name'                    => Arr::get($castedSpace, 'name'),
+                'created_at'              => Arr::get($castedSpace, 'created_at'),
+                'updated_at'              => Arr::get($castedSpace, 'updated_at'),
+                'deleted_at'              => Arr::get($castedSpace, 'deleted_at'),
+                'is_open_for_reservation' => Arr::get($castedSpace, 'is_open_for_reservation'),
             ],
             Arr::get((array) $response->getData(true), 'data')
         );
