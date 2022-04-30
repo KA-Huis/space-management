@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   title: KA-Huis REST API
-  description: The official KA-Huis REST API.
+  description: This documentation covers the official REST API of the KA-Huis.
   version: 1.0.0
 
 servers:
@@ -17,6 +17,9 @@ components:
       flows:
         authorizationCode:
           authorizationUrl: http://acc-ka.jstlwk.dev/v1/oauth/authorize
+          tokenUrl: http://acc-ka.jstlwk.dev/v1/oauth/token
+          refreshUrl: http://acc-ka.jstlwk.dev/v1/oauth/token/refresh
+          scopes: {}
 
 security:
   - oAuth: []
