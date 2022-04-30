@@ -35,7 +35,7 @@ class SpaceResourceTest extends TestCase
                 'created_at'              => Arr::get($castedSpace, 'created_at'),
                 'updated_at'              => Arr::get($castedSpace, 'updated_at'),
                 'deleted_at'              => Arr::get($castedSpace, 'deleted_at'),
-                'is_open_for_reservation' => Arr::get($castedSpace, 'is_open_for_reservation'),
+                'is_open_for_reservations' => Arr::get($castedSpace, 'is_open_for_reservations'),
             ],
             Arr::get((array) $response->getData(true), 'data')
         );
