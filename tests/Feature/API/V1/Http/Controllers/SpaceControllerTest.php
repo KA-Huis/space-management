@@ -29,14 +29,14 @@ class SpaceControllerTest extends TestCase
         // Given
         $user = User::factory()->create();
         $space = Space::create([
-            'name' => 'Some name',
-            'description' => 'A description that is does not add anything of value.',
+            'name'                     => 'Some name',
+            'description'              => 'A description that is does not add anything of value.',
             'is_open_for_reservations' => true,
         ]);
 
         $newData = [
-            'name' => 'New name',
-            'description' => 'Edited description',
+            'name'                     => 'New name',
+            'description'              => 'Edited description',
             'is_open_for_reservations' => false,
         ];
 
@@ -65,13 +65,13 @@ class SpaceControllerTest extends TestCase
         // Given
         $user = User::factory()->create();
         $space = Space::create([
-            'name' => 'Some name',
-            'description' => 'A description that is does not add anything of value.',
+            'name'                     => 'Some name',
+            'description'              => 'A description that is does not add anything of value.',
             'is_open_for_reservations' => true,
         ]);
 
         $newData = [
-            'description' => 'Edited description',
+            'description'              => 'Edited description',
             'is_open_for_reservations' => null,
         ];
 
