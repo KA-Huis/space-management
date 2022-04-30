@@ -30,4 +30,11 @@ $router
                 $router->get('/', [ReparationRequestMaterialController::class, 'index'])->name('index');
                 $router->post('/', [ReparationRequestMaterialController::class, 'store'])->name('store');
             });
+
+        $router
+            ->prefix('spaces')
+            ->name('space.')
+            ->group(function (Router $router) {
+                $router->delete('/{space}', [SpaceController::class, 'destroy'])->name('destroy');
+            });
     });
