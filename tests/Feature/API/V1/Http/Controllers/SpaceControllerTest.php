@@ -47,9 +47,9 @@ class SpaceControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn(AssertableJson $json) => $json
+                fn (AssertableJson $json) => $json
                     ->has('data', 3,
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('id', $firstSpace->id)
                             ->etc()
                     )
@@ -85,9 +85,9 @@ class SpaceControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn(AssertableJson $json) => $json
+                fn (AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('id', $expectedSpace->id)
                             ->etc()
                     )
@@ -123,9 +123,9 @@ class SpaceControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn(AssertableJson $json) => $json
+                fn (AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('id', $expectedSpace->id)
                             ->etc()
                     )
@@ -161,9 +161,9 @@ class SpaceControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn(AssertableJson $json) => $json
+                fn (AssertableJson $json) => $json
                     ->has('data', 1,
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('id', $expectedSpace->id)
                             ->etc()
                     )
