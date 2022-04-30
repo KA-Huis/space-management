@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 use App\API\V1\Http\Controllers\ReparationRequestController;
 use App\API\V1\Http\Controllers\ReparationRequestMaterialController;
+use App\API\V1\Http\Controllers\SpaceController;
 use Illuminate\Routing\Router;
 
 $router
@@ -29,5 +30,12 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestMaterialController::class, 'index'])->name('index');
                 $router->post('/', [ReparationRequestMaterialController::class, 'store'])->name('store');
+            });
+
+        $router
+            ->prefix('spaces')
+            ->name('space.')
+            ->group(function (Router $router) {
+                $router->get('/', [SpaceController::class, 'index'])->name('index');
             });
     });
