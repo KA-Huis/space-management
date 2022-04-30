@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\API\V1;
+namespace App\API\V1\Http\Requests;
 
 use App\Models\ReparationRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ReparationRequestMaterialStoreRequest extends FormRequest
+class StoreReparationRequestMaterialRequest extends FormRequest
 {
     public function rules(): array
     {
