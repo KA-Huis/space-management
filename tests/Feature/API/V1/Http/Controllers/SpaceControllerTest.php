@@ -30,8 +30,8 @@ class SpaceControllerTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'name'                 => 'Some name',
-            'description'           => 'A description that is does not add anything of value.',
+            'name'                                  => 'Some name',
+            'description'                           => 'A description that is does not add anything of value.',
             'is_open_for_reservations'              => true,
         ];
 
@@ -55,7 +55,7 @@ class SpaceControllerTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'description'           => 'A description that is does not add anything of value.',
+            'description'                           => 'A description that is does not add anything of value.',
             'is_open_for_reservations'              => -200,
         ];
 
