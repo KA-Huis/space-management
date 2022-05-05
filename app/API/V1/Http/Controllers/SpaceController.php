@@ -8,7 +8,6 @@ use App\API\V1\Http\Requests\StoreSpaceRequest;
 use App\API\V1\Http\Requests\UpdateSpaceRequest;
 use App\API\V1\Http\Resources\SpaceCollection;
 use App\API\V1\Http\Resources\SpaceResource;
-use App\Authentication\Guards\RestApiGuard;
 use App\Http\Controllers\Controller;
 use App\Models\ReparationRequest;
 use App\Models\Space;
