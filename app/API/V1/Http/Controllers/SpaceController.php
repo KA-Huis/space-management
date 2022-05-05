@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use App\API\V1\Http\Requests\UpdateSpaceRequest;
 use App\API\V1\Http\Resources\SpaceCollection;
+use App\API\V1\Http\Resources\SpaceResource;
 use App\Http\Controllers\Controller;
 use App\Models\Space;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -13,9 +15,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 final class SpaceController extends Controller
 {
-    /**
-     * @throws AuthorizationException
-     */
     public function index(): SpaceCollection
     {
         $this->authorize('viewAny', Space::class);
@@ -33,5 +32,18 @@ final class SpaceController extends Controller
             ->jsonPaginate();
 
         return new SpaceCollection($spaces);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function update(UpdateSpaceRequest $request, Space $space): SpaceResource
+    {
+        $this->authorize('update', $space);
+
+        $space->fill($request->safe()->all());
+        $space->save();
+
+        return new SpaceResource($space);
     }
 }

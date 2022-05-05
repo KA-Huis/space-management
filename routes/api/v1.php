@@ -41,4 +41,11 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [SpaceController::class, 'index'])->name('index');
             });
+
+        $router
+            ->prefix('spaces')
+            ->name('space.')
+            ->group(function (Router $router) {
+                $router->put('/{space}', [SpaceController::class, 'update'])->name('update');
+            });
     });

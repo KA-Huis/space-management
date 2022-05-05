@@ -217,4 +217,72 @@ class SpaceControllerTest extends TestCase
                 })
         );
     }
+
+    public function testUpdateEndpoint(): void
+    {
+        // Given
+        $user = User::factory()->create();
+        $space = Space::create([
+            'name'                     => 'Some name',
+            'description'              => 'A description that is does not add anything of value.',
+            'is_open_for_reservations' => true,
+        ]);
+
+        $newData = [
+            'name'                     => 'New name',
+            'description'              => 'Edited description',
+            'is_open_for_reservations' => false,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.space.update', [
+            'space' => $space->id,
+        ]);
+
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->put($endpointUri, $newData);
+
+        // Then
+        $space->refresh();
+
+        $response->assertSuccessful()
+            ->assertJsonPath('data.id', $space->id);
+
+        self::assertEquals($space->name, $newData['name']);
+        self::assertEquals($space->description, $newData['description']);
+        self::assertEquals($space->priority, $newData['is_open_for_reservations']);
+    }
+
+    public function testUpdateEndpointValidation(): void
+    {
+        // Given
+        $user = User::factory()->create();
+        $space = Space::create([
+            'name'                     => 'Some name',
+            'description'              => 'A description that is does not add anything of value.',
+            'is_open_for_reservations' => true,
+        ]);
+
+        $newData = [
+            'description'              => 'Edited description',
+            'is_open_for_reservations' => null,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.space.update', [
+            'space' => $space->id,
+        ]);
+
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->put($endpointUri, $newData);
+
+        // Then
+        $response->assertRedirect()
+            ->assertSessionHasErrors([
+                'name',
+                'is_open_for_reservations',
+            ]);
+    }
 }
