@@ -46,7 +46,6 @@ final class SpaceController extends Controller
         $this->authorize('create', ReparationRequest::class);
 
         $space = Space::make($request->safe()->all());
-        $space->reporter()->associate($request->user((new RestApiGuard())->getName()));
         $space->save();
 
         return new SpaceResource($space);

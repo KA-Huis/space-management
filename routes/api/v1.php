@@ -40,19 +40,8 @@ $router
             ->name('space.')
             ->group(function (Router $router) {
                 $router->get('/', [SpaceController::class, 'index'])->name('index');
-            });
-
-        $router
-            ->prefix('spaces')
-            ->name('space.')
-            ->group(function (Router $router) {
+                $router->post('/', [SpaceController::class, 'store'])->name('store');
                 $router->put('/{space}', [SpaceController::class, 'update'])->name('update');
-            });
-
-        $router
-            ->prefix('spaces')
-            ->name('space.')
-            ->group(function (Router $router) {
                 $router->delete('/{space}', [SpaceController::class, 'destroy'])->name('destroy');
             });
     });
