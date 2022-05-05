@@ -18,6 +18,9 @@ class Reservation extends Model
     use SoftDeletes;
 
     /** @var array */
+    protected $guarded = [];
+
+    /** @var array */
     protected $casts = [
         'uuid'      => 'string',
         'starts_at' => 'datetime',
