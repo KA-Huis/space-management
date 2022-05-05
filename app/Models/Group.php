@@ -18,6 +18,9 @@ class Group extends Model
     use HasUuid;
 
     /** @var array */
+    protected $guarded = [];
+
+    /** @var array */
     protected $casts = [
         'uuid' => 'string',
         'name' => 'string',
