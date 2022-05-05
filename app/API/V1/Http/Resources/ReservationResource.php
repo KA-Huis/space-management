@@ -27,9 +27,9 @@ class ReservationResource extends JsonResource
             'updated_at'         => $this->updated_at,
             'deleted_at'         => $this->deleted_at,
             'created_by_user_id' => $this->created_by_user_id,
-            'created_by_user' => new UserResource($this->whenLoaded('createdByUser')),
-            'space' => new SpaceResource($this->whenLoaded('space')),
-            'group' => new GroupResource($this->whenLoaded('group')),
+            'created_by_user'    => new UserResource($this->whenLoaded('createdByUser')),
+            'space'              => new SpaceResource($this->whenLoaded('space')),
+            'group'              => new GroupResource($this->whenLoaded('group')),
         ];
     }
 }
