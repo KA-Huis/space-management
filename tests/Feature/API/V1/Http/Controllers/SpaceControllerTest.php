@@ -219,6 +219,56 @@ class SpaceControllerTest extends TestCase
         );
     }
 
+    public function testStoreEndpoint(): void
+    {
+        // Given
+        $user = User::factory()->create();
+
+        $data = [
+            'name'                                  => 'Some name',
+            'description'                           => 'A description that is does not add anything of value.',
+            'is_open_for_reservations'              => true,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.space.store');
+
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->post($endpointUri, $data);
+
+        // Then
+        $space = Space::where('name', '=', $data['name'])->latest()->first();
+
+        $response->assertCreated()
+            ->assertJsonPath('data.id', $space->id);
+    }
+
+    public function testStoreEndpointValidation(): void
+    {
+        // Given
+        $user = User::factory()->create();
+
+        $data = [
+            'description'                           => 'A description that is does not add anything of value.',
+            'is_open_for_reservations'              => -200,
+        ];
+
+        $endpointUri = $this->urlGenerator->route('api.v1.space.store');
+
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->post($endpointUri, $data);
+
+        // Then
+        $response->assertRedirect()
+            ->assertSessionHasErrors([
+                'name',
+                'is_open_for_reservations',
+            ]);
+    }
+
     public function testUpdateEndpoint(): void
     {
         // Given

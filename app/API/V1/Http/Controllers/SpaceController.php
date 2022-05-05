@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use App\API\V1\Http\Requests\StoreSpaceRequest;
 use App\API\V1\Http\Requests\UpdateSpaceRequest;
 use App\API\V1\Http\Resources\SpaceCollection;
 use App\API\V1\Http\Resources\SpaceResource;
 use App\Http\Controllers\Controller;
+use App\Models\ReparationRequest;
 use App\Models\Space;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -33,6 +35,19 @@ final class SpaceController extends Controller
             ->jsonPaginate();
 
         return new SpaceCollection($spaces);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function store(StoreSpaceRequest $request): SpaceResource
+    {
+        $this->authorize('create', ReparationRequest::class);
+
+        $space = Space::make($request->safe()->all());
+        $space->save();
+
+        return new SpaceResource($space);
     }
 
     /**
