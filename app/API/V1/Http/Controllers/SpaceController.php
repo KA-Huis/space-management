@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\API\V1\Http\Controllers;
 
 use App\API\V1\Http\Requests\UpdateSpaceRequest;
-use App\API\V1\Http\Resources\ReparationRequestResource;
+use App\API\V1\Http\Resources\SpaceCollection;
 use App\API\V1\Http\Resources\SpaceResource;
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Access\AuthorizationException;
-use App\API\V1\Http\Resources\SpaceCollection;
 use App\Models\Space;
+use Illuminate\Auth\Access\AuthorizationException;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
