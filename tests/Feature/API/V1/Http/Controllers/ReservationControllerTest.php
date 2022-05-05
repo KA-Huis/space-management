@@ -7,7 +7,6 @@ namespace Tests\Feature\API\V1\Http\Controllers;
 use App\Authentication\Guards\RestApiGuard;
 use App\Models\Group;
 use App\Models\GroupType;
-use App\Models\ReparationRequest;
 use App\Models\Reservation;
 use App\Models\Space;
 use App\Models\User;
@@ -54,9 +53,9 @@ class ReservationControllerTest extends TestCase
         $response->assertOk()
             ->assertJsonPaginated()
             ->assertJson(
-                fn(AssertableJson $json) => $json
+                fn (AssertableJson $json) => $json
                     ->has('data', 3,
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('id', $firstReservation->id)
                             ->etc()
                     )
@@ -137,9 +136,9 @@ class ReservationControllerTest extends TestCase
         // Then
         $response->assertOk()
             ->assertJson(
-                fn(AssertableJson $json) => $json
+                fn (AssertableJson $json) => $json
                     ->has('data',
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('id', $reservation->id)
                             ->etc()
                     )
@@ -157,10 +156,10 @@ class ReservationControllerTest extends TestCase
             ->create();
 
         $data = [
-            'starts_at' => (string)Carbon::today(),
-            'ends_at' => (string)Carbon::today()->addDays(3),
-            'space_id' => $space->id,
-            'group_id' => $group->id,
+            'starts_at' => (string) Carbon::today(),
+            'ends_at'   => (string) Carbon::today()->addDays(3),
+            'space_id'  => $space->id,
+            'group_id'  => $group->id,
         ];
 
         $endpointUri = $this->urlGenerator->route('api.v1.reservation.store');
@@ -182,9 +181,9 @@ class ReservationControllerTest extends TestCase
         // Given
         $user = User::factory()->create();
         $data = [
-            'starts_at' => (string)Carbon::today(),
-            'ends_at' => (string)Carbon::today()->addDays(3),
-            'group_id' => 0,
+            'starts_at' => (string) Carbon::today(),
+            'ends_at'   => (string) Carbon::today()->addDays(3),
+            'group_id'  => 0,
         ];
 
         $endpointUri = $this->urlGenerator->route('api.v1.reservation.store');
@@ -212,11 +211,11 @@ class ReservationControllerTest extends TestCase
             ->create();
 
         $reservation = Reservation::create([
-            'starts_at' => Carbon::today(),
-            'ends_at' => Carbon::today()->addDays(3),
+            'starts_at'          => Carbon::today(),
+            'ends_at'            => Carbon::today()->addDays(3),
             'created_by_user_id' => $user->id,
-            'space_id' => $space->id,
-            'group_id' => $group->id,
+            'space_id'           => $space->id,
+            'group_id'           => $group->id,
         ]);
 
         $newGroup = Group::factory()
@@ -224,11 +223,11 @@ class ReservationControllerTest extends TestCase
             ->create();
 
         $newData = [
-            'starts_at' => (string)Carbon::today()->addDay(),
-            'ends_at' => (string)Carbon::today()->addDays(3),
+            'starts_at'          => (string) Carbon::today()->addDay(),
+            'ends_at'            => (string) Carbon::today()->addDays(3),
             'created_by_user_id' => $user->id,
-            'space_id' => $space->id,
-            'group_id' => $newGroup->id,
+            'space_id'           => $space->id,
+            'group_id'           => $newGroup->id,
         ];
 
         $endpointUri = $this->urlGenerator->route('api.v1.reservation.update', [
@@ -260,11 +259,11 @@ class ReservationControllerTest extends TestCase
             ->create();
 
         $reservation = Reservation::create([
-            'starts_at' => Carbon::today(),
-            'ends_at' => Carbon::today()->addDays(3),
+            'starts_at'          => Carbon::today(),
+            'ends_at'            => Carbon::today()->addDays(3),
             'created_by_user_id' => $user->id,
-            'space_id' => $space->id,
-            'group_id' => $group->id,
+            'space_id'           => $space->id,
+            'group_id'           => $group->id,
         ]);
 
         $newData = [
@@ -277,7 +276,7 @@ class ReservationControllerTest extends TestCase
 
         $endpointUri = $this->urlGenerator->route('api.v1.reservation.update', [
             'reservation' => $reservation->id,
-            'group_id' => $newGroup->id,
+            'group_id'    => $newGroup->id,
         ]);
 
         // When
