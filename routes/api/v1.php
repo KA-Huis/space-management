@@ -41,14 +41,8 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [SpaceController::class, 'index'])->name('index');
                 $router->post('/', [SpaceController::class, 'store'])->name('store');
+                $router->get('/{space}', [SpaceController::class, 'show'])->name('show');
                 $router->put('/{space}', [SpaceController::class, 'update'])->name('update');
                 $router->delete('/{space}', [SpaceController::class, 'destroy'])->name('destroy');
-            });
-
-        $router
-            ->prefix('spaces')
-            ->name('space.')
-            ->group(function (Router $router) {
-                $router->get('/{space}', [SpaceController::class, 'show'])->name('show');
             });
     });
