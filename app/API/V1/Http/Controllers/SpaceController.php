@@ -40,6 +40,16 @@ final class SpaceController extends Controller
     /**
      * @throws AuthorizationException
      */
+    public function show(Space $space): SpaceResource
+    {
+        $this->authorize('view', $space);
+
+        return new SpaceResource($space);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
     public function store(StoreSpaceRequest $request): SpaceResource
     {
         $this->authorize('create', ReparationRequest::class);

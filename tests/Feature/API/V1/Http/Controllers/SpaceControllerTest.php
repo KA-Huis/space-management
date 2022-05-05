@@ -219,6 +219,36 @@ class SpaceControllerTest extends TestCase
         );
     }
 
+    public function testShowEndpoint(): void
+    {
+        // Given
+        $user = User::factory()->create();
+
+        $space = Space::factory()
+            ->create();
+
+        $endpointUri = $this->urlGenerator->route('api.v1.space.show', [
+            'space' => $space->id,
+        ]);
+
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->get($endpointUri);
+
+        // Then
+        $response->assertOk()
+            ->assertJson(
+                fn (AssertableJson $json) => $json
+                    ->has('data',
+                        fn (AssertableJson $json) => $json
+                            ->where('id', $space->id)
+                            ->etc()
+                    )
+                    ->etc()
+            );
+    }
+
     public function testStoreEndpoint(): void
     {
         // Given
