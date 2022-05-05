@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Policies;
 
-use App\Models\Space;
+use App\Models\Group;
 use App\Models\User;
-use App\Policies\SpacePolicy;
+use App\Policies\GroupPolicy;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
-class SpacePolicyTest extends TestCase
+class GroupPolicyTest extends TestCase
 {
     /**
      * This tests the `viewAny` action.
@@ -20,7 +20,7 @@ class SpacePolicyTest extends TestCase
     public function testViewAny(): void
     {
         // Given
-        $policy = new SpacePolicy();
+        $policy = new GroupPolicy();
 
         $user = Mockery::mock(User::class);
 
@@ -39,13 +39,13 @@ class SpacePolicyTest extends TestCase
     public function testView(): void
     {
         // Given
-        $policy = new SpacePolicy();
+        $policy = new GroupPolicy();
 
         $user = Mockery::mock(User::class);
-        $space = Mockery::mock(Space::class);
+        $group = Mockery::mock(Group::class);
 
         // When
-        $response = $policy->view($user, $space);
+        $response = $policy->view($user, $group);
 
         // Then
         self::assertTrue($response);
@@ -59,7 +59,7 @@ class SpacePolicyTest extends TestCase
     public function testCreate(): void
     {
         // Given
-        $policy = new SpacePolicy();
+        $policy = new GroupPolicy();
 
         $user = Mockery::mock(User::class);
 
@@ -78,13 +78,13 @@ class SpacePolicyTest extends TestCase
     public function testUpdate(): void
     {
         // Given
-        $policy = new SpacePolicy();
+        $policy = new GroupPolicy();
 
         $user = Mockery::mock(User::class);
-        $space = Mockery::mock(Space::class);
+        $group = Mockery::mock(Group::class);
 
         // When
-        $response = $policy->update($user, $space);
+        $response = $policy->update($user, $group);
 
         // Then
         self::assertTrue($response);
@@ -98,13 +98,13 @@ class SpacePolicyTest extends TestCase
     public function testDelete(): void
     {
         // Given
-        $policy = new SpacePolicy();
+        $policy = new GroupPolicy();
 
         $user = Mockery::mock(User::class);
-        $space = Mockery::mock(Space::class);
+        $group = Mockery::mock(Group::class);
 
         // When
-        $response = $policy->delete($user, $space);
+        $response = $policy->delete($user, $group);
 
         // Then
         self::assertTrue($response);
@@ -118,13 +118,13 @@ class SpacePolicyTest extends TestCase
     public function testForceDelete(): void
     {
         // Given
-        $policy = new SpacePolicy();
+        $policy = new GroupPolicy();
 
         $user = Mockery::mock(User::class);
-        $space = Mockery::mock(Space::class);
+        $group = Mockery::mock(Group::class);
 
         // When
-        $response = $policy->forceDelete($user, $space);
+        $response = $policy->forceDelete($user, $group);
 
         // Then
         self::assertTrue($response);
