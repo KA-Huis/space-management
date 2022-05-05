@@ -31,12 +31,12 @@ class GroupResourceTest extends TestCase
 
         self::assertEquals(
             [
-                'id'          => Arr::get($castedGroup, 'id'),
-                'name'        => Arr::get($castedGroup, 'name'),
-                'created_at'  => Arr::get($castedGroup, 'created_at'),
+                'id'             => Arr::get($castedGroup, 'id'),
+                'name'           => Arr::get($castedGroup, 'name'),
+                'created_at'     => Arr::get($castedGroup, 'created_at'),
                 'group_type_id'  => Arr::get($castedGroup, 'group_type_id'),
-                'updated_at'  => Arr::get($castedGroup, 'updated_at'),
-                'deleted_at'  => Arr::get($castedGroup, 'deleted_at'),
+                'updated_at'     => Arr::get($castedGroup, 'updated_at'),
+                'deleted_at'     => Arr::get($castedGroup, 'deleted_at'),
             ],
             Arr::get((array) $response->getData(true), 'data')
         );

@@ -285,7 +285,7 @@ class GroupControllerTest extends TestCase
         $groupType = GroupType::factory()->create();
 
         $data = [
-            'name'                 => 'Some name',
+            'name'                          => 'Some name',
             'group_type_id'                 => $groupType->id,
         ];
 
@@ -333,13 +333,13 @@ class GroupControllerTest extends TestCase
         $user = User::factory()->create();
         $groupType = GroupType::factory()->create();
         $group = Group::create([
-            'name'                 => 'Some name',
+            'name'                    => 'Some name',
             'group_type_id'           => $groupType->id,
         ]);
 
         $newGroupType = GroupType::factory()->create();
         $newData = [
-            'name'                 => 'Some name',
+            'name'                    => 'Some name',
             'group_type_id'           => $newGroupType->id,
         ];
 
@@ -368,12 +368,12 @@ class GroupControllerTest extends TestCase
         $user = User::factory()->create();
         $groupType = GroupType::factory()->create();
         $group = Group::create([
-            'name'                 => 'Some name',
+            'name'                    => 'Some name',
             'group_type_id'           => $groupType->id,
         ]);
 
         $newData = [
-            'name'           => 'Edited name',
+            'name'                  => 'Edited name',
             'priority'              => 0,
         ];
 
