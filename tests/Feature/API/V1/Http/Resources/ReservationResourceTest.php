@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\API\V1\Http\Resources;
 
 use App\API\V1\Http\Resources\ReservationResource;
-use App\API\V1\Http\Resources\SpaceResource;
 use App\Models\Group;
 use App\Models\GroupType;
 use App\Models\Reservation;
@@ -36,17 +35,17 @@ class ReservationResourceTest extends TestCase
 
         self::assertEquals(
             [
-                'id' => Arr::get($castedReservation, 'id'),
-                'starts_at' => Arr::get($castedReservation, 'starts_at'),
-                'ends_at' => Arr::get($castedReservation, 'ends_at'),
-                'space_id' => Arr::get($castedReservation, 'space_id'),
+                'id'                 => Arr::get($castedReservation, 'id'),
+                'starts_at'          => Arr::get($castedReservation, 'starts_at'),
+                'ends_at'            => Arr::get($castedReservation, 'ends_at'),
+                'space_id'           => Arr::get($castedReservation, 'space_id'),
                 'created_by_user_id' => Arr::get($castedReservation, 'created_by_user_id'),
-                'group_id' => Arr::get($castedReservation, 'group_id'),
-                'created_at' => Arr::get($castedReservation, 'created_at'),
-                'updated_at' => Arr::get($castedReservation, 'updated_at'),
-                'deleted_at' => Arr::get($castedReservation, 'deleted_at'),
+                'group_id'           => Arr::get($castedReservation, 'group_id'),
+                'created_at'         => Arr::get($castedReservation, 'created_at'),
+                'updated_at'         => Arr::get($castedReservation, 'updated_at'),
+                'deleted_at'         => Arr::get($castedReservation, 'deleted_at'),
             ],
-            Arr::get((array)$response->getData(true), 'data')
+            Arr::get((array) $response->getData(true), 'data')
         );
     }
 
