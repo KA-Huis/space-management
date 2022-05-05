@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\API\V1\Http\Controllers;
 
+use App\API\V1\Http\Resources\SpaceCollection;
 use App\Http\Controllers\Controller;
 use App\Models\Space;
 use Illuminate\Auth\Access\AuthorizationException;

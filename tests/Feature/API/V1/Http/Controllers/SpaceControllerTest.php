@@ -64,15 +64,15 @@ class SpaceControllerTest extends TestCase
 
         $spaces = Space::factory(3)
             ->create([
-                'name' => 'Unrelevant title',
+                'name' => 'Unrelevant name',
             ]);
         $expectedSpace = $spaces->random();
-        $expectedSpace->title = 'Needle in title';
+        $expectedSpace->name = 'Needle in name';
         $expectedSpace->save();
 
         $endpointUri = $this->urlGenerator->route('api.v1.space.index', [
             'filter' => [
-                'title' => 'Needle',
+                'name' => 'Needle',
             ],
         ]);
 
@@ -108,7 +108,7 @@ class SpaceControllerTest extends TestCase
         $expectedSpace->description = 'Needle in description';
         $expectedSpace->save();
 
-        $endpointUri = $this->urlGenerator->route('api.v1.reparation-request.index', [
+        $endpointUri = $this->urlGenerator->route('api.v1.space.index', [
             'filter' => [
                 'description' => 'Needle',
             ],
