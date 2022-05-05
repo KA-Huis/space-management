@@ -6,6 +6,7 @@ namespace App\API\V1\Http\Controllers;
 
 use App\API\V1\Http\Requests\UpdateSpaceRequest;
 use App\API\V1\Http\Resources\ReparationRequestResource;
+use App\API\V1\Http\Resources\SpaceResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Access\AuthorizationException;
 use App\API\V1\Http\Resources\SpaceCollection;
@@ -37,7 +38,7 @@ final class SpaceController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function update(UpdateSpaceRequest $request, Space $space): ReparationRequestResource
+    public function update(UpdateSpaceRequest $request, Space $space): SpaceResource
     {
         $this->authorize('update', $space);
 

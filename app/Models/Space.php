@@ -16,6 +16,8 @@ class Space extends Model
     use SoftDeletes;
     use HasUuid;
 
+    protected $guarded = [];
+
     /** @var array */
     protected $casts = [
         'uuid'                     => 'string',

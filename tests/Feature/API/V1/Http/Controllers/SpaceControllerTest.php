@@ -249,7 +249,7 @@ class SpaceControllerTest extends TestCase
         $response->assertSuccessful()
             ->assertJsonPath('data.id', $space->id);
 
-        self::assertEquals($space->title, $newData['name']);
+        self::assertEquals($space->name, $newData['name']);
         self::assertEquals($space->description, $newData['description']);
         self::assertEquals($space->priority, $newData['is_open_for_reservations']);
     }
@@ -269,8 +269,8 @@ class SpaceControllerTest extends TestCase
             'is_open_for_reservations' => null,
         ];
 
-        $endpointUri = $this->urlGenerator->route('api.v1.spacet.update', [
-            'reparationRequest' => $space->id,
+        $endpointUri = $this->urlGenerator->route('api.v1.space.update', [
+            'space' => $space->id,
         ]);
 
         // When
