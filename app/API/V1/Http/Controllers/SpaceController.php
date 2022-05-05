@@ -10,6 +10,7 @@ use App\API\V1\Http\Resources\SpaceResource;
 use App\Http\Controllers\Controller;
 use App\Models\Space;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -45,5 +46,17 @@ final class SpaceController extends Controller
         $space->save();
 
         return new SpaceResource($space);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(Space $space): JsonResponse
+    {
+        $this->authorize('delete', $space);
+
+        $space->delete();
+
+        return new JsonResponse();
     }
 }

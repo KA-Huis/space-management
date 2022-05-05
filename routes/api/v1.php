@@ -48,4 +48,11 @@ $router
             ->group(function (Router $router) {
                 $router->put('/{space}', [SpaceController::class, 'update'])->name('update');
             });
+
+        $router
+            ->prefix('spaces')
+            ->name('space.')
+            ->group(function (Router $router) {
+                $router->delete('/{space}', [SpaceController::class, 'destroy'])->name('destroy');
+            });
     });
