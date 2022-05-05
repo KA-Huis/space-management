@@ -30,6 +30,9 @@ $router
             ->group(function (Router $router) {
                 $router->get('/', [ReparationRequestMaterialController::class, 'index'])->name('index');
                 $router->post('/', [ReparationRequestMaterialController::class, 'store'])->name('store');
+                $router->put('/{reparationRequestMaterial}', [ReparationRequestMaterialController::class, 'update'])->name('update');
+                $router->get('/{reparationRequestMaterial}', [ReparationRequestMaterialController::class, 'show'])->name('show');
+                $router->delete('/{reparationRequestMaterial}', [ReparationRequestMaterialController::class, 'destroy'])->name('destroy');
             });
 
         $router
