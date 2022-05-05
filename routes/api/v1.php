@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 /* @var Router $router */
 
+use App\API\V1\Http\Controllers\GroupController;
 use App\API\V1\Http\Controllers\ReparationRequestController;
 use App\API\V1\Http\Controllers\ReparationRequestMaterialController;
 use App\API\V1\Http\Controllers\ReservationController;
@@ -56,5 +57,16 @@ $router
                 $router->put('/{reservation}', [ReservationController::class, 'update'])->name('update');
                 $router->get('/{reservation}', [ReservationController::class, 'show'])->name('show');
                 $router->delete('/{reservation}', [ReservationController::class, 'destroy'])->name('destroy');
+            });
+
+        $router
+            ->prefix('groups')
+            ->name('group.')
+            ->group(static function (Router $router) {
+                $router->get('/', [GroupController::class, 'index'])->name('index');
+                $router->post('/', [GroupController::class, 'store'])->name('store');
+                $router->put('/{group}', [GroupController::class, 'update'])->name('update');
+                $router->get('/{group}', [GroupController::class, 'show'])->name('show');
+                $router->delete('/{group}', [GroupController::class, 'destroy'])->name('destroy');
             });
     });
