@@ -21,6 +21,41 @@ components:
           refreshUrl: http://acc-ka.jstlwk.dev/v1/oauth/token/refresh
           scopes: {}
 
+  schemas:
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        space_id:
+          type: integer
+          format: bigint20
+        group_id:
+          type: integer
+          format: bigint20
+        created_by_user_id:
+          type: integer
+          format: bigint20
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - starts_at
+        - ends_at
+        - created_by_user_id
+
+
 security:
   - oAuth: []
 
