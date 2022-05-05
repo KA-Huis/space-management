@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
-use App\Models\ReparationRequest;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ReparationRequestPolicy
+class ReservationPolicy
 {
     use HandlesAuthorization;
 
@@ -23,7 +23,7 @@ class ReparationRequestPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ReparationRequest $reparationRequest): bool
+    public function view(User $user, Reservation $reservation): bool
     {
         return true;
     }
@@ -39,7 +39,7 @@ class ReparationRequestPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ReparationRequest $reparationRequest): bool
+    public function update(User $user, Reservation $reservation): bool
     {
         return true;
     }
@@ -47,7 +47,7 @@ class ReparationRequestPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ReparationRequest $reparationRequest): bool
+    public function delete(User $user, Reservation $reservation): bool
     {
         return true;
     }
@@ -55,7 +55,7 @@ class ReparationRequestPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ReparationRequest $reparationRequest): bool
+    public function restore(User $user, Reservation $reservation): bool
     {
         return true;
     }
@@ -63,7 +63,7 @@ class ReparationRequestPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ReparationRequest $reparationRequest): bool
+    public function forceDelete(User $user, Reservation $reservation): bool
     {
         return true;
     }
