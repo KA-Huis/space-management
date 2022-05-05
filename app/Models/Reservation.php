@@ -18,6 +18,9 @@ class Reservation extends Model
     use SoftDeletes;
 
     /** @var array */
+    protected $guarded = [];
+
+    /** @var array */
     protected $casts = [
         'uuid'      => 'string',
         'starts_at' => 'datetime',
@@ -42,5 +45,10 @@ class Reservation extends Model
     public function space(): BelongsTo
     {
         return $this->belongsTo(Space::class);
+    }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
     }
 }
