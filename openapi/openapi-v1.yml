@@ -28,6 +28,7 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         first_name:
           type: string
         last_name:
@@ -52,6 +53,7 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         starts_at:
           type: string
           format: date-time
@@ -61,12 +63,15 @@ components:
         space_id:
           type: integer
           format: bigint20
+          minimum: 1
         group_id:
           type: integer
           format: bigint20
+          minimum: 1
         created_by_user_id:
           type: integer
           format: bigint20
+          minimum: 1
         created_at:
           type: string
           format: date-time
@@ -77,12 +82,15 @@ components:
           type: string
           format: date-time
         created_by_user:
+          readOnly: true
           allOf:
             - $ref: '#/components/schemas/User'
         space:
+          readOnly: true
           allOf:
             - $ref: '#/components/schemas/Space'
         group:
+          readOnly: true
           allOf:
             - $ref: '#/components/schemas/Group'
       required:
@@ -97,11 +105,13 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         name:
           type: string
         group_type_id:
           type: integer
           format: bigint20
+          minimum: 1
         created_at:
           type: string
           format: date-time
@@ -127,6 +137,7 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         name:
           type: string
         created_at:
@@ -139,6 +150,7 @@ components:
           type: string
           format: date-time
         groups:
+          readOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Group'
@@ -152,6 +164,7 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         name:
           type: string
         is_open_for_reservations:
@@ -176,6 +189,7 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         name:
           type: string
         description:
@@ -195,7 +209,9 @@ components:
         reporter_id:
           type: integer
           format: bigint20
+          minimum: 1
         reporter:
+          readOnly: true
           allOf:
             - $ref: '#/components/schemas/User'
       required:
@@ -209,6 +225,7 @@ components:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         is_mandatory:
           type: boolean
         created_at:
@@ -223,6 +240,7 @@ components:
         reperation_request_id:
           type: integer
           format: bigint20
+          minimum: 1
       required:
         - id
         - is_mandatory
@@ -322,7 +340,7 @@ security:
 paths:
   /groups:
     get:
-      summary: Lists groups
+      summary: List groups
       description: >
         Retrieve groups paginated. Filter and sort on defined attributes.
       parameters:
@@ -386,7 +404,7 @@ paths:
         403:
           $ref: '#/components/responses/UnauthorizedResponse'
     post:
-      summary: Create a group
+      summary: Create group
       requestBody:
         content:
           application/json:
@@ -403,3 +421,34 @@ paths:
           $ref: '#/components/responses/UnauthorizedResponse'
         422:
           $ref: '#/components/responses/ValidationErrorResponse'
+  /groups/{id}:
+    put:
+      summary: Update group
+      description: >
+        This endpoint can be used to update some details of a created group.
+      parameters:
+        - in: path
+          name: id
+          description: The group ID
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+
