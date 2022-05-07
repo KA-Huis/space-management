@@ -234,7 +234,117 @@ components:
         - 300
         - 400
 
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        last_page:
+          type: integer
+        from:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaginationMetaLink'
+
+    PaginationMetaLink:
+      type: object
+      properties:
+        url:
+          type: string
+        label:
+          type: string
+        active:
+          type: boolean
+
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+          format: uri
+        last:
+          type: string
+          format: uri
+        prev:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+
+  responses:
+    UnauthorizedResponse:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: This action is unauthorized.
+            required:
+              - message
+
+
 security:
   - oAuth: [ ]
 
-paths: { }
+paths:
+  /groups:
+    get:
+      summary: Lists groups
+      description: >
+        Retrieve groups paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[name]
+          schema:
+            type: string
+          description: Query partially on name.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+        - in: query
+          name: filter[is_open_for_reservations]
+          description: Query strict on is_open_for_reservations.
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
