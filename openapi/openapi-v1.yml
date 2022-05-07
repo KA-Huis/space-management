@@ -636,3 +636,151 @@ paths:
           $ref: '#/components/responses/UnauthorizedResponse'
 
 
+  /reparation_request_materials:
+    get:
+      tags:
+        - Reparation request materials
+      summary: List reparation request materials
+      description: >
+        Retrieve reparation request materials paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[name]
+          schema:
+            type: string
+          description: Query partially on name.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+          schema:
+            type: string
+        - in: query
+          name: filter[is_mandatory]
+          description: Query strict on is_mandatory.
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReparationRequestMaterial'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Reparation request materials
+      summary: Create reparation request material
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequestMaterial'
+      responses:
+        200:
+          description: Successfully created a reparation request material
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequestMaterial'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+  /reparation_request_materials/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The reparation request material ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Reparation request materials
+      summary: Get reparation request material
+      description: Retrieve a single reparation request material by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequestMaterial'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Reparation request materials
+      summary: Update reparation request material
+      description: >
+        This endpoint can be used to update some details of a created reparation request material.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequestMaterial'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequestMaterial'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Reparation request materials
+      summary: Delete reparation request material
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
