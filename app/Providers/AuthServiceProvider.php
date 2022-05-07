@@ -23,10 +23,10 @@ class AuthServiceProvider extends ServiceProvider
 {
     /** @var array */
     protected $policies = [
-        Group::class => GroupPolicy::class,
-        Reservation::class => ReservationPolicy::class,
-        Space::class => SpacePolicy::class,
-        User::class => UserPolicy::class,
+        Group::class             => GroupPolicy::class,
+        Reservation::class       => ReservationPolicy::class,
+        Space::class             => SpacePolicy::class,
+        User::class              => UserPolicy::class,
         ReparationRequest::class => ReparationRequestPolicy::class,
     ];
 
