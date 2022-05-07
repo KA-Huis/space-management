@@ -422,18 +422,32 @@ paths:
         422:
           $ref: '#/components/responses/ValidationErrorResponse'
   /groups/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The group ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      summary: Get group
+      description: Retrieve a singel group by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
     put:
       summary: Update group
       description: >
         This endpoint can be used to update some details of a created group.
-      parameters:
-        - in: path
-          name: id
-          description: The group ID
-          required: true
-          schema:
-            type: integer
-            minimum: 1
       requestBody:
         content:
           application/json:
@@ -450,5 +464,17 @@ paths:
           $ref: '#/components/responses/UnauthorizedResponse'
         422:
           $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      summary: Delete group
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+
 
 
