@@ -340,6 +340,8 @@ security:
 paths:
   /groups:
     get:
+      tags:
+        - Groups
       summary: List groups
       description: >
         Retrieve groups paginated. Filter and sort on defined attributes.
@@ -404,6 +406,8 @@ paths:
         403:
           $ref: '#/components/responses/UnauthorizedResponse'
     post:
+      tags:
+        - Groups
       summary: Create group
       requestBody:
         content:
@@ -431,6 +435,8 @@ paths:
           type: integer
           minimum: 1
     get:
+      tags:
+        - Groups
       summary: Get group
       description: Retrieve a singel group by its id.
       responses:
@@ -445,6 +451,8 @@ paths:
         422:
           $ref: '#/components/responses/ValidationErrorResponse'
     put:
+      tags:
+        - Groups
       summary: Update group
       description: >
         This endpoint can be used to update some details of a created group.
@@ -465,6 +473,8 @@ paths:
         422:
           $ref: '#/components/responses/ValidationErrorResponse'
     delete:
+      tags:
+        - Groups
       summary: Delete group
       responses:
         200:
