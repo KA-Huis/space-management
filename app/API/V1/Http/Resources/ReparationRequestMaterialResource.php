@@ -24,6 +24,7 @@ class ReparationRequestMaterialResource extends JsonResource
             'is_mandatory' => $this->is_mandatory,
             'created_at'   => $this->created_at,
             'updated_at'   => $this->updated_at,
+            'deleted_at'   => $this->deleted_at,
 
             'reparation_request_id' => $this->reparation_request_id,
 

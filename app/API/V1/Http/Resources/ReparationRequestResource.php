@@ -25,6 +25,7 @@ class ReparationRequestResource extends JsonResource
             'created_at'  => $this->created_at,
             'updated_at'  => $this->updated_at,
             'deleted_at'  => $this->deleted_at,
+            'reporter_id' => $this->reporter_id,
             'reporter'    => new UserResource($this->whenLoaded('reporter')),
             'statuses'    => new ReparationRequestStatusCollection($this->whenLoaded('statuses')),
             'materials'   => new ReparationRequestMaterialCollection($this->whenLoaded('materials')),

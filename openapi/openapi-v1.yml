@@ -19,9 +19,33 @@ components:
           authorizationUrl: http://acc-ka.jstlwk.dev/v1/oauth/authorize
           tokenUrl: http://acc-ka.jstlwk.dev/v1/oauth/token
           refreshUrl: http://acc-ka.jstlwk.dev/v1/oauth/token/refresh
-          scopes: {}
+          scopes: { }
 
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        first_name:
+          type: string
+        last_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - first_nane
+        - last_name
+        - email
     Reservation:
       type: object
       properties:
@@ -52,6 +76,15 @@ components:
         deleted_at:
           type: string
           format: date-time
+        created_by_user:
+          allOf:
+            - $ref: '#/components/schemas/User'
+        space:
+          allOf:
+            - $ref: '#/components/schemas/Space'
+        group:
+          allOf:
+            - $ref: '#/components/schemas/Group'
       required:
         - id
         - starts_at
@@ -111,8 +144,97 @@ components:
         - id
         - name
 
+    Space:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        name:
+          type: string
+        is_open_for_reservations:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - is_open_for_reservations
+
+    ReperationRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        name:
+          type: string
+        description:
+          type: string
+        priority:
+          allOf:
+            - $ref: '#/components/schemas/ReparationRequestPriority'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        reporter_id:
+          type: integer
+          format: bigint20
+        reporter:
+          allOf:
+            - $ref: '#/components/schemas/User'
+      required:
+        - id
+        - title
+        - description
+
+    ReperationRequestMaterial:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        is_mandatory:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        reperation_request_id:
+          type: integer
+          format: bigint20
+      required:
+        - id
+        - is_mandatory
+
+    ReparationRequestPriority:
+      type: integer
+      description: 'Available values: Low (100), Medium (200), High (300), Highest (400)'
+      enum:
+        - 100
+        - 200
+        - 300
+        - 400
 
 security:
-  - oAuth: []
+  - oAuth: [ ]
 
-paths: {}
+paths: { }
