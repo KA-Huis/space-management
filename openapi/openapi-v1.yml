@@ -49,11 +49,67 @@ components:
         updated_at:
           type: string
           format: date-time
+        deleted_at:
+          type: string
+          format: date-time
       required:
         - id
         - starts_at
         - ends_at
         - created_by_user_id
+
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        name:
+          type: string
+        group_type_id:
+          type: integer
+          format: bigint20
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        group_type:
+          allOf:
+            - $ref: '#/components/schemas/GroupType'
+      required:
+        - id
+        - name
+        - group_type_id
+
+    GroupType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+      required:
+        - id
+        - name
 
 
 security:
