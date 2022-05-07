@@ -112,8 +112,10 @@ components:
           type: string
           format: date-time
         group_type:
+          readOnly: true
           allOf:
             - $ref: '#/components/schemas/GroupType'
+            - nullable: true
       required:
         - id
         - name
@@ -274,6 +276,15 @@ components:
           type: string
           format: uri
 
+    ValidationErrorAttributeMessages:
+      type: object
+      description: List of attributes with the validation error messages.
+      properties:
+        attribute_name:
+          type: array
+          items:
+            type: string
+
   responses:
     UnauthorizedResponse:
       description: Unauthorized
@@ -287,7 +298,23 @@ components:
                 example: This action is unauthorized.
             required:
               - message
-
+    ValidationErrorResponse:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "The description field is required. (and 1 more error)"
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValidationErrorAttributeMessages'
+            required:
+              - message
+              - errors
 
 security:
   - oAuth: [ ]
@@ -307,9 +334,13 @@ paths:
         - in: query
           name: filter[description]
           description: Query partially on description.
+          schema:
+            type: string
         - in: query
           name: filter[is_open_for_reservations]
           description: Query strict on is_open_for_reservations.
+          schema:
+            type: string
         - in: query
           name: sort
           description: >
@@ -322,12 +353,18 @@ paths:
             Example:
               - Ascending: ?sort=created_at
               - Descending: ?sort=-created_at
+          schema:
+            type: string
         - in: query
           name: page[number]
           description: The page number that the client is requesting.
+          schema:
+            type: string
         - in: query
           name: page[size]
           description: The number of resources to return per-page.
+          schema:
+            type: string
       responses:
         200:
           description: Succcessful operation
@@ -348,3 +385,21 @@ paths:
 
         403:
           $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      summary: Create a group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        200:
+          description: Successfully created a group
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'

@@ -17,7 +17,6 @@ class SpacePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
         return true;
     }
 
