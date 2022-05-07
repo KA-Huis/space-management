@@ -183,7 +183,7 @@ components:
         - name
         - is_open_for_reservations
 
-    ReperationRequest:
+    ReparationRequest:
       type: object
       properties:
         id:
@@ -219,7 +219,7 @@ components:
         - title
         - description
 
-    ReperationRequestMaterial:
+    ReparationRequestMaterial:
       type: object
       properties:
         id:
@@ -438,7 +438,7 @@ paths:
       tags:
         - Groups
       summary: Get group
-      description: Retrieve a singel group by its id.
+      description: Retrieve a single group by its id.
       responses:
         200:
           description: Succcessful operation
@@ -486,5 +486,153 @@ paths:
         403:
           $ref: '#/components/responses/UnauthorizedResponse'
 
+  /reparation_requests:
+    get:
+      tags:
+        - Reparation requests
+      summary: List reparation requests
+      description: >
+        Retrieve reparation requests paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[title]
+          schema:
+            type: string
+          description: Query partially on title.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+          schema:
+            type: string
+        - in: query
+          name: filter[priority]
+          description: Query strict on priority.
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReparationRequest'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Reparation requests
+      summary: Create reparation request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequest'
+      responses:
+        200:
+          description: Successfully created a reparation request
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequest'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+  /reparation_requests/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The reparation request ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Reparation requests
+      summary: Get reparation request
+      description: Retrieve a single reparation request by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequest'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Reparation requests
+      summary: Update reparation request
+      description: >
+        This endpoint can be used to update some details of a created reparation request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequest'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequest'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Reparation requests
+      summary: Delete reparation request
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
 
 
