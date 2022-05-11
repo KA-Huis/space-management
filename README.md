@@ -12,7 +12,7 @@ This repository contains the core web application of the KA-Huis. A youth buildi
 
 ### Technical overview
 
-<img src="/art/system-infrastructure-overview.png" alt="System Infrastructure Overview">
+<img src="/art/system-infrastructure-overview.png" alt="System Infrastructure Overview" height="280">
 
 ## Installation
 
