@@ -10,6 +10,10 @@
 
 This repository contains the core web application of the KA-Huis. A youth building located in Posterholt, The Netherlands fully run by volunteers. This application serves as an internal tool to improve processes and realtime availability of information. It's build in PHP with the popular Laravel framework. This application is responsible for multiple services. It contains at this moment the web application interface and a generic purpose REST API (used for example by the mobile application [Repair Tool](https://github.com/KA-Huis/repair-tool)). Both reuse the same core and domain logic. 
 
+### Technical overview
+
+<img src="/art/system-infrastructure-overview.png" alt="System Infrastructure Overview">
+
 ## Installation
 
 Make sure that a Traefik reverse proxy is running. See [KA-Huis/traefik-gateway](https://github.com/KA-Huis/traefik-gateway).
