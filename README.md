@@ -58,7 +58,7 @@ After that you can for example run Laravel artisan commands (`php artisan list`)
 
 ### Seeded data
 
-### User accounts
+#### User accounts
 
 A small list of user accounts are already automatically created by the database seeder which you can use to easily get access to the admin portal.
 
