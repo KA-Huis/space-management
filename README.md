@@ -65,8 +65,7 @@ A small list of user accounts are already automatically created by the database 
 | First Name | Last Name | E-mailaddress | Password | Role |
 |------------|-----------|---------------|----------|------|
 | Cyril | de Wit | 453717@student.fontys.nl| Welkom0! | To be created |
-| Abas | Sharif | 472244@student.fontys.nl| Welkom0! | To be created |
-| Joey | Vonck | 454988@student.fontys.nl| Welkom0! | To be created |
+| Jasper | Stolwijk | jasper.stolwijk@student.fontys.nl| Welkom0! | To be created |
 | Mitch | Kessels | 453258@student.fontys.nl| Welkom0! | To be created |
 | Enno | Overbeeken | enno@kahuis.nl| Welkom0! | To be created |
 

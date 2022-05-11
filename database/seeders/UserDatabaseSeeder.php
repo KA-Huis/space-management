@@ -22,17 +22,9 @@ class UserDatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name'        => 'Abas',
-            'last_name'         => 'Sharif',
-            'email'             => '472244@student.fontys.nl',
-            'password'          => Hash::make('Welkom0!'),
-            'email_verified_at' => Carbon::now(),
-        ]);
-
-        User::create([
-            'first_name'        => 'Joey',
-            'last_name'         => 'Vonck',
-            'email'             => '454988@student.fontys.nl',
+            'first_name'        => 'Jasper',
+            'last_name'         => 'Stolwijk',
+            'email'             => 'jasper.stolwijk@student.fontys.nl',
             'password'          => Hash::make('Welkom0!'),
             'email_verified_at' => Carbon::now(),
         ]);
