@@ -1,4 +1,4 @@
-<p align="center"><img src="/art/project-logo.svg" alt="Logo Core Application"></p>
+<p align="center"><img src="/art/project-logo.svg" alt="Logo Core Application" height="120"></p>
 
 <p align="center">
 [![run-tests](https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml/badge.svg?branch=acceptance)](https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml)
