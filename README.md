@@ -70,8 +70,6 @@ A small list of user accounts are already automatically created by the database 
 | Mitch | Kessels | 453258@student.fontys.nl| Welkom0! | To be created |
 | Enno | Overbeeken | enno@kahuis.nl| Welkom0! | To be created |
 
-### OAuth clients
-
 ## Branching model
 
 * **Branch `production`:** This branch will be used to build an artefact that can be deployed to the production environment.
