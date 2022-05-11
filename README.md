@@ -44,7 +44,7 @@ All the installation steps are added to the `./setup.sh` script to automate the 
 
 Run the `./setup.sh` script every time you want to have a fresh setup of this project.
 
-After the initial setup has been run once, the next time you want start the service you can run `docker-compose up -d`.`` 
+After the initial setup has been run once, the next time you want start the service you can run `docker-compose up -d`.
 
 ### Running commands in the environment
 
