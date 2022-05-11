@@ -47,10 +47,10 @@ All work branches branch off from the `producion` branch to make branches indepe
 
 ## Credits
 
-* **Mitch Kessels** - _Creator_ - [MiKessels](https://github.com/MiKessels)
-* **Abas Sharif** - _Creator_ - [abassharif](https://github.com/abassharif)
-* **Joey Vonck** - _Creator_ - [joeyvonck](https://github.com/joeyvonck)
 * **Cyril de Wit** - _Creator_ - [cyrildewit](https://github.com/cyrildewit)
+* **Jasper Stolwijk** - _Creator_ - [Hoopless](https://github.com/Hoopless)
+* **Mitch Kessels** - _Creator_ - [MiKessels](https://github.com/MiKessels)
+* **Joey Vonck** - _Creator_ - [joeyvonck](https://github.com/joeyvonck)
 
 See also the list of [contributors](https://github.com/KA-Huis/space-management/graphs/contributors) who participated in this project.
 
