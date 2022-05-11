@@ -60,4 +60,6 @@ Please see [CHANGELOG](CHANGELOG-2.0.md) for more information on what has change
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+Copyright (c) KA-Huis. All rights reserved.
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
