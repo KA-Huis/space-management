@@ -1,18 +1,16 @@
-# Space Management
+<p align="center"><img src="/art/project-logo.svg" alt="Logo Core Application"></p>
 
-Spaces management tool built for KA-Huis.
+<p align="center">
+[![run-tests](https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml/badge.svg?branch=acceptance)](https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml)
+</p>
 
-## Overview
+Core web application of youth building KA-Huis in Posterholt, The Netherlands.
 
-The application is built with the Laravel framework.
+## Introduction
 
-## Setup
+This repository contains the core web application of the KA-Huis. A youth building located in Posterholt, The Netherlands fully run by volunteers. This application serves as an internal tool to improve processes and realtime availability of information. It's build in PHP with the popular Laravel framework. This application is responsible for multiple services. It contains at this moment the web application interface and a generic purpose REST API (used for example by the mobile application [Repair Tool](https://github.com/KA-Huis/repair-tool)). Both reuse the same core and domain logic. 
 
-### Requirements
-
-This application requires **PHP 8.0+**.
-
-### Installation
+## Installation
 
 Make sure that a Traefik reverse proxy is running. See [KA-Huis/traefik-gateway](https://github.com/KA-Huis/traefik-gateway).
 
