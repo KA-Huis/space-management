@@ -18,7 +18,7 @@ This repository contains the core web application of the KA-Huis. A youth buildi
 
 ### Docker
 
-This project contains a preconfigured Docker setup to easily get this project locally running. Although it's heavily advised to use this Docker setup, so it matches production as much as possible it's not required. We do however not accept code changes to support other setups. 
+This project contains a preconfigured Docker setup to easily get this project locally running. Although it's heavily advised to use this Docker setup, because it matches production as much as possible it's not required. We do however not accept code changes to support other setups. 
 
 #### Services
 
@@ -42,7 +42,9 @@ In order to easily redirect local requests to the localhost domain of this proje
 
 All the installation steps are added to the `./setup.sh` script to automate the process. This makes sure every necessary step is executed in the right order. Shell scripts can be run on macOS and Linux. In case you're using windows, you could use WSL (Windows Subsystem for Linux).
 
-Run the `./setup.sh` script every time you want to set up the project.
+Run the `./setup.sh` script every time you want to have a fresh setup of this project.
+
+After the initial setup has been run once, the next time you want start the service you can run `docker-compose up -d`.`` 
 
 ### Running commands in the environment
 
@@ -52,7 +54,7 @@ In order to run commands, you will have to SSH into the `php` service container:
 docker-compose exec php sh
 ```
 
-After that you can for example run Laravel artisan commands. For example `php artisan list`.
+After that you can for example run Laravel artisan commands (`php artisan list`).
 
 ### Seeded data
 
@@ -67,6 +69,8 @@ A small list of user accounts are already automatically created by the database 
 | Joey | Vonck | 454988@student.fontys.nl| Welkom0! | To be created |
 | Mitch | Kessels | 453258@student.fontys.nl| Welkom0! | To be created |
 | Enno | Overbeeken | enno@kahuis.nl| Welkom0! | To be created |
+
+### OAuth clients
 
 ## Branching model
 
