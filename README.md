@@ -14,13 +14,47 @@ This repository contains the core web application of the KA-Huis. A youth buildi
 
 <img src="/art/system-infrastructure-overview.png" alt="System Infrastructure Overview" height="280">
 
-## Installation
+## Local Installation
 
-Make sure that a Traefik reverse proxy is running. See [KA-Huis/traefik-gateway](https://github.com/KA-Huis/traefik-gateway).
+### Docker
 
-Run `./setup.sh`. This will setup the application for you.
+This project contains a preconfigured Docker setup to easily get this project locally running. Although it's heavily advised to use this Docker setup, so it matches production as much as possible it's not required. We do however not accept code changes to support other setups. 
 
-## Usage
+#### Services
+
+* `php`: Core application
+* `nginx`: NGINX server
+* `mariadb`: MySQL database
+  * Database: `sm`
+  * Root password: `root`
+  * Username: `sm`
+  * User password: `sm`
+  * Exposed port: `34030`
+* `redis`: Cache data store
+* `mailhog`: Local e-mail testing tool to catch sent e-mails
+  * URL: `https://mailhog.space-management.localhost`
+
+### Traefik - reverse proxy
+
+In order to easily redirect local requests to the localhost domain of this project, we use Traefik a reverse proxy. Make sure it's running. Follow the installation steps at [KA-Huis/traefik-gateway](https://github.com/KA-Huis/traefik-gateway).
+
+### Setup script
+
+All the installation steps are added to the `./setup.sh` script to automate the process. This makes sure every necessary step is executed in the right order. Shell scripts can be run on macOS and Linux. In case you're using windows, you could use WSL (Windows Subsystem for Linux).
+
+Run the `./setup.sh` script every time you want to set up the project.
+
+### Running commands in the environment
+
+In order to run commands, you will have to SSH into the `php` service container:
+
+```shell
+docker-compose exec php sh
+```
+
+After that you can for example run Laravel artisan commands. For example `php artisan list`.
+
+### Seeded data
 
 ### User accounts
 
