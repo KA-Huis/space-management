@@ -1,7 +1,7 @@
 <p align="center"><img src="/art/project-logo.svg" alt="Logo Core Application" height="120"></p>
 
 <p align="center">
-[![run-tests](https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml/badge.svg?branch=acceptance)](https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml)
+<a href="https://github.com/KA-Huis/space-management/actions"><img src="https://github.com/KA-Huis/space-management/actions/workflows/run-tests.yml/badge.svg?branch=acceptance" alt="Integration Tests Status"></a>
 </p>
 
 Core web application of youth building KA-Huis in Posterholt, The Netherlands.
