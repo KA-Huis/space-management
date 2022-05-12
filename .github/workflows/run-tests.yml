@@ -53,11 +53,9 @@ jobs:
         run: |
           composer install --prefer-dist --no-interaction --no-progress
 
-      #      - name: Prepare application
-      #        run: |
-      #          php artisan key:generate
-      #          php artisan config:clear
-      #          php artisan migrate
+            - name: Setup Laravel Passport
+              run: |
+                php artisan passport:install
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
