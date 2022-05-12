@@ -37,6 +37,7 @@ class ReparationRequestResourceTest extends TestCase
                 'title'       => Arr::get($castedReparationRequest, 'title'),
                 'description' => Arr::get($castedReparationRequest, 'description'),
                 'priority'    => Arr::get($castedReparationRequest, 'priority'),
+                'reporter_id'    => Arr::get($castedReparationRequest, 'reporter_id'),
                 'created_at'  => Arr::get($castedReparationRequest, 'created_at'),
                 'updated_at'  => Arr::get($castedReparationRequest, 'updated_at'),
                 'deleted_at'  => Arr::get($castedReparationRequest, 'deleted_at'),
