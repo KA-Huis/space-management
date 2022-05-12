@@ -9,11 +9,15 @@ use App\API\V1\Http\Controllers\ReparationRequestController;
 use App\API\V1\Http\Controllers\ReparationRequestMaterialController;
 use App\API\V1\Http\Controllers\ReservationController;
 use App\API\V1\Http\Controllers\SpaceController;
+use App\Authentication\Guards\RestApiGuard;
 use Illuminate\Routing\Router;
 
 $router
     ->prefix('v1')
     ->name('api.v1.')
+    ->middleware([
+        sprintf('auth:%s', (new RestApiGuard())->getName()),
+    ])
     ->group(static function (Router $router) {
         $router
             ->prefix('reparation_requests')

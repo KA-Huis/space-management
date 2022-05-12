@@ -19,15 +19,41 @@ components:
           authorizationUrl: http://acc-ka.jstlwk.dev/v1/oauth/authorize
           tokenUrl: http://acc-ka.jstlwk.dev/v1/oauth/token
           refreshUrl: http://acc-ka.jstlwk.dev/v1/oauth/token/refresh
-          scopes: {}
+          scopes: { }
 
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        first_name:
+          type: string
+        last_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - first_nane
+        - last_name
+        - email
     Reservation:
       type: object
       properties:
         id:
           type: integer
           format: bigint20
+          minimum: 1
         starts_at:
           type: string
           format: date-time
@@ -37,26 +63,724 @@ components:
         space_id:
           type: integer
           format: bigint20
+          minimum: 1
         group_id:
           type: integer
           format: bigint20
+          minimum: 1
         created_by_user_id:
           type: integer
           format: bigint20
+          minimum: 1
         created_at:
           type: string
           format: date-time
         updated_at:
           type: string
           format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        created_by_user:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/User'
+        space:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Space'
+        group:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Group'
       required:
         - id
         - starts_at
         - ends_at
         - created_by_user_id
 
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        name:
+          type: string
+        group_type_id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        group_type:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/GroupType'
+            - nullable: true
+      required:
+        - id
+        - name
+        - group_type_id
+
+    GroupType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        groups:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+      required:
+        - id
+        - name
+
+    Space:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        name:
+          type: string
+        is_open_for_reservations:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - is_open_for_reservations
+
+    ReparationRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        name:
+          type: string
+        description:
+          type: string
+        priority:
+          allOf:
+            - $ref: '#/components/schemas/ReparationRequestPriority'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        reporter_id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        reporter:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/User'
+      required:
+        - id
+        - title
+        - description
+
+    ReparationRequestMaterial:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: bigint20
+          minimum: 1
+        is_mandatory:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        reperation_request_id:
+          type: integer
+          format: bigint20
+          minimum: 1
+      required:
+        - id
+        - is_mandatory
+
+    ReparationRequestPriority:
+      type: integer
+      description: 'Available values: Low (100), Medium (200), High (300), Highest (400)'
+      enum:
+        - 100
+        - 200
+        - 300
+        - 400
+
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        last_page:
+          type: integer
+        from:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaginationMetaLink'
+
+    PaginationMetaLink:
+      type: object
+      properties:
+        url:
+          type: string
+        label:
+          type: string
+        active:
+          type: boolean
+
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+          format: uri
+        last:
+          type: string
+          format: uri
+        prev:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+
+    ValidationErrorAttributeMessages:
+      type: object
+      description: List of attributes with the validation error messages.
+      properties:
+        attribute_name:
+          type: array
+          items:
+            type: string
+
+  responses:
+    UnauthorizedResponse:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: This action is unauthorized.
+            required:
+              - message
+    ValidationErrorResponse:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "The description field is required. (and 1 more error)"
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValidationErrorAttributeMessages'
+            required:
+              - message
+              - errors
 
 security:
-  - oAuth: []
+  - oAuth: [ ]
 
-paths: {}
+paths:
+  /groups:
+    get:
+      tags:
+        - Groups
+      summary: List groups
+      description: >
+        Retrieve groups paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[name]
+          schema:
+            type: string
+          description: Query partially on name.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+          schema:
+            type: string
+        - in: query
+          name: filter[is_open_for_reservations]
+          description: Query strict on is_open_for_reservations.
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Groups
+      summary: Create group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        200:
+          description: Successfully created a group
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+  /groups/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The group ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Groups
+      summary: Get group
+      description: Retrieve a single group by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Groups
+      summary: Update group
+      description: >
+        This endpoint can be used to update some details of a created group.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Groups
+      summary: Delete group
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+
+  /reparation_requests:
+    get:
+      tags:
+        - Reparation requests
+      summary: List reparation requests
+      description: >
+        Retrieve reparation requests paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[title]
+          schema:
+            type: string
+          description: Query partially on title.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+          schema:
+            type: string
+        - in: query
+          name: filter[priority]
+          description: Query strict on priority.
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReparationRequest'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Reparation requests
+      summary: Create reparation request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequest'
+      responses:
+        200:
+          description: Successfully created a reparation request
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequest'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+  /reparation_requests/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The reparation request ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Reparation requests
+      summary: Get reparation request
+      description: Retrieve a single reparation request by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequest'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Reparation requests
+      summary: Update reparation request
+      description: >
+        This endpoint can be used to update some details of a created reparation request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequest'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequest'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Reparation requests
+      summary: Delete reparation request
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+
+
+  /reparation_request_materials:
+    get:
+      tags:
+        - Reparation request materials
+      summary: List reparation request materials
+      description: >
+        Retrieve reparation request materials paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[name]
+          schema:
+            type: string
+          description: Query partially on name.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+          schema:
+            type: string
+        - in: query
+          name: filter[is_mandatory]
+          description: Query strict on is_mandatory.
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReparationRequestMaterial'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Reparation request materials
+      summary: Create reparation request material
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequestMaterial'
+      responses:
+        200:
+          description: Successfully created a reparation request material
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequestMaterial'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+  /reparation_request_materials/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The reparation request material ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Reparation request materials
+      summary: Get reparation request material
+      description: Retrieve a single reparation request material by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequestMaterial'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Reparation request materials
+      summary: Update reparation request material
+      description: >
+        This endpoint can be used to update some details of a created reparation request material.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReparationRequestMaterial'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReparationRequestMaterial'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Reparation request materials
+      summary: Delete reparation request material
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'

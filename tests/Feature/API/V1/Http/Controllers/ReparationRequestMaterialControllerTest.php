@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Feature\API\V1\Http\Controllers;
 
+use App\Authentication\Guards\RestApiGuard;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
 use App\Models\User;
@@ -29,6 +30,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testIndexEndpoint(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationMaterialRequests = ReparationRequestMaterial::factory(3)
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -38,7 +41,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
         $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.index');
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->get($endpointUri);
 
         // Then
         $firstReparationRequest = $reparationMaterialRequests->first();
@@ -58,6 +63,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testIndexEndpointFilteringOnUuid(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequests = ReparationRequestMaterial::factory(3)
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -73,7 +80,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -91,6 +100,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testIndexEndpointFilteringOnName(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequestMaterials = ReparationRequestMaterial::factory(3)
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -110,7 +121,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -143,6 +156,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testIndexEndpointSortingOnDateColumns(string $dateColumn): void
     {
         // Given
+        $user = User::factory()->create();
+
         ReparationRequestMaterial::factory(3)
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -156,7 +171,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->get($endpointUri);
 
         // Then
         $response->assertOk();
@@ -174,6 +191,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testIndexEndpointIncludingMaterials(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequestMaterial::factory()
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -187,7 +206,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->get($endpointUri);
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->get($endpointUri);
 
         // Then
         $response->assertOk()
@@ -205,6 +226,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
     public function testStoreEndpoint(): void
     {
+        // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')
             ->create();
@@ -217,16 +241,23 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
         $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.store');
 
-        $response = $this->post($endpointUri, $data, [
-            'Accept' => 'application/json',
-        ]);
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->post($endpointUri, $data, [
+                'Accept' => 'application/json',
+            ]);
 
+        // Then
         $response->assertCreated()
             ->assertJsonPath('data.reparation_request.id', $reparationRequest->id);
     }
 
     public function testStoreEndpointValidation(): void
     {
+        // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')
             ->create();
@@ -239,10 +270,14 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
         $endpointUri = $this->urlGenerator->route('api.v1.reparation-request-material.store');
 
-        $response = $this->post($endpointUri, $data, [
-            'Accept' => 'application/json',
-        ]);
+        // When
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->post($endpointUri, $data, [
+                'Accept' => 'application/json',
+            ]);
 
+        // Then
         $response->assertUnprocessable()
             ->assertJson(
                 fn (AssertableJson $json) => $json
@@ -254,6 +289,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testShowEndpoint(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequestMaterials = ReparationRequestMaterial::factory()
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -266,6 +303,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
         // When
         $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->get($endpointUri);
 
         // Then
@@ -284,6 +322,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testUpdateEndpoint(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')->create();
 
@@ -305,6 +345,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->put($endpointUri, $newData);
 
         $reparationRequestMaterial->refresh();
@@ -319,6 +360,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
     public function testUpdateEndpointValidation(): void
     {
+        $user = User::factory()->create();
+
         $reparationRequest = ReparationRequest::factory()
             ->for(User::factory(), 'reporter')->create();
 
@@ -339,6 +382,7 @@ class ReparationRequestMaterialControllerTest extends TestCase
 
         // When
         $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
             ->put($endpointUri, $newData);
 
         // Then
@@ -351,6 +395,8 @@ class ReparationRequestMaterialControllerTest extends TestCase
     public function testDestroyEndpoint(): void
     {
         // Given
+        $user = User::factory()->create();
+
         $reparationRequestMaterials = ReparationRequestMaterial::factory()
             ->for(ReparationRequest::factory()
                 ->for(User::factory(), 'reporter')
@@ -364,7 +410,9 @@ class ReparationRequestMaterialControllerTest extends TestCase
         ]);
 
         // When
-        $response = $this->delete($endpointUri);
+        $response = $this
+            ->actingAs($user, (new RestApiGuard())->getName())
+            ->delete($endpointUri);
 
         // Then
         self::assertFalse($firstReparationRequest->trashed());

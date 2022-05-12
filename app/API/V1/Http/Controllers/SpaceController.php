@@ -18,6 +18,9 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 final class SpaceController extends Controller
 {
+    /**
+     * @throws AuthorizationException
+     */
     public function index(): SpaceCollection
     {
         $this->authorize('viewAny', Space::class);
