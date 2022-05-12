@@ -56,6 +56,10 @@ jobs:
       - name: Setup Laravel Passport
         run: |
           php artisan passport:install --env=testing
+        env:
+          DB_CONNECTION: mysql
+          DB_USERNAME: root
+          DB_DATABASE: default
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
