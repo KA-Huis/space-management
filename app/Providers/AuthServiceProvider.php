@@ -7,10 +7,12 @@ namespace App\Providers;
 use App\ACL\Roles\AdminRole;
 use App\Models\Group;
 use App\Models\ReparationRequest;
+use App\Models\ReparationRequestMaterial;
 use App\Models\Reservation;
 use App\Models\Space;
 use App\Models\User;
 use App\Policies\GroupPolicy;
+use App\Policies\ReparationRequestMaterialPolicy;
 use App\Policies\ReparationRequestPolicy;
 use App\Policies\ReservationPolicy;
 use App\Policies\SpacePolicy;
@@ -23,11 +25,12 @@ class AuthServiceProvider extends ServiceProvider
 {
     /** @var array */
     protected $policies = [
-        Group::class             => GroupPolicy::class,
-        Reservation::class       => ReservationPolicy::class,
-        Space::class             => SpacePolicy::class,
-        User::class              => UserPolicy::class,
-        ReparationRequest::class => ReparationRequestPolicy::class,
+        Group::class                     => GroupPolicy::class,
+        Reservation::class               => ReservationPolicy::class,
+        Space::class                     => SpacePolicy::class,
+        User::class                      => UserPolicy::class,
+        ReparationRequest::class         => ReparationRequestPolicy::class,
+        ReparationRequestMaterial::class => ReparationRequestMaterialPolicy::class,
     ];
 
     public function boot(): void
