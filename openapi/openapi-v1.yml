@@ -934,3 +934,154 @@ paths:
                 type: object
         403:
           $ref: '#/components/responses/UnauthorizedResponse'
+
+  /reservations:
+    get:
+      tags:
+        - Reservations
+      summary: List reservations
+      description: >
+        Retrieve reservations paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[space_id]
+          schema:
+            type: string
+          description: Filter strict on space_id.
+        - in: query
+          name: filter[group_id]
+          schema:
+            type: string
+          description: Filter strict on group_id.
+        - in: query
+          name: filter[created_by_user_id]
+          schema:
+            type: string
+          description: Filter strict on created_by_user_id.
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - starts_at
+              - ends_at
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Reservation'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Reservations
+      summary: Create reservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        200:
+          description: Successfully created a reservation
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+  /reservations/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The reservation ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Reservations
+      summary: Get reservation
+      description: Retrieve a single reservation by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Reservations
+      summary: Update reservation
+      description: >
+        This endpoint can be used to update some details of a created reservation.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Reservations
+      summary: Delete reservation
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
