@@ -784,3 +784,153 @@ paths:
                 type: object
         403:
           $ref: '#/components/responses/UnauthorizedResponse'
+
+
+  /spaces:
+    get:
+      tags:
+        - Spaces
+      summary: List spaces
+      description: >
+        Retrieve spaces paginated. Filter and sort on defined attributes.
+      parameters:
+        - in: query
+          name: filter[name]
+          schema:
+            type: string
+          description: Query partially on name.
+        - in: query
+          name: filter[description]
+          description: Query partially on description.
+          schema:
+            type: string
+        - in: query
+          name: filter[is_open_for_reservations]
+          description: Query strict on is_open_for_reservations.
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: >
+            Sort the list ascending/descending on various available datetime attributes.
+
+            Allowed properties are:
+              - created_at
+              - updated_at
+
+            Example:
+              - Ascending: ?sort=created_at
+              - Descending: ?sort=-created_at
+          schema:
+            type: string
+        - in: query
+          name: page[number]
+          description: The page number that the client is requesting.
+          schema:
+            type: string
+        - in: query
+          name: page[size]
+          description: The number of resources to return per-page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Space'
+                  meta:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    allOf:
+                      - $ref: '#/components/schemas/PaginationLinks'
+
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+    post:
+      tags:
+        - Spaces
+      summary: Create space
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Space'
+      responses:
+        200:
+          description: Successfully created a space
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+
+  /spaces/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The space ID
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags:
+        - Spaces
+      summary: Get space
+      description: Retrieve a single space by its id.
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    put:
+      tags:
+        - Spaces
+      summary: Update space
+      description: >
+        This endpoint can be used to update some details of a created space.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Space'
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
+        422:
+          $ref: '#/components/responses/ValidationErrorResponse'
+    delete:
+      tags:
+        - Spaces
+      summary: Delete space
+      responses:
+        200:
+          description: Succcessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        403:
+          $ref: '#/components/responses/UnauthorizedResponse'
