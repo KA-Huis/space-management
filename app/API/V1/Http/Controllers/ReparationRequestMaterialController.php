@@ -11,6 +11,7 @@ use App\API\V1\Http\Resources\ReparationRequestMaterialResource;
 use App\Http\Controllers\Controller;
 use App\Models\ReparationRequest;
 use App\Models\ReparationRequestMaterial;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
@@ -18,8 +19,13 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ReparationRequestMaterialController extends Controller
 {
+    /**
+     * @throws AuthorizationException
+     */
     public function index(): ReparationRequestMaterialCollection
     {
+        $this->authorize('viewAny', ReparationRequestMaterial::class);
+
         $reparationRequestMaterial = QueryBuilder::for(ReparationRequestMaterial::class)
             ->allowedFilters([
                 AllowedFilter::partial('uuid'),
@@ -39,13 +45,23 @@ class ReparationRequestMaterialController extends Controller
         return new ReparationRequestMaterialCollection($reparationRequestMaterial);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function show(ReparationRequestMaterial $reparationRequestMaterial): ReparationRequestMaterialResource
     {
+        $this->authorize('view', $reparationRequestMaterial);
+
         return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function store(StoreReparationRequestMaterialRequest $request): ReparationRequestMaterialResource
     {
+        $this->authorize('create', ReparationRequestMaterial::class);
+
         $reparationRequest = ReparationRequest::find((int) $request->safe()->collect()->get('reparation_request_id'));
 
         $reparationRequestMaterial = ReparationRequestMaterial::make($request->safe()
@@ -56,8 +72,15 @@ class ReparationRequestMaterialController extends Controller
         return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
 
-    public function update(UpdateReparationRequestMaterialRequest $request, ReparationRequestMaterial $reparationRequestMaterial): ReparationRequestMaterialResource
-    {
+    /**
+     * @throws AuthorizationException
+     */
+    public function update(
+        UpdateReparationRequestMaterialRequest $request,
+        ReparationRequestMaterial $reparationRequestMaterial
+    ): ReparationRequestMaterialResource {
+        $this->authorize('update', $reparationRequestMaterial);
+
         $reparationRequest = ReparationRequest::find((int) $request->get('reparation_request_id'));
 
         $reparationRequestMaterial->fill($request->safe()->all());
@@ -67,8 +90,13 @@ class ReparationRequestMaterialController extends Controller
         return new ReparationRequestMaterialResource($reparationRequestMaterial);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function destroy(ReparationRequestMaterial $reparationRequestMaterial): JsonResponse
     {
+        $this->authorize('delete', $reparationRequestMaterial);
+
         $reparationRequestMaterial->delete();
 
         return new JsonResponse();
