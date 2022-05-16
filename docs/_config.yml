@@ -1,3 +1,11 @@
 remote_theme: pmarsceill/just-the-docs
 
 title: Core Application
+
+## Footer
+
+last_edit_timestamp: true
+
+gh_edit_link: true
+gh_edit_repository: https://github.com/KA-Huis/space-management
+gh_edit_branch: 'acceptance' # Todo: when we go to production this should be removed or set to 'production'
