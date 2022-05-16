@@ -3,6 +3,7 @@ layout: default
 title: REST API
 nav_order: 1
 permalink: /contributing/rest-api
+parent: Contributing
 ---
 
 # REST API
