@@ -28,6 +28,14 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     */
+    public function viewPrivateProfile(User $user, User $userSubject): bool
+    {
+        return $user->id === $userSubject->id;
+    }
+
+    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool

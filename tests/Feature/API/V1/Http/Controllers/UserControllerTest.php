@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\API\V1\Http\Controllers;
 
 use App\Authentication\Guards\RestApiGuard;
-use App\Models\Space;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\UrlGenerator;
@@ -30,11 +29,11 @@ class UserControllerTest extends TestCase
         // Given
         $user = User::factory()->create();
 
-        $space = Space::factory()
+        $expectedUser = User::factory()
             ->create();
 
         $endpointUri = $this->urlGenerator->route('api.v1.user.show', [
-            'user' => $user->id,
+            'user' => $expectedUser->id,
         ]);
 
         // When
@@ -48,7 +47,7 @@ class UserControllerTest extends TestCase
                 fn (AssertableJson $json) => $json
                     ->has('data',
                         fn (AssertableJson $json) => $json
-                            ->where('id', $space->id)
+                            ->where('id', $expectedUser->id)
                             ->etc()
                     )
                     ->etc()
