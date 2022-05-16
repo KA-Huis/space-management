@@ -9,17 +9,18 @@ use App\API\V1\Http\Resources\PublicUserResource;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Request;
 
 final class UserController extends Controller
 {
     /**
      * @throws AuthorizationException
      */
-    public function show(User $user): PublicUserResource|PrivateUserResource
+    public function show(Request $request, User $user): PublicUserResource|PrivateUserResource
     {
         $this->authorize('view', $user);
 
-        if ($this->authorize('viewPrivateProfile', $user)->allowed()) {
+        if ($request->user()->can('viewPrivateProfile')) {
             return new PrivateUserResource($user);
         }
 

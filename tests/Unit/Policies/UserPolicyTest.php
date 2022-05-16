@@ -61,6 +61,10 @@ class UserPolicyTest extends TestCase
         $policy = new UserPolicy();
 
         $user = Mockery::mock(User::class);
+        $user->shouldReceive('getAttribute')
+            ->with('id')
+            ->andReturn(1)
+            ->once();
 
         // When
         $response = $policy->viewPrivateProfile($user, $user);
