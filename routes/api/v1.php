@@ -9,6 +9,7 @@ use App\API\V1\Http\Controllers\ReparationRequestController;
 use App\API\V1\Http\Controllers\ReparationRequestMaterialController;
 use App\API\V1\Http\Controllers\ReservationController;
 use App\API\V1\Http\Controllers\SpaceController;
+use App\API\V1\Http\Controllers\UserController;
 use App\Authentication\Guards\RestApiGuard;
 use Illuminate\Routing\Router;
 
@@ -72,5 +73,12 @@ $router
                 $router->put('/{group}', [GroupController::class, 'update'])->name('update');
                 $router->get('/{group}', [GroupController::class, 'show'])->name('show');
                 $router->delete('/{group}', [GroupController::class, 'destroy'])->name('destroy');
+            });
+
+        $router
+            ->prefix('users')
+            ->name('user.')
+            ->group(static function (Router $router) {
+                $router->get('/{user}', [UserController::class, 'show'])->name('show');
             });
     });

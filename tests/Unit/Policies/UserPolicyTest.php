@@ -51,6 +51,59 @@ class UserPolicyTest extends TestCase
     }
 
     /**
+     * This tests the `viewPrivateProfile` action.
+     *
+     * @testdox This verifies the happy flow when someone is allowed to view a reparation request.
+     */
+    public function testViewPrivateProfile(): void
+    {
+        // Given
+        $policy = new UserPolicy();
+
+        $user = Mockery::mock(User::class);
+        $user->shouldReceive('getAttribute')
+            ->with('id')
+            ->andReturn(1)
+            ->twice();
+
+        // When
+        $response = $policy->viewPrivateProfile($user, $user);
+
+        // Then
+        self::assertTrue($response);
+    }
+
+    /**
+     * This tests the `viewPrivateProfile` action.
+     *
+     * @testdox This verifies the flow when someone is not allowed to view a private user profile, because it's not its
+     * own profile.
+     */
+    public function testViewPrivateProfileWhenSubjectIsDifferentThanAuthenticatedUser(): void
+    {
+        // Given
+        $policy = new UserPolicy();
+
+        $user = Mockery::mock(User::class);
+        $user->shouldReceive('getAttribute')
+            ->with('id')
+            ->andReturn(1)
+            ->once();
+
+        $userSubject = Mockery::mock(User::class);
+        $userSubject->shouldReceive('getAttribute')
+            ->with('id')
+            ->andReturn(2)
+            ->once();
+
+        // When
+        $response = $policy->viewPrivateProfile($user, $userSubject);
+
+        // Then
+        self::assertFalse($response);
+    }
+
+    /**
      * This tests the `create` action.
      *
      * @testdox This verifies the happy flow when someone is allowed to create a reparation request.

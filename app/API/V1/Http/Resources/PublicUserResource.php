@@ -6,7 +6,7 @@ namespace App\API\V1\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ReservationResource extends JsonResource
+class PublicUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,17 +19,11 @@ class ReservationResource extends JsonResource
     {
         return [
             'id'                 => $this->id,
-            'starts_at'          => $this->starts_at,
-            'ends_at'            => $this->ends_at,
-            'space_id'           => $this->space_id,
-            'group_id'           => $this->group_id,
+            'first_name'         => $this->first_name,
+            'last_name'          => $this->last_name,
             'created_at'         => $this->created_at,
             'updated_at'         => $this->updated_at,
             'deleted_at'         => $this->deleted_at,
-            'created_by_user_id' => $this->created_by_user_id,
-            'created_by_user'    => new PublicUserResource($this->whenLoaded('createdByUser')),
-            'space'              => new SpaceResource($this->whenLoaded('space')),
-            'group'              => new GroupResource($this->whenLoaded('group')),
         ];
     }
 }
