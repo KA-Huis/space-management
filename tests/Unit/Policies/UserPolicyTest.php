@@ -64,7 +64,7 @@ class UserPolicyTest extends TestCase
         $user->shouldReceive('getAttribute')
             ->with('id')
             ->andReturn(1)
-            ->once();
+            ->twice();
 
         // When
         $response = $policy->viewPrivateProfile($user, $user);
