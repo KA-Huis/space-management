@@ -65,7 +65,7 @@ jobs:
           DB_DATABASE: default
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./build/logs/clover.xml
